@@ -1,9 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
 import TopBarNav from "./components/TopBarNav";
-import CarouselAnim from "./components/CarouselAnim";
-
-//<CarouselAnim/> to put after <div className="carousel-animation">
+import ContentWrapperComponent from "./components/Content/ContentWrapper/ContentWrapperComponent";
 
 function App() {
   return (
@@ -11,9 +8,10 @@ function App() {
       <div className="top-bar-container">
         <TopBarNav />
       </div>
-      <div className="carousel-container">
-        <CarouselAnim />
+      <div className="content-wrapper">
+        <ContentWrapperComponent />
       </div>
+      <div className="footer"></div>
     </div>
   );
 }
