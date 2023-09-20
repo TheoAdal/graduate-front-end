@@ -1,4 +1,5 @@
 import React from "react";
+import "./ContentWrapperStyles.css";
 import { Routes, Route, Link } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import Home from "../HomePage/HomePageComponent";
@@ -7,7 +8,7 @@ import About from "../AboutUsPage/AboutUsPageComponent";
 
 function ContentWrapperComponent() {
   return (
-    <div>
+    <div className="content-wrapper-container">
       ContentWrapperComponent
       <Router>
         <div className="App">
