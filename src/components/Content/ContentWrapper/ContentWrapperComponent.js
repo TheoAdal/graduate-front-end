@@ -11,8 +11,8 @@ function ContentWrapperComponent() {
     <div className="content-wrapper-container">
       ContentWrapperComponent
       <Router>
-        <div className="App">
-          <ul className="App-header">
+        <div className="">
+          <ul className="">
             <li>
               <Link to="/">Home</Link>
             </li>

@@ -6,12 +6,8 @@ function HomePageComponent() {
   return (
     <div>
       HomePageComponent
-      <div className="carousel-container" styles="width: 100px">
+      <div className="home-page-container">
         <CarouselAnimation />
-        <div Contact></div>
-        <div></div>
-        <div></div>
-        <div></div>
       </div>
     </div>
   );
