@@ -1,6 +1,6 @@
 import React from "react";
 import CarouselAnimation from "./CarouselAnimation";
-import "./HomePageStyles.css";
+import "./HomePageStyles.scss";
 
 function HomePageComponent() {
   return (

@@ -1,0 +1,32 @@
+.nav-bar-container {
+}
+
+.container {
+  width: 80%;
+
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    margin: 0;
+  }
+
+  @media only screen and (min-width: 1360px) {
+    max-width: 1088px;
+  }
+}
+
+.navbar-brand {
+  display: flex;
+  font-family: Helvetica-Nue;
+}
+
+.navbar-expand .navbar-nav {
+  display: flex;
+  display: contents;
+  font-family: Sans-Serif;
+  margin-left: -15px;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+}
