@@ -1,0 +1,39 @@
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-bottom: 1px;
+}
+
+.section-box {
+  background-color: #00a98f;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.card-box {
+  background-color: #00a98f;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the content horizontally */
+  align-items: flex-start; /* Align items at the start of the flex container */
+}
+
+.cards {
+  .team-member-card {
+    width: 200px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+h2, h4, p, ul {
+  margin-bottom: 20px;
+}
+
+h3 {
+  margin-bottom: 0px; /* Adjust the margin as needed */
+}

@@ -26,9 +26,10 @@ function TopBarNav() {
             <Link to="/">Home</Link>
             <Link to="/about">About us</Link>
             <Link to="/contact">Contact us</Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">1st option</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">2nd option</NavDropdown.Item>
+            <Link to="/login">Log in</Link> 
+            <NavDropdown title="Register as" id="basic-nav-dropdown">
+            <NavDropdown.Item><Link to="/volunteer">Volunteer</Link></NavDropdown.Item>
+            <NavDropdown.Item><Link to="/olduser">Person in need</Link></NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Container>
@@ -38,3 +39,5 @@ function TopBarNav() {
 }
 
 export default TopBarNav;
+
+//

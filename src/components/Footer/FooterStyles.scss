@@ -1,7 +1,29 @@
 .footer-container {
-  position: absolute;
-  bottom: 0;
-  background-color: rgb(0 169 143 / 37%);
+  //margin-top: 10px;
+  bottom: 0; 
+  background-color: #00a98f;
   width: 100%;
-  height: 2.5rem; /* Footer height */
+  padding: 20px; /* Adjust padding as needed */
+  color: #fff;
 }
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.company-info {
+  display: flex;
+  align-items: center;
+}
+
+.company-logo {
+  width: 50px; /* Adjust the logo size as needed */
+  margin-right: 10px; /* Add margin between logo and text */
+}
+
+.contact-info {
+  text-align: right;
+}
+
