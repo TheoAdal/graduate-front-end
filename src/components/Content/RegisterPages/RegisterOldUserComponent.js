@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./RegisterComponent.scss";
-
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function ParticipationComponent() {
   const [formData, setFormData] = useState({
@@ -84,5 +84,3 @@ function ParticipationComponent() {
 }
 
 export default ParticipationComponent;
-
-

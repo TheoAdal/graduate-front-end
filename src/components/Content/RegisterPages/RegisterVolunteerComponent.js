@@ -1,30 +1,31 @@
 import React, { useState } from "react";
 import "./RegisterComponent.scss";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
+// anti gia function RegisterVolunteerComponent() kanoume export to list //
+export default function VolunteerListComponent() {
+  const navigate = useNavigate();
 
+  const [inputs, setInputs] = useState([]);
 
-function RegisterVolunteerComponent() {
-  const [formData, setFormData] = useState({
-    name: "",
-    surname: "",
-    email: "",
-    phoneNumber: "",
-    city: "",
-  });
+  const handleChange = (event) => {
+      const name = event.target.name;
+      const value = event.target.value;
+      setInputs(values => ({...values, [name]: value}));
+  }
+  const handleSubmit = (event) => {
+      event.preventDefault();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+      axios.post('http://localhost:8888/api/user/save', inputs);
+      console.log(inputs); //4306
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-  };
-
+      // axios.post('http://localhost:8888/api/user/save', inputs).then(function(response){
+      //     console.log(response.data);
+      //     navigate('/');
+      // });
+      
+  }
   return (
     <div>
       <div className="form-container">
@@ -32,49 +33,23 @@ function RegisterVolunteerComponent() {
         <form onSubmit={handleSubmit}>
           <div>
             <label>Name:</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-            />
+            <input type="text" name="name"  onChange={handleChange}/>
           </div>
           <div>
             <label>Surname:</label>
-            <input
-              type="text"
-              name="surname"
-              value={formData.surname}
-              onChange={handleChange}
-            />
+            <input type="text" name="surname"  onChange={handleChange}/>
           </div>
           <div>
             <label>Email:</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
+            <input type="email" name="email"  onChange={handleChange}/>
           </div>
           <div>
             <label>Phone Number:</label>
-            <input
-              type="tel"
-              name="phoneNumber"
-              value={formData.phoneNumber}
-              maxLength="15"
-              onChange={handleChange}
-            />
+            <input type="tel" name="mobile"  maxLength="15" onChange={handleChange}/>
           </div>
           <div>
             <label>City:</label>
-            <input
-              type="text"
-              name="city"
-              value={formData.city}
-              onChange={handleChange}
-            />
+            <input type="text" name="city"  onChange={handleChange}/>
           </div>
           <button type="submit">Submit</button>
         </form>
@@ -83,5 +58,4 @@ function RegisterVolunteerComponent() {
   );
 }
 
-export default  RegisterVolunteerComponent;
 
