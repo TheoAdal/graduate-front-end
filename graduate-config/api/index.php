@@ -1,19 +1,52 @@
 <?php
+error_reporting(E_ALL);
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Methods: *");
 
 echo"Testing";
+
+include 'DbConnect.php';
+$objDb = new DbConnect;
+$conn = $objDb->connect();
+
+
+$method = $_SERVER['REQUEST_METHOD'];
+switch($method) {
+    case "POST":
+            $user = json_decode( file_get_contents('php://input') );
+            $sql = "INSERT INTO volunteer(VolunteerName, VolunteerSurname, 
+                                        VolunteerEmail, VolunteerMobile, 
+                                        VolunteerCity) 
+                    VALUES(:name, :surname, :email, :mobile, :city)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':name', $user->name);
+            $stmt->bindParam(':surname', $user->surname);
+            $stmt->bindParam(':email', $user->email);
+            $stmt->bindParam(':mobile', $user->mobile);
+            $stmt->bindParam(':city', $user->city);
+    
+            if($stmt->execute()) 
+            {
+                $response = ['status' => 1, 'message' => 'Record created successfully.'];
+            } 
+            else 
+            {
+                $response = ['status' => 0, 'message' => 'Failed to create record.'];
+            }
+            echo json_encode($response);
+            break;
+
+    }
 // error_reporting(E_ALL);
 // ini_set('display_errors', 1);
 
 
-// include 'DbConnect.php';
-// $objDb = new DbConnect;
-// $conn = $objDb->connect();
 
-// $method = $_SERVER['REQUEST_METHOD'];
+
+
+// 
 // switch($method) {
 //     case "GET":
 //         $sql = "SELECT * FROM users";
