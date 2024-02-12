@@ -1,10 +1,10 @@
 // routes/OldUserRoutes.js
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const OldUser = require('../models/OldUser');
+const OldUser = require("../models/OldUser");
 
 // Controller logic for creating a volunteer
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const oldUser = new OldUser(req.body);
     await oldUser.save();
@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
 });
 
 // Controller logic for getting all volunteers
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const oldUsers = await OldUser.find();
     res.send(oldUsers);
@@ -25,11 +25,13 @@ router.get('/', async (req, res) => {
 });
 
 // Route to update a volunteer user by ID
-router.patch('/oldUser/:id', async (req, res) => {
+router.patch("/oldUser/:id", async (req, res) => {
   try {
-    const oldUser = await OldUser.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const oldUser = await OldUser.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     if (!oldUser) {
-      return res.status(404).send('Old user not found');
+      return res.status(404).send("Old user not found");
     }
     res.send(oldUser);
   } catch (err) {
@@ -38,11 +40,11 @@ router.patch('/oldUser/:id', async (req, res) => {
 });
 
 // Route to delete a volunteer user by ID
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const oldUser = await OldUser.findByIdAndDelete(req.params.id);
     if (!oldUser) {
-      return res.status(404).send('Old user not found');
+      return res.status(404).send("Old user not found");
     }
     res.send(oldUser);
   } catch (err) {
@@ -51,16 +53,16 @@ router.delete('/:id', async (req, res) => {
 });
 
 // Route to get a specific volunteer user by ID
-router.get('/oldUser/:id', async (req, res) => {
-    try {
-      const oldUser = await OldUser.findById(req.params.id);
-      if (!oldUser) {
-        return res.status(404).send('Old user not found');
-      }
-      res.send(oldUser);
-    } catch (err) {
-      res.status(500).send(err);
+router.get("/oldUser/:id", async (req, res) => {
+  try {
+    const oldUser = await OldUser.findById(req.params.id);
+    if (!oldUser) {
+      return res.status(404).send("Old user not found");
     }
-  });
+    res.send(oldUser);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 
 module.exports = router;
