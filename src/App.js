@@ -5,6 +5,11 @@ import TopBarNav from "./components/TopBar/TopBarNav";
 import FooterWrapper from "./components/Footer/FooterWrapper";
 import ContentWrapperComponent from "./components/Content/ContentWrapper/ContentWrapperComponent";
 
+// const mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost/graduate_db', { useNewUrlParser: true, useUnifiedTopology: true })
+//   .then(() => console.log('MongoDB connected'))
+//   .catch((err) => console.log(err));
+
 function App() {
   return (
     <BrowserRouter>

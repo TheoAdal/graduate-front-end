@@ -17,13 +17,13 @@ export default function VolunteerListComponent() {
   const handleSubmit = (event) => {
       event.preventDefault();
 
-      axios.post('http://localhost:8888/api/user/save', inputs);
+      axios.post('http://localhost/graduate-config/api/', inputs);
       console.log(inputs); //4306
 
-      // axios.post('http://localhost:8888/api/user/save', inputs).then(function(response){
-      //     console.log(response.data);
-      //     navigate('/');
-      // });
+      axios.post('http://localhost/graduate-config/api/', inputs).then(function(response){
+          console.log(response.data);
+          navigate('/');
+      });
       
   }
   return (
