@@ -1,38 +1,34 @@
-import { Button, Stack } from 'react-bootstrap';
-import React, { useState } from 'react';
+import { Button, Stack } from "react-bootstrap";
+import React, { useState } from "react";
 import "./LoginWrapperComponent.scss";
-import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
-// import AdminDashboard from "../../Dashboard/AdminDashboard/AdminDashboard";
+import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
 
 
 async function loginUser(credentials) {
-  return fetch('http://localhost:5000/login', { ////////////////////
-    method: 'POST',
+  return fetch("http://localhost:5000/login", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(credentials)
-  })
-    .then(data => data.json())
- }
+    body: JSON.stringify(credentials),
+  }).then((data) => data.json());
+}
 
- 
-
-export default function LoginWrapperComponent({ setToken }){
-  const [username, setUserName] = useState();
+export default function Login({ setToken }) {
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  // const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate(); // Use useNavigate hook to get navigation function
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const token = await loginUser({
-      username,
-      password
+      email,
+      password,
     });
-    setToken(token.token);
-    // navigate('/admin-dashboard'); // Use navigate function to redirect to AdminDashboard component
-  }
+    setToken(token);
+    navigate('/admindash'); // Use navigate function to redirect to AdminDashboard component
+  };
 
   return (
     <div className="Auth-form-container">
@@ -45,8 +41,8 @@ export default function LoginWrapperComponent({ setToken }){
               type="email"
               className="form-control mt-1"
               placeholder="Enter email"
-              // value={username}
-              // onChange={e => setUserName(e.target.value)} // Update username state on change
+              value={email}
+              onChange={e => setEmail(e.target.value)} 
             />
           </div>
           <div className="form-group mt-3">
@@ -55,8 +51,8 @@ export default function LoginWrapperComponent({ setToken }){
               type="password"
               className="form-control mt-1"
               placeholder="Enter password"
-              // value={password}
-              // onChange={e => setPassword(e.target.value)} // Update password state on change
+              value={password}
+              onChange={e => setPassword(e.target.value)} 
             />
           </div>
           <div className="form-group mt-2">
@@ -74,13 +70,9 @@ export default function LoginWrapperComponent({ setToken }){
         </div>
       </form>
     </div>
-  )
-    }
+  );
+}
 
-    LoginWrapperComponent.propTypes = {
-      setToken: PropTypes.func.isRequired
-    };
-
-
-
-
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired,
+};
