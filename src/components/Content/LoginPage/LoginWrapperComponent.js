@@ -1,9 +1,8 @@
-import { Button, Stack } from "react-bootstrap";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
 import "./LoginWrapperComponent.scss";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
-
+import useToken from "../../Token/useToken";
 
 async function loginUser(credentials) {
   return fetch("http://localhost:5000/login", {
@@ -16,18 +15,58 @@ async function loginUser(credentials) {
 }
 
 export default function Login({ setToken }) {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const navigate = useNavigate(); // Use useNavigate hook to get navigation function
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { setToken: saveToken } = useToken(); // Destructure setToken from useToken
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const { token, role } = await loginUser({ email, password });
+  //     if (token && role) {
+  //       saveToken({ token }); // Save token to local storage
+  //       setToken({ token, role }); // Set token and role in parent component
+  //       switch (role) {
+  //         case "admin":
+  //           navigate("/admindash");
+  //           break;
+  //         case "manager":
+  //           navigate("/managerdash");
+  //           break;
+  //         case "volunteer":
+  //           navigate("/volunteerdash");
+  //           break;
+  //         case "oldUser":
+  //           navigate("/olduserdash");
+  //           break;
+  //         default:
+  //           navigate("/about");
+  //           break;
+  //       }
+  //     } else {
+  //       console.error("Login error: Token or role is missing.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Login error:", error);
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = await loginUser({
-      email,
-      password,
-    });
-    setToken(token);
-    navigate('/admindash'); // Use navigate function to redirect to AdminDashboard component
+    try {
+      const { token, role } = await loginUser({ email, password });
+      console.log("Received token in login component:", token); // Debugging statement
+      if (token && role) {
+        console.log("Role:", role); // Debugging statement
+        saveToken({ token }); // Save token to local storage
+        setToken({ token, role }); // Set token and role in parent component
+        // Other code...
+      } else {
+        console.error("Login error: Token or role is missing.");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+    }
   };
 
   return (
@@ -42,7 +81,7 @@ export default function Login({ setToken }) {
               className="form-control mt-1"
               placeholder="Enter email"
               value={email}
-              onChange={e => setEmail(e.target.value)} 
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="form-group mt-3">
@@ -52,13 +91,15 @@ export default function Login({ setToken }) {
               className="form-control mt-1"
               placeholder="Enter password"
               value={password}
-              onChange={e => setPassword(e.target.value)} 
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="form-group mt-2">
-            <p>Participate in our program as a <a href="#">Volunteer</a> or a <a href="#">Beneficiary</a></p>
+            <p>
+              Participate in our program as a <a href="#">Volunteer</a> or a{" "}
+              <a href="#">Beneficiary</a>
+            </p>
           </div>
-
           <div className="d-grid gap-2 mt-3">
             <button type="submit" className="btn btn-primary">
               Log In

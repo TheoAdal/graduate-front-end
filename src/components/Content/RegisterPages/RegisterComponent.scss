@@ -1,45 +1,45 @@
 // RegisterComponent.scss
 
 .form-container {
-    background-color: #00a98f;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 8px;
-  
-    h2 {
-      color: #fff;
-    }
-  
-    form {
-      display: flex;
-      flex-direction: column;
-  
-      div {
-        margin-bottom: 20px;
-  
-        label {
-          color: #fff;
-          margin-bottom: 8px;
-          display: block;
-        }
-  
-        input {
-          width: 100%;
-          padding: 8px;
-          border: 1px solid #fff;
-          border-radius: 4px;
-          color: #000;
-        }
-      }
-  
-      button {
-        background-color: #00695c;
+  background-color: #00a98f;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 8px;
+
+  h2 {
+    color: #fff;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    div {
+      margin-bottom: 20px;
+
+      label {
         color: #fff;
-        padding: 10px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
+        margin-bottom: 8px;
+        display: block;
       }
+
+      input,
+      select { /* Updated to include select */
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #fff;
+        border-radius: 4px;
+        color: #000;
+      }
+    }
+
+    button {
+      background-color: #00695c;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
   }
-  
+}

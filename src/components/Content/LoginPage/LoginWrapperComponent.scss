@@ -39,6 +39,11 @@
     font-weight: 600;
     color: rgb(34, 34, 34);
   }
+
+  .errorLabel {
+    color: red;
+    font-size: 12px;
+  }
   
   @media (max-width: 600px) {
     .Auth-form {

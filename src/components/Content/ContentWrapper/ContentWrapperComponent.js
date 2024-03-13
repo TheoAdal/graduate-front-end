@@ -1,5 +1,4 @@
 import "./ContentWrapperStyles.scss";
-// import React from "react";
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../HomePage/HomePageComponent";
@@ -15,22 +14,22 @@ import OldUserDashboard from "../../Dashboard/OldUserDasboard/OldUserDashboard";
 import useToken from "../../Token/useToken"; //allagh directory
 
 function ContentWrapperComponent() {
-  const { token, setToken } = useToken(); //GIA TO useToken
+   const { token, setToken } = useToken(); //GIA TO useToken
 
-  //Forces user to log in to enter
-  
-  if(!token) {
-    return <Login setToken={setToken} />
-  }
+  //////Forces user to log in to enter//////
+
+  // if (!token) {
+  //   return <Login setToken={setToken} />;
+  // }
 
   return (
     <div className="content-wrapper-container">
-      ContentWrapperComponent
+      {/* ContentWrapperComponent */}
       <Routes>
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/about" element={<About />}></Route>
         <Route exact path="/contact" element={<Contact />}></Route>
-        <Route exact path="/login" element={<Login />}></Route>
+        <Route exact path="/login" element={<Login   setToken={setToken} />}></Route>
         <Route exact path="/volunteer" element={<RegisterVolunteer />}></Route>
         <Route exact path="/olduser" element={<RegisterOldUser />}></Route>
         <Route exact path="/admindash" element={<AdminDashboard />}></Route>
