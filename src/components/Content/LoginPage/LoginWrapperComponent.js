@@ -1,73 +1,36 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
 import "./LoginWrapperComponent.scss";
-import PropTypes from "prop-types";
-import useToken from "../../Token/useToken";
 
-async function loginUser(credentials) {
-  return fetch("http://localhost:5000/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(credentials),
-  }).then((data) => data.json());
-}
+import axios from "axios";
 
-export default function Login({ setToken }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const { setToken: saveToken } = useToken(); // Destructure setToken from useToken
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const { token, role } = await loginUser({ email, password });
-  //     if (token && role) {
-  //       saveToken({ token }); // Save token to local storage
-  //       setToken({ token, role }); // Set token and role in parent component
-  //       switch (role) {
-  //         case "admin":
-  //           navigate("/admindash");
-  //           break;
-  //         case "manager":
-  //           navigate("/managerdash");
-  //           break;
-  //         case "volunteer":
-  //           navigate("/volunteerdash");
-  //           break;
-  //         case "oldUser":
-  //           navigate("/olduserdash");
-  //           break;
-  //         default:
-  //           navigate("/about");
-  //           break;
-  //       }
-  //     } else {
-  //       console.error("Login error: Token or role is missing.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Login error:", error);
-  //   }
-  // };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const { token, role } = await loginUser({ email, password });
-      console.log("Received token in login component:", token); // Debugging statement
-      if (token && role) {
-        console.log("Role:", role); // Debugging statement
-        saveToken({ token }); // Save token to local storage
-        setToken({ token, role }); // Set token and role in parent component
-        // Other code...
-      } else {
-        console.error("Login error: Token or role is missing.");
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-    }
-  };
+
+// function LoginWrapperComponent() {
+  async function loginUser(credentials) {
+    return fetch("http://localhost:5000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    }).then((data) => data.json());
+  }
+  
+  export default function Login({ setToken }) {
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const navigate = useNavigate(); // Use useNavigate hook to get navigation function
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const token = await loginUser({
+        email,
+        password,
+      });
+      // setToken(token);
+      navigate('/admindash'); // Use navigate function to redirect to AdminDashboard component
+    };
 
   return (
     <div className="Auth-form-container">
@@ -78,9 +41,9 @@ export default function Login({ setToken }) {
             <label>Email address</label>
             <input
               type="email"
+              value={email}
               className="form-control mt-1"
               placeholder="Enter email"
-              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -88,9 +51,9 @@ export default function Login({ setToken }) {
             <label>Password</label>
             <input
               type="password"
+              value={password}
               className="form-control mt-1"
               placeholder="Enter password"
-              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
@@ -114,6 +77,5 @@ export default function Login({ setToken }) {
   );
 }
 
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired,
-};
+//export default LoginWrapperComponent;
+

@@ -4,8 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import TopBarNav from "./components/TopBar/TopBarNav";
 import FooterWrapper from "./components/Footer/FooterWrapper";
 import ContentWrapperComponent from "./components/Content/ContentWrapper/ContentWrapperComponent";
-import Login from "./components/Content/LoginPage/LoginWrapperComponent";
-import useToken from "./components/Token/useToken"; //allagh directory
+
 
 
 function App() {
@@ -14,7 +13,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         {/* Render navbar if not in dashboard */}
-        {!window.location.pathname.includes('/admindash') && (
+        {!window.location.pathname.includes('/admindash' && '/volunteerlist') && (
           <div className="top-bar-container">
             <TopBarNav />
           </div>
@@ -23,7 +22,7 @@ function App() {
           <ContentWrapperComponent />
         </div>
         {/* Render footer if not in dashboard */}
-        {!window.location.pathname.includes('/admindash') && (
+        {!window.location.pathname.includes('/admindash' && '/volunteerlist') && (
           <div className="footer">
             <FooterWrapper />
           </div>

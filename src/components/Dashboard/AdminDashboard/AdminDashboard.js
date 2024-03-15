@@ -25,7 +25,7 @@ function AdminDashboard() {
         <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
           <NavDropdown title="Options" id="basic-nav-dropdown">
             <NavDropdown.Item>
-              <Link to="/volunteer">Change Password</Link>
+              <Link to="/profile">Profile</Link>
             </NavDropdown.Item>
             <NavDropdown.Item>
               <Link to="/login">Logout</Link>
@@ -41,41 +41,34 @@ function AdminDashboard() {
           >
             <div className="sb-sidenav-menu">
               <div className="nav">
-                {/* <div className="sb-sidenav-menu-heading">Core</div>
-                <a className="nav-link" href="#">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-tachometer-alt"></i>
-                  </div>
-                  Dashboard Menu
-                </a> */}
                 <div className="sb-sidenav-menu-heading">Addons</div>
                 {/* Change href */}
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/volunteerlist">
                   <div className="sb-nav-link-icon">
                     <i className="fas fa-chart-area"></i>
                   </div>
-                  Manage Employees
+                  Volunteer List
                 </a>
                 {/* Change href */}
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/olduserlist">
                   <div className="sb-nav-link-icon">
                     <i className="fas fa-table"></i>
                   </div>
-                  Manage Service
+                  Old User List
                 </a>
                 {/* Change href */}
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/employeelist">
                   <div className="sb-nav-link-icon">
                     <i className="fas fa-table"></i>
                   </div>
-                  System Configuration
+                  Manager List
                 </a>
                 {/* Change href */}
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/calendar">
                   <div className="sb-nav-link-icon">
                     <i className="fas fa-table"></i>
                   </div>
-                  Reports
+                  Calendar
                 </a>
               </div>
             </div>

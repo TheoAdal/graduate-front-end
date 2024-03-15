@@ -37,9 +37,7 @@ export default function RegisterVolunteerComponent() {
     setInputs((prevInputs) => ({ ...prevInputs, [name]: value }));
   };
 
-  // const togglePasswordVisibility = () => {
-  //   setInputs((prevInputs) => ({ ...prevInputs, showPassword: !prevInputs.showPassword }));
-  // };
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -52,7 +50,7 @@ export default function RegisterVolunteerComponent() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/volunteers/register", //localhost:5000/volunteers/register
+        "http://localhost:5000/users/registervolunteer", //localhost:5000/volunteers/register
         inputs
       );
       console.log(response.data);
