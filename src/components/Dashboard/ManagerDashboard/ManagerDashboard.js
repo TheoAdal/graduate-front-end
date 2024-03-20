@@ -10,7 +10,7 @@ function ManagerDashboard() {
     <div className="sb-nav-fixed">
       <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         {/* Navbar Brand */}
-        <a className="navbar-brand ps-3" href="#">
+        <a className="navbar-brand ps-3" href="/managerdash">
           Manager Dashboard
         </a>
         {/* Sidebar Toggle */}
@@ -23,9 +23,9 @@ function ManagerDashboard() {
         </button>
         {/* Navbar */}
         <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-          <NavDropdown title="Options" id="basic-nav-dropdown">
+        <NavDropdown title="Options" id="basic-nav-dropdown">
             <NavDropdown.Item>
-              <Link to="/volunteer">Change Password</Link>
+              <Link to="/profile">Profile</Link>
             </NavDropdown.Item>
             <NavDropdown.Item>
               <Link to="/login">Logout</Link>
@@ -54,34 +54,27 @@ function ManagerDashboard() {
                   <div className="sb-nav-link-icon">
                     <i className="fas fa-chart-area"></i>
                   </div>
-                  Manage Employees
+                  Volunteer List
                 </a>
                 {/* Change href */}
                 <a className="nav-link" href="#">
                   <div className="sb-nav-link-icon">
                     <i className="fas fa-table"></i>
                   </div>
-                  Manage Service
+                  Old User List
                 </a>
                 {/* Change href */}
                 <a className="nav-link" href="#">
                   <div className="sb-nav-link-icon">
                     <i className="fas fa-table"></i>
                   </div>
-                  System Configuration
-                </a>
-                {/* Change href */}
-                <a className="nav-link" href="#">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-table"></i>
-                  </div>
-                  Reports
+                  Calendar
                 </a>
               </div>
             </div>
             <div className="sb-sidenav-footer">
               <div className="small">Logged in as:</div>
-              Admin
+              Manager
             </div>
           </nav>
         </div>
@@ -95,7 +88,7 @@ function ManagerDashboard() {
                     <div className="card-body">Volunteer List</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
                       {/* Change href to the report */}
-                      <a className="small text-white stretched-link" href="#">
+                      <a className="small text-white stretched-link" href="/volunteerlist">
                         View Details
                       </a>
                       <div className="small text-white">
@@ -109,21 +102,7 @@ function ManagerDashboard() {
                     <div className="card-body">Old User List</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
                       {/* Change href to the report */}
-                      <a className="small text-white stretched-link" href="#">
-                        View Details
-                      </a>
-                      <div className="small text-white">
-                        <i className="fas fa-angle-right"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-md-6">
-                  <div className="card bg-success text-white mb-4">
-                    <div className="card-body">Manager List</div>
-                    <div className="card-footer d-flex align-items-center justify-content-between">
-                      {/* Change href to the report */}
-                      <a className="small text-white stretched-link" href="#">
+                      <a className="small text-white stretched-link" href="/olduserlist">
                         View Details
                       </a>
                       <div className="small text-white">
@@ -137,7 +116,7 @@ function ManagerDashboard() {
                     <div className="card-body">Calendar</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
                       {/* Change href to the report */}
-                      <a className="small text-white stretched-link" href="#">
+                      <a className="small text-white stretched-link" href="/calendar">
                         View Details
                       </a>
                       <div className="small text-white">

@@ -17,6 +17,7 @@ import EmployeeList from "../../Dashboard/DashboardButtons/EmployeeListComponent
 import OldUserList from "../../Dashboard/DashboardButtons/OldUserListComponent";
 import ProfileEdit from "../../Dashboard/DashboardButtons/ProfileEditComponent";
 import VolunteerList from "../../Dashboard/DashboardButtons/VolunteerListComponent";
+import UserEditComponent from "../../Dashboard/DashboardButtons/UserEditComponent";
 import Calendar from "../../Dashboard/DashboardButtons/Calendar";
 
 function ContentWrapperComponent() {
@@ -43,6 +44,7 @@ function ContentWrapperComponent() {
         <Route exact path="/profile" element={<ProfileEdit />}></Route>
         <Route exact path="/volunteerlist" element={<VolunteerList />}></Route>
         <Route exact path="/calendar" element={<Calendar />}></Route>
+        <Route exact path="/useredit" element={<UserEditComponent />}></Route>
       </Routes>
     </div>
   );

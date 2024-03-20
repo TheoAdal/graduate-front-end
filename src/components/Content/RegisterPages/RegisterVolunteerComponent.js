@@ -38,7 +38,6 @@ export default function RegisterVolunteerComponent() {
   };
 
   
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -54,7 +53,7 @@ export default function RegisterVolunteerComponent() {
         inputs
       );
       console.log(response.data);
-      navigate("/");                                //Homepage redirect
+      navigate("/volunteerdash");                    //user dash redirect
     } catch (error) {                               //Email validation
       console.error("Error registering volunteer:", error);
       if (error.response && error.response.status === 400) {

@@ -10,7 +10,7 @@ function AdminDashboard() {
     <div className="sb-nav-fixed">
       <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         {/* Navbar Brand */}
-        <a className="navbar-brand ps-3" href="#">
+        <a className="navbar-brand ps-3" href="/admindash">
           Admin Dashboard
         </a>
         {/* Sidebar Toggle */}
@@ -88,7 +88,7 @@ function AdminDashboard() {
                     <div className="card-body">Volunteer List</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
                       {/* Change href to the report */}
-                      <a className="small text-white stretched-link" href="#">
+                      <a className="small text-white stretched-link" href="/volunteerlist">
                         View Details
                       </a>
                       <div className="small text-white">
@@ -102,7 +102,7 @@ function AdminDashboard() {
                     <div className="card-body">Old User List</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
                       {/* Change href to the report */}
-                      <a className="small text-white stretched-link" href="#">
+                      <a className="small text-white stretched-link" href="/olduserlist">
                         View Details
                       </a>
                       <div className="small text-white">
@@ -116,7 +116,7 @@ function AdminDashboard() {
                     <div className="card-body">Manager List</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
                       {/* Change href to the report */}
-                      <a className="small text-white stretched-link" href="#">
+                      <a className="small text-white stretched-link" href="/employeelist">
                         View Details
                       </a>
                       <div className="small text-white">
@@ -130,7 +130,7 @@ function AdminDashboard() {
                     <div className="card-body">Calendar</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
                       {/* Change href to the report */}
-                      <a className="small text-white stretched-link" href="#">
+                      <a className="small text-white stretched-link" href="/calendar">
                         View Details
                       </a>
                       <div className="small text-white">

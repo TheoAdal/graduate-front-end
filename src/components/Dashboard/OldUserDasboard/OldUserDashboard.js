@@ -10,8 +10,8 @@ function OldUserDashboard() {
     <div className="sb-nav-fixed">
       <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         {/* Navbar Brand */}
-        <a className="navbar-brand ps-3" href="#">
-        OldUser Dashboard
+        <a className="navbar-brand ps-3" href="/olduserdash">
+          Old User Dashboard
         </a>
         {/* Sidebar Toggle */}
         <button
@@ -41,47 +41,27 @@ function OldUserDashboard() {
           >
             <div className="sb-sidenav-menu">
               <div className="nav">
-                {/* <div className="sb-sidenav-menu-heading">Core</div>
-                <a className="nav-link" href="#">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-tachometer-alt"></i>
-                  </div>
-                  Dashboard Menu
-                </a> */}
                 <div className="sb-sidenav-menu-heading">Addons</div>
                 {/* Change href */}
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/profile">
                   <div className="sb-nav-link-icon">
                     <i className="fas fa-chart-area"></i>
                   </div>
-                  Manage Employees
+                   Profile
                 </a>
                 {/* Change href */}
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/calendar">
                   <div className="sb-nav-link-icon">
                     <i className="fas fa-table"></i>
                   </div>
-                  Manage Service
+                  Calendar
                 </a>
-                {/* Change href */}
-                <a className="nav-link" href="#">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-table"></i>
-                  </div>
-                  System Configuration
-                </a>
-                {/* Change href */}
-                <a className="nav-link" href="#">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-table"></i>
-                  </div>
-                  Reports
-                </a>
+                
               </div>
             </div>
             <div className="sb-sidenav-footer">
               <div className="small">Logged in as:</div>
-              Admin
+              Old User
             </div>
           </nav>
         </div>
@@ -92,38 +72,10 @@ function OldUserDashboard() {
               <div className="row">
                 <div className="col-xl-3 col-md-6">
                   <div className="card bg-primary text-white mb-4">
-                    <div className="card-body">Volunteer List</div>
+                    <div className="card-body"> Profile</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
                       {/* Change href to the report */}
-                      <a className="small text-white stretched-link" href="#">
-                        View Details
-                      </a>
-                      <div className="small text-white">
-                        <i className="fas fa-angle-right"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-md-6">
-                  <div className="card bg-warning text-white mb-4">
-                    <div className="card-body">Old User List</div>
-                    <div className="card-footer d-flex align-items-center justify-content-between">
-                      {/* Change href to the report */}
-                      <a className="small text-white stretched-link" href="#">
-                        View Details
-                      </a>
-                      <div className="small text-white">
-                        <i className="fas fa-angle-right"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-md-6">
-                  <div className="card bg-success text-white mb-4">
-                    <div className="card-body">Manager List</div>
-                    <div className="card-footer d-flex align-items-center justify-content-between">
-                      {/* Change href to the report */}
-                      <a className="small text-white stretched-link" href="#">
+                      <a className="small text-white stretched-link" href="/profile">
                         View Details
                       </a>
                       <div className="small text-white">
@@ -137,7 +89,7 @@ function OldUserDashboard() {
                     <div className="card-body">Calendar</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
                       {/* Change href to the report */}
-                      <a className="small text-white stretched-link" href="#">
+                      <a className="small text-white stretched-link" href="/calendar">
                         View Details
                       </a>
                       <div className="small text-white">

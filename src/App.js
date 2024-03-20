@@ -13,16 +13,24 @@ function App() {
     <BrowserRouter>
       <div className="App">
         {/* Render navbar if not in dashboard */}
-        {!window.location.pathname.includes('/admindash' && '/volunteerlist') && (
+        {!window.location.pathname.includes('/admindash' && '/volunteerlist' 
+        && '/managerdash' && '/volunteerdash' && '/olduserdash' && '/employeelist'&&'/olduserlist'
+        && '/profile'&&'/calendar'&&'/useredit' ) && (
           <div className="top-bar-container">
             <TopBarNav />
           </div>
         )}
+        {/* {!window.location.pathname.includes('/admindash' && '/volunteerlist' 
+        && '/managerdash' && '/volunteerdash' && '/olduserdash' && '/employeelist'&&'/olduserlist'
+        && '/profile' && '/calendar'&&'/useredit' ) && ( */}
         <div className="content-wrapper">
           <ContentWrapperComponent />
         </div>
+        {/* )} */}
         {/* Render footer if not in dashboard */}
-        {!window.location.pathname.includes('/admindash' && '/volunteerlist') && (
+        {!window.location.pathname.includes('/admindash' && '/volunteerlist' 
+        && '/managerdash' && '/volunteerdash' && '/olduserdash' && '/employeelist'&&'/olduserlist'
+        && '/profile' && '/calendar'&&'/useredit' ) && (
           <div className="footer">
             <FooterWrapper />
           </div>

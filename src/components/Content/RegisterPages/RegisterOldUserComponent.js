@@ -52,11 +52,11 @@ export default function RegisterOldUserComponent() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/olduser/register",
+        "http://localhost:5000/users/registerolduser",
         inputs
       ); //localhost:5000/olduser/register
       console.log(response.data);
-      navigate("/");
+      navigate("/olduserdash");
     } catch (error) {
       console.error("Error registering volunteer:", error);
     }
