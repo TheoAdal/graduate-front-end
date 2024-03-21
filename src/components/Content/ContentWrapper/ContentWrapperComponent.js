@@ -1,6 +1,6 @@
 import "./ContentWrapperStyles.scss";
 import React, { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "../HomePage/HomePageComponent";
 import Contact from "../ContactUsPage/ContactUsPageComponent";
 import About from "../AboutUsPage/AboutUsPageComponent";
@@ -21,30 +21,31 @@ import UserEditComponent from "../../Dashboard/DashboardButtons/UserEditComponen
 import Calendar from "../../Dashboard/DashboardButtons/Calendar";
 
 function ContentWrapperComponent() {
-   
-
   return (
     <div className="content-wrapper-container">
       {/* ContentWrapperComponent */}
+      <div className="content-wrapper-routes">
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/about" element={<About />} />
+          <Route exact path="/contact" element={<Contact />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/volunteer" element={<RegisterVolunteer />} />
+          <Route exact path="/olduser" element={<RegisterOldUser />} />
+        </Routes>
+      </div>
       <Routes>
-        <Route exact path="/" element={<Home />}></Route>
-        <Route exact path="/about" element={<About />}></Route>
-        <Route exact path="/contact" element={<Contact />}></Route>
-        <Route exact path="/login" element={<Login />}></Route>
-        <Route exact path="/volunteer" element={<RegisterVolunteer />}></Route>
-        <Route exact path="/olduser" element={<RegisterOldUser />}></Route>
+        <Route exact path="/admindash" element={<AdminDashboard />} />
+        <Route exact path="/managerdash" element={<ManagerDashboard />} />
+        <Route exact path="/volunteerdash" element={<VolunteerDashboard />} />
+        <Route exact path="/olduserdash" element={<OldUserDashboard />} />
 
-        <Route exact path="/admindash" element={<AdminDashboard />}></Route>
-        <Route exact path="/managerdash" element={<ManagerDashboard />}></Route>
-        <Route exact path="/volunteerdash" element={<VolunteerDashboard />}></Route>
-        <Route exact path="/olduserdash" element={<OldUserDashboard />}></Route>
-
-        <Route exact path="/employeelist" element={<EmployeeList />}></Route>
-        <Route exact path="/olduserlist" element={<OldUserList />}></Route>
-        <Route exact path="/profile" element={<ProfileEdit />}></Route>
-        <Route exact path="/volunteerlist" element={<VolunteerList />}></Route>
-        <Route exact path="/calendar" element={<Calendar />}></Route>
-        <Route exact path="/useredit" element={<UserEditComponent />}></Route>
+        <Route exact path="/employeelist" element={<EmployeeList />} />
+        <Route exact path="/olduserlist" element={<OldUserList />} />
+        <Route exact path="/profile" element={<ProfileEdit />} />
+        <Route exact path="/volunteerlist" element={<VolunteerList />} />
+        <Route exact path="/calendar" element={<Calendar />} />
+        <Route exact path="/useredit" element={<UserEditComponent />} />
       </Routes>
     </div>
   );
