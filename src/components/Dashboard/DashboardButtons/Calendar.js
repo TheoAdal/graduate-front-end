@@ -1,157 +1,161 @@
-// import React, { useState } from "react";
-// import Calendar from "react-calendar";
-// import "react-calendar/dist/Calendar.css";
-// //import "./App.css";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import "./Button.scss";
 
-// const App = () => {
-//     const [selectedDate, setSelectedDate] = useState(null);
-//     const [eventName, setEventName] = useState("");
-//     const [events, setEvents] = useState([]);
+export default function ListUser() {
+    const [volunteers, oldusers, setVolunteer, setOldUser] = useState([]);
+    useEffect(() => {
+        getVolunteer();
+        getOldUser();
+    }, []);
+  
+    function getVolunteer() {
+      axios
+        .get("http://localhost:5000/users/getallvol")
+        .then(function (response) {
+          console.log(response.data);
+          setVolunteer(response.data);
+        });
+    }
 
-//     const Date_Click_Fun = (date) => {
-//         setSelectedDate(date);
-//     };
+    function getOldUser() {
+        axios
+          .get("http://localhost:5000/users/getalloldusers")
+          .then(function (response) {
+            console.log(response.data);
+            setOldUser(response.data);
+          });
+      }
 
-//     const Event_Data_Update = (event) => {
-//         setEventName(event.target.value);
-//     };
+function getVisits() {
+    
+  }
 
-//     const Create_Event_Fun = () => {
-//         if (selectedDate && eventName) {
-//             const newEvent = {
-//                 id: new Date().getTime(),
-//                 date: selectedDate,
-//                 title: eventName,
-//             };
-//             setEvents([...events, newEvent]);
-//             setSelectedDate(null);
-//             setEventName("");
-//             setSelectedDate(newEvent.date);
-//         }
-//     };
 
-//     const Update_Event_Fun = (eventId, newName) => {
-//         const updated_Events = events.map((event) => {
-//             if (event.id === eventId) {
-//                 return {
-//                     ...event,
-//                     title: newName,
-//                 };
-//             }
-//             return event;
-//         });
-//         setEvents(updated_Events);
-//     };
 
-//     const Delete_Event_Fun = (eventId) => {
-//         const updated_Events = events.filter((event) => event.id !== eventId);
-//         setEvents(updated_Events);
-//     };
-
-//     return (
-//         <div className="app">
-//             <h1> GeeksforGeeks Calendar Application </h1>
-//             <div className="container">
-//                 <div className="calendar-container">
-//                     <Calendar
-//                         value={selectedDate}
-//                         onClickDay={Date_Click_Fun}
-//                         tileClassName={({ date }) =>
-//                             selectedDate &&
-//                             date.toDateString() === selectedDate.toDateString()
-//                                 ? "selected"
-//                                 : events.some(
-//                                       (event) =>
-//                                           event.date.toDateString() ===
-//                                           date.toDateString(),
-//                                   )
-//                                 ? "event-marked"
-//                                 : ""
-//                         }
-//                     />{" "}
-//                 </div>
-//                 <div className="event-container">
-//                     {" "}
-//                     {selectedDate && (
-//                         <div className="event-form">
-//                             <h2> Create Event </h2>{" "}
-//                             <p>
-//                                 {" "}
-//                                 Selected Date: {selectedDate.toDateString()}{" "}
-//                             </p>{" "}
-//                             <input
-//                                 type="text"
-//                                 placeholder="Event Name"
-//                                 value={eventName}
-//                                 onChange={Event_Data_Update}
-//                             />{" "}
-//                             <button
-//                                 className="create-btn"
-//                                 onClick={Create_Event_Fun}
-//                             >
-//                                 Click Here to Add Event{" "}
-//                             </button>{" "}
-//                         </div>
-//                     )}
-//                     {events.length > 0 && selectedDate && (
-//                         <div className="event-list">
-//                             <h2> My Created Event List </h2>{" "}
-//                             <div className="event-cards">
-//                                 {" "}
-//                                 {events.map((event) =>
-//                                     event.date.toDateString() ===
-//                                     selectedDate.toDateString() ? (
-//                                         <div
-//                                             key={event.id}
-//                                             className="event-card"
-//                                         >
-//                                             <div className="event-card-header">
-//                                                 <span className="event-date">
-//                                                     {" "}
-//                                                     {event.date.toDateString()}{" "}
-//                                                 </span>{" "}
-//                                                 <div className="event-actions">
-//                                                     <button
-//                                                         className="update-btn"
-//                                                         onClick={() =>
-//                                                             Update_Event_Fun(
-//                                                                 event.id,
-//                                                                 prompt(
-//                                                                     "ENTER NEW TITLE",
-//                                                                 ),
-//                                                             )
-//                                                         }
-//                                                     >
-//                                                         Update Event{" "}
-//                                                     </button>{" "}
-//                                                     <button
-//                                                         className="delete-btn"
-//                                                         onClick={() =>
-//                                                             Delete_Event_Fun(
-//                                                                 event.id,
-//                                                             )
-//                                                         }
-//                                                     >
-//                                                         Delete Event{" "}
-//                                                     </button>{" "}
-//                                                 </div>{" "}
-//                                             </div>{" "}
-//                                             <div className="event-card-body">
-//                                                 <p className="event-title">
-//                                                     {" "}
-//                                                     {event.title}{" "}
-//                                                 </p>{" "}
-//                                             </div>{" "}
-//                                         </div>
-//                                     ) : null,
-//                                 )}{" "}
-//                             </div>{" "}
-//                         </div>
-//                     )}{" "}
-//                 </div>{" "}
-//             </div>{" "}
-//         </div>
-//     );
-// };
-
-// export default App;
+    return (
+        <div className="sb-nav-fixed">
+          <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            {/* Navbar Brand */}
+            <a className="navbar-brand ps-3" href="#">
+              Admin Dashboard
+            </a>
+            {/* Sidebar Toggle */}
+            <button
+              className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+              id="sidebarToggle"
+              href="#"
+            >
+              <i className="fas fa-bars"></i>
+            </button>
+            {/* Navbar */}
+            <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+              <NavDropdown title="Options" id="basic-nav-dropdown">
+                <NavDropdown.Item>
+                  <Link to="/profile">Profile</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="/login">Logout</Link>
+                </NavDropdown.Item>
+              </NavDropdown>
+            </ul>
+          </nav>
+          <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+              <nav
+                className="sb-sidenav accordion sb-sidenav-dark"
+                id="sidenavAccordion"
+              >
+                <div className="sb-sidenav-menu">
+                  <div className="nav">
+                    <div className="sb-sidenav-menu-heading">Addons</div>
+                    {/* Change href */}
+                    <a className="nav-link" href="/volunteerlist">
+                      <div className="sb-nav-link-icon">
+                        <i className="fas fa-chart-area"></i>
+                      </div>
+                      Volunteer List
+                    </a>
+                    {/* Change href */}
+                    <a className="nav-link" href="/olduserlist">
+                      <div className="sb-nav-link-icon">
+                        <i className="fas fa-table"></i>
+                      </div>
+                      Old User List
+                    </a>
+                    {/* Change href */}
+                    <a className="nav-link" href="/employeelist">
+                      <div className="sb-nav-link-icon">
+                        <i className="fas fa-table"></i>
+                      </div>
+                      Manager List
+                    </a>
+                    {/* Change href */}
+                    <a className="nav-link" href="/calendar">
+                      <div className="sb-nav-link-icon">
+                        <i className="fas fa-table"></i>
+                      </div>
+                      Calendar
+                    </a>
+                  </div>
+                </div>
+                <div className="sb-sidenav-footer">
+                  <div className="small">Logged in as:</div>
+                  Admin
+                </div>
+              </nav>
+            </div>
+            <div className="container-fluid px-4">
+              <h1 className="mt-4">Appointments Program</h1>
+              <div className="row">
+                <div className="col-xs-12">
+                  <div className="box">
+                    <table className="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Volunteer Name</th>
+                          <th>Old User Name</th>
+                          <th>Kind of Appointment</th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {volunteers.map((user, key) => (
+                          <tr key={key}>
+                            {/* <td>{visit.date}</td>  */}
+                            <td>{user.name} && {user.surname}</td>
+                            </tr>
+                            ))}
+                        {oldusers.map((user, key) => (
+                          <tr key={key}>
+                            <td>{user.name} && {user.surname}</td>
+                            {/* <td>{visit.kind}</td>  */}
+                        </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <footer className="py-4 bg-light mt-auto">
+                <div className="container-fluid px-4">
+                  <div className="d-flex align-items-center justify-content-between small">
+                    <div className="text-muted">
+                      Copyright &copy; Your Website 2024
+                    </div>
+                    <div>
+                      <a href="#">Privacy Policy</a>
+                      &middot;
+                      <a href="#">Terms &amp; Conditions</a>
+                    </div>
+                  </div>
+                </div>
+              </footer>
+            </div>
+          </div>
+        </div>
+      );
+    }

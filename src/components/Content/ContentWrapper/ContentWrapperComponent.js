@@ -1,6 +1,6 @@
 import "./ContentWrapperStyles.scss";
 import React, { useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "../HomePage/HomePageComponent";
 import Contact from "../ContactUsPage/ContactUsPageComponent";
 import About from "../AboutUsPage/AboutUsPageComponent";
@@ -15,7 +15,7 @@ import OldUserDashboard from "../../Dashboard/OldUserDasboard/OldUserDashboard";
 
 import EmployeeList from "../../Dashboard/DashboardButtons/EmployeeListComponent";
 import OldUserList from "../../Dashboard/DashboardButtons/OldUserListComponent";
-import ProfileEdit from "../../Dashboard/DashboardButtons/ProfileEditComponent";
+//import ProfileEdit from "../../Dashboard/DashboardButtons/ProfileEditComponent";
 import VolunteerList from "../../Dashboard/DashboardButtons/VolunteerListComponent";
 import UserEditComponent from "../../Dashboard/DashboardButtons/UserEditComponent";
 import Calendar from "../../Dashboard/DashboardButtons/Calendar";
@@ -39,13 +39,13 @@ function ContentWrapperComponent() {
         <Route exact path="/managerdash" element={<ManagerDashboard />} />
         <Route exact path="/volunteerdash" element={<VolunteerDashboard />} />
         <Route exact path="/olduserdash" element={<OldUserDashboard />} />
-
+       
         <Route exact path="/employeelist" element={<EmployeeList />} />
         <Route exact path="/olduserlist" element={<OldUserList />} />
-        <Route exact path="/profile" element={<ProfileEdit />} />
+        {/* <Route exact path="/profile" element={<ProfileEdit />} /> */}
         <Route exact path="/volunteerlist" element={<VolunteerList />} />
         <Route exact path="/calendar" element={<Calendar />} />
-        <Route exact path="/useredit" element={<UserEditComponent />} />
+        <Route exact path="volunteerlist/useredit/:id" element={<UserEditComponent />} />
       </Routes>
     </div>
   );

@@ -673,6 +673,36 @@ progress {
     max-width: 1320px;
   }
 }
+.form.edit {
+  flex-shrink: 0;
+  width: 90%;
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-top: var(--bs-gutter-y);
+  //background-color: #b30b0b;
+  border: 1px solid grey;
+
+  form{
+    background-color: #434343;
+  }
+
+  .two-column-form{
+    display: grid;
+    grid-template-columns: auto auto;
+
+    .column{
+    
+    }
+  }
+
+  
+
+}
+
+
+
+
 .row {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
@@ -681,14 +711,17 @@ progress {
   margin-top: calc(-1 * var(--bs-gutter-y));
   margin-right: calc(-0.5 * var(--bs-gutter-x));
   margin-left: calc(-0.5 * var(--bs-gutter-x));
+  //background-color: #c5ccce;
 }
 .row > * {
   flex-shrink: 0;
-  width: 100%;
+  width: 70%;
   max-width: 100%;
   padding-right: calc(var(--bs-gutter-x) * 0.5);
   padding-left: calc(var(--bs-gutter-x) * 0.5);
   margin-top: var(--bs-gutter-y);
+  //background-color: #434343;
+  //border: 1px solid grey;
 }
 
 .col {
@@ -1169,7 +1202,7 @@ progress {
 
   .col-md-3 {
     flex: 0 0 auto;
-    width: 25%;
+    width: 60%;
   }
 
   .col-md-4 {
@@ -2165,6 +2198,7 @@ progress {
 }
 .form-label {
   margin-bottom: 0.5rem;
+  
 }
 
 .col-form-label {
@@ -3146,6 +3180,7 @@ textarea.form-control-lg {
   color: #000;
   background-color: #0dcaf0;
   border-color: #0dcaf0;
+  
 }
 .btn-info:hover {
   color: #000;
@@ -4541,6 +4576,7 @@ textarea.form-control-lg {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  //position:absolute
 }
 .card > hr {
   margin-right: 0;
@@ -4568,6 +4604,7 @@ textarea.form-control-lg {
 .card-body {
   flex: 1 1 auto;
   padding: 1rem 1rem;
+  //background-color: #04414d;
 }
 
 .card-title {
@@ -11434,6 +11471,7 @@ body {
 .sb-topnav .navbar-brand {
   width: 225px;
   margin: 0;
+  margin-right: 1300px ;
 }
 .sb-topnav.navbar-dark #sidebarToggle {
   color: rgba(255, 255, 255, 0.5);

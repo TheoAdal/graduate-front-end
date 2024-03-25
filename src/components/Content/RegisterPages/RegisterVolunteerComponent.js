@@ -11,6 +11,7 @@ export default function RegisterVolunteerComponent() {
     surname: "",
     email: "",
     mobile: "",
+    gender: "male", // Default value
     country: "",
     city: "",
     password: "",
@@ -120,6 +121,18 @@ export default function RegisterVolunteerComponent() {
               value={inputs.mobile}
               onChange={handleChange}
             />
+          </div>
+          <div>
+            <label>Gender:</label>
+            <select
+              name="gender"
+              value={inputs.gender}
+              onChange={handleChange}
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
           </div>
           <div>
             <label>Country:</label>

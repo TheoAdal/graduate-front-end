@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./Button.scss";
 
@@ -19,6 +18,14 @@ export default function ListUser() {
         setUsers(response.data);
       });
   }
+//   const fetchUser =  (id) => {
+//     axios
+//   .get("http://localhost:5000/users/get/${id}")
+//   .then(function (response) {
+//     console.log(response.data);
+//     setUsers(response.data);
+//   });
+// }
 
   const deleteUser = (id) => {
     axios
@@ -130,7 +137,7 @@ export default function ListUser() {
                         <td>{user.city}</td>
                         <td>
                           <Link
-                            to={`user/${user._id}/edit`}
+                            to={`useredit/${user._id}`}
                             style={{ marginRight: "10px" }}
                           >
                             Edit
