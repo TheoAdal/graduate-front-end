@@ -1,39 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
 import "./LoginWrapperComponent.scss";
 
 import axios from "axios";
+import { AuthContext } from "./AuthContext";
 
 
 
-// function LoginWrapperComponent() {
-  async function loginUser(credentials) {
-    return fetch("http://localhost:5000/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(credentials),
-    }).then((data) => data.json());
-  }
-  
-  export default function Login({ setToken }) {
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const navigate = useNavigate(); // Use useNavigate hook to get navigation function
-  
+  const LoginWrapperComponent = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState(null); //For handling error messages
+
+    const navigate = useNavigate();
+
+    const { setToken } = useContext(AuthContext);
+   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      const token = await loginUser({
-        email,
-        password,
-      });
-      // setToken(token);
-      navigate('/admindash'); // Use navigate function to redirect to AdminDashboard component
+      try {
+        const response = await axios.post("http://localhost:5000/login", {
+          email,
+          password,
+        });
+        const { token, role } = response.data; // Extract role from response.data
+        setToken(token);
+        localStorage.setItem("token", response.data.token);
+
+        //Role redirect 
+        if (role === 'admin') 
+        {
+          navigate("/admindash");
+        } 
+        else if (role === 'manager')
+        {
+          navigate("/managerdash");
+        }
+        else if (role === 'volunteer')
+        {
+          navigate("/volunteerdash");
+        }
+        else if (role === 'olduser')
+        {
+          navigate("/olduserdash");
+        }
+      } catch (error) {
+        console.error("Authentication failed:", error);
+        setToken(null);
+        localStorage.removeItem("token");
+        if (error.response && error.response.data) {
+          setErrorMessage(error.response.data); // Set the error message if present in the error response
+        } else {
+          setErrorMessage("An unexpected error occurred. Please try again.");
+        }
+      }
     };
+
 
   return (
     <div className="Auth-form-container">
+      {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}{" "}
       <form className="Auth-form" onSubmit={handleSubmit}>
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Sign in</h3>
@@ -64,7 +90,7 @@ import axios from "axios";
             </p>
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" onClick={setToken}>
               Log In
             </button>
           </div>
@@ -75,7 +101,7 @@ import axios from "axios";
       </form>
     </div>
   );
-}
+};
 
-//export default LoginWrapperComponent;
+export default LoginWrapperComponent;
 

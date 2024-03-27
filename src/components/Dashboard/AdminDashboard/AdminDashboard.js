@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useContext, useState} from "react";
 import "./AdminDashboard.scss";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate, } from "react-router-dom";
+import axios from "axios";
+
+import { AuthContext } from "../../Content/LoginPage/AuthContext";
 
 function AdminDashboard() {
+  const [user, setUser] = useState("");
+  const { setToken } = useContext(AuthContext);
+  const navigate = useNavigate();
+  
+  const { token, loading } = useContext(AuthContext);
+  if (loading) {
+    return null;
+  }
+
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+
+  const handleLogout = () => {
+    setToken(null); // Clear token from context
+    localStorage.removeItem("token"); // Remove token from local storage
+    navigate("/login"); // Navigate user to login page
+  };
+  
+
   return (
     <div className="sb-nav-fixed">
       <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -28,7 +51,9 @@ function AdminDashboard() {
               <Link to="/profile">Profile</Link>
             </NavDropdown.Item>
             <NavDropdown.Item>
-              <Link to="/login">Logout</Link>
+              <Link to="/login" onClick={handleLogout}>
+                Logout
+              </Link>
             </NavDropdown.Item>
           </NavDropdown>
         </ul>
