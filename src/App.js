@@ -5,6 +5,8 @@ import TopBarNav from "./components/TopBar/TopBarNav";
 import FooterWrapper from "./components/Footer/FooterWrapper";
 import ContentWrapperComponent from "./components/Content/ContentWrapper/ContentWrapperComponent";
 
+import { AuthProvider } from "./components/Content/LoginPage/AuthContext";
+
 function App() {
   const excludePaths = [
     "/admindash",
@@ -24,27 +26,29 @@ function App() {
   );
 
   return (
-    <BrowserRouter>
-      <div className="App">
-        {/* Render navbar if not in excluded paths */}
-        {RenderComponent && (
-          <div className="top-bar-container">
-            <TopBarNav />
-          </div>
-        )}
+    <AuthProvider>
+      <BrowserRouter>
+        <div className="App">
+          {/* Render navbar if not in excluded paths */}
+          {RenderComponent && (
+            <div className="top-bar-container">
+              <TopBarNav />
+            </div>
+          )}
 
-        <div className="content-wrapper">
-          <ContentWrapperComponent />
+          <div className="content-wrapper">
+            <ContentWrapperComponent />
+          </div>
+
+          {/* Render footer if not in excluded paths */}
+          {RenderComponent && (
+            <div className="footer">
+              <FooterWrapper />
+            </div>
+          )}
         </div>
-
-        {/* Render footer if not in excluded paths */}
-        {RenderComponent && (
-          <div className="footer">
-            <FooterWrapper />
-          </div>
-        )}
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

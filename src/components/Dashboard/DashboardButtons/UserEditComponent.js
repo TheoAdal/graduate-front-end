@@ -5,6 +5,9 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./Button.scss";
 
+//UPDATE USER PROFILE TUTORIAL 
+//https://www.youtube.com/watch?v=ShejXVOTmKs&ab_channel=SmartSystemSolutions
+
 // Define your functional component
 const UserEditComponent = () => {
   const { id } = useParams(); // Access the user ID from URL parameters
