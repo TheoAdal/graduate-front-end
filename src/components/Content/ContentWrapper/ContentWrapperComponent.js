@@ -18,7 +18,8 @@ import OldUserList from "../../Dashboard/DashboardButtons/OldUserListComponent";
 import ProfileEdit from "../../Dashboard/DashboardButtons/ProfileEditComponent";
 import VolunteerList from "../../Dashboard/DashboardButtons/VolunteerListComponent";
 import UserEditComponent from "../../Dashboard/DashboardButtons/UserEditComponent";
-import Appointments from "../../Dashboard/DashboardButtons/Appointments";
+import AppointmentsList from "../../Dashboard/DashboardButtons/AppointmentsList";
+import CreateAppointment from "../../Dashboard/DashboardButtons/CreateAppointment";
 
 function ContentWrapperComponent() {
   return (
@@ -44,7 +45,8 @@ function ContentWrapperComponent() {
         <Route exact path="/olduserlist" element={<OldUserList />} />
         <Route exact path="/profile" element={<ProfileEdit />} />
         <Route exact path="/volunteerlist" element={<VolunteerList />} />
-        <Route exact path="/appointments" element={<Appointments />} />
+        <Route exact path="/appointmentslist" element={<AppointmentsList />} />
+        <Route exact path="/createappointment" element={<CreateAppointment />} />
         <Route exact path="volunteerlist/useredit/:id" element={<UserEditComponent />} />
       </Routes>
     </div>

@@ -18,7 +18,7 @@ function App() {
     "/employeelist",
     "/olduserlist",
     "/profile",
-    "/calendar",
+    "/appointmentslist",
     "/useredit",
   ];
 

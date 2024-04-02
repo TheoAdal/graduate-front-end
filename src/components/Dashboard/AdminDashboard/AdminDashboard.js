@@ -195,7 +195,7 @@ function AdminDashboard() {
                     <div className="card-body">Appointments</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
                       {/* Change href to the report */}
-                      <a className="small text-white stretched-link" href="/appointments">
+                      <a className="small text-white stretched-link" href="/appointmentslist">
                         View Details
                       </a>
                       <div className="small text-white">
@@ -204,7 +204,6 @@ function AdminDashboard() {
                     </div>
                   </div>
                 </div>
-                {/* Add more cards here */}
               </div>
             </div>
           </main>
