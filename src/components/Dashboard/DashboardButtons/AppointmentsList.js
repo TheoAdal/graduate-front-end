@@ -15,7 +15,7 @@ export default function ListUser() {
   
     function getActiveVolunteer() {
       axios
-        .get("http://localhost:5000/users/getallactivevol")
+        .get("http://localhost:5000/volunteers/getallactivevol")
         .then(function (response) {
           console.log(response.data);
           setVolunteer(response.data);
@@ -24,16 +24,14 @@ export default function ListUser() {
 
     function getActiveOldUser() {
         axios
-          .get("http://localhost:5000/users/getallactiveold")
+          .get("http://localhost:5000/oldusers/getallactiveold")
           .then(function (response) {
             console.log(response.data);
             setOldUser(response.data);
           });
       }
 
-function getVisits() {
-    
-  }
+
 
     return (
         <div className="sb-nav-fixed">
@@ -93,11 +91,11 @@ function getVisits() {
                       Manager List
                     </a>
                     {/* Change href */}
-                    <a className="nav-link" href="/calendar">
+                    <a className="nav-link" href="/appointmentslist">
                       <div className="sb-nav-link-icon">
                         <i className="fas fa-table"></i>
                       </div>
-                      Calendar
+                      Appointments
                     </a>
                   </div>
                 </div>
@@ -108,31 +106,51 @@ function getVisits() {
               </nav>
             </div>
             <div className="container-fluid px-4">
-              <h1 className="mt-4">Appointments Program</h1>
+              
               <div className="row">
+              <div className="card bg-danger text-white mb-4">
+                    <div className="card-body">Create Appointment</div>
+                    <div className="card-footer d-flex align-items-center justify-content-between">
+                      {/* Change href to the report */}
+                      <a className="small text-white stretched-link" href="/createappointment">
+                        View Details
+                      </a>
+                      <div className="small text-white">
+                        <i className="fas fa -angle-right"></i>
+                      </div>
+                    </div>
+                  </div>
+              {/* <h3 className="mt-4">Create an Appointment</h3> */}
                 <div className="col-xs-12">
+                <h3 className="mt-4">Appointments List</h3>
                   <div className="box">
                     <table className="table table-bordered">
                       <thead>
                         <tr>
-                          <th>Date</th>
+                          <th>Olduser Name</th>
+                          <th>Phone Number </th>
                           <th>Volunteer Name</th>
-                          <th>State </th>
-                          <th>Old User Name</th>
-                          <th>State </th>
+                          <th>Phone Number </th>
+                          <th>Date</th>
                           <th>Kind of Appointment</th>
-                          
                         </tr>
                       </thead>
                       <tbody>
-                        {volunteers.map((user, key) => (
-                          <tr key={key}>
-                            {/* <td>{visit.date}</td>  */}
-                            <td>{user.name} && {user.surname}</td>
-                            </tr>
-                            ))}
-                       
-                      </tbody>
+                      {oldusers.map((olduser, index) => (
+                        <tr key={index}>
+                          <td>{olduser.name} {olduser.surname}</td>
+                          <td>{olduser.mobile}</td>
+                          {volunteers[index] && (
+                            <>
+                              <td>{volunteers[index].name} {volunteers[index].surname}</td>
+                              <td>{volunteers[index].mobile}</td>
+                            </>
+                          )}
+                          <td>Date Placeholder</td> 
+                          <td>Appointment Type Placeholder</td> 
+                        </tr>
+                      ))}
+                    </tbody>
                     </table>
                   </div>
                 </div>
