@@ -16,6 +16,8 @@ import { AuthContext } from "./AuthContext";
 
     const { setToken } = useContext(AuthContext);
    
+//FOR CREATING LOGIN AUTHENTICATION
+//https://medium.com/@simonsruggi/how-to-implement-jwt-authentication-with-react-and-node-js-5d8bf3e718d0
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
@@ -23,9 +25,13 @@ import { AuthContext } from "./AuthContext";
           email,
           password,
         });
-        const { token, role } = response.data; // Extract role from response.data
+        const { token, _id, name, surname, role } = response.data; // Extract role from response.data
         setToken(token);
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userId", _id); // Store user ID in local storage
+        localStorage.setItem("userName", name); // Store user's name in local storage
+        localStorage.setItem("userSurname", surname); // Store user's surname in local storage
+        localStorage.setItem("userRole", role); // Store user's surname in local storage
 
         //Role redirect 
         if (role === 'admin') 
@@ -45,6 +51,7 @@ import { AuthContext } from "./AuthContext";
           navigate("/olduserdash");
         }
       } catch (error) {
+        //window.alert('Wrong email or password')
         console.error("Authentication failed:", error);
         setToken(null);
         localStorage.removeItem("token");
@@ -59,7 +66,6 @@ import { AuthContext } from "./AuthContext";
 
   return (
     <div className="Auth-form-container">
-      {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}{" "}
       <form className="Auth-form" onSubmit={handleSubmit}>
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Sign in</h3>
@@ -83,6 +89,7 @@ import { AuthContext } from "./AuthContext";
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}{" "}
           <div className="form-group mt-2">
             <p>
               Participate in our program as a <a href="#">Volunteer</a> or a{" "}

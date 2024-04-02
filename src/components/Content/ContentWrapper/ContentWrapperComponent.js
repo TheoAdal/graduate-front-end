@@ -15,10 +15,10 @@ import OldUserDashboard from "../../Dashboard/OldUserDasboard/OldUserDashboard";
 
 import EmployeeList from "../../Dashboard/DashboardButtons/EmployeeListComponent";
 import OldUserList from "../../Dashboard/DashboardButtons/OldUserListComponent";
-//import ProfileEdit from "../../Dashboard/DashboardButtons/ProfileEditComponent";
+import ProfileEdit from "../../Dashboard/DashboardButtons/ProfileEditComponent";
 import VolunteerList from "../../Dashboard/DashboardButtons/VolunteerListComponent";
 import UserEditComponent from "../../Dashboard/DashboardButtons/UserEditComponent";
-import Calendar from "../../Dashboard/DashboardButtons/Calendar";
+import Appointments from "../../Dashboard/DashboardButtons/Appointments";
 
 function ContentWrapperComponent() {
   return (
@@ -42,9 +42,9 @@ function ContentWrapperComponent() {
        
         <Route exact path="/employeelist" element={<EmployeeList />} />
         <Route exact path="/olduserlist" element={<OldUserList />} />
-        {/* <Route exact path="/profile" element={<ProfileEdit />} /> */}
+        <Route exact path="/profile" element={<ProfileEdit />} />
         <Route exact path="/volunteerlist" element={<VolunteerList />} />
-        <Route exact path="/calendar" element={<Calendar />} />
+        <Route exact path="/appointments" element={<Appointments />} />
         <Route exact path="volunteerlist/useredit/:id" element={<UserEditComponent />} />
       </Routes>
     </div>

@@ -54,7 +54,7 @@ export default function RegisterVolunteerComponent() {
         inputs
       );
       console.log(response.data);
-      navigate("/volunteerdash");                    //user dash redirect
+      navigate("/login");                           //login redirect
     } catch (error) {                               //Email validation
       console.error("Error registering volunteer:", error);
       if (error.response && error.response.status === 400) {
@@ -89,27 +89,12 @@ export default function RegisterVolunteerComponent() {
             />
           </div>
           <div>
-          {/* <div class="form-group">
-          <label>Email</label>
-          <input type="email" 
-          name="email" 
-          required="" class="form-control" 
-          oninvalid="this.setCustomValidity('Please Enter valid email')"  
-          oninput="this.setCustomValidity('')" title='<your text>'">
-          </div> 
-          */}
             <label>Email:</label>
             <input
               type="email"
               name="email"
               value={inputs.email}
               onChange={handleChange}
-              // onInvalid={() => {
-              //   this.setCustomValidity('This email is already in use');
-              // }}
-              // onInput={() => {
-              //   this.setCustomValidity('');
-              // }}
             />
           </div>
           <div>
@@ -167,9 +152,6 @@ export default function RegisterVolunteerComponent() {
               value={inputs.password}
               onChange={handleChange}
             />
-            {/* <button type="button" onClick={togglePasswordVisibility}>
-              {inputs.showPassword ? "Hide" : "Show"}
-            </button> */}
           </div>
           <div>
             <label>Confirm Password:</label>

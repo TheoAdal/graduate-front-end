@@ -4,28 +4,42 @@ import { Link } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./Button.scss";
 
+const cities = [
+  "all", // default value
+  "Nicosia",
+  "Limassol",
+  "Larnaca",
+  "Famagusta",
+  "Paphos",
+  "Kyrenia",
+  "Protaras",
+  "Polis",
+  "Ayia Napa",
+  "Troodos",
+];
+
+const states = ["all", "active", "inactive"];
+
 export default function ListUser() {
   const [users, setUsers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCity, setSelectedCity] = useState("all");
+  const [selectedState, setSelectedState] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 2;
+
   useEffect(() => {
     getUsers();
   }, []);
 
-  function getUsers() {
-    axios
-      .get("http://localhost:5000/users/getallvol")
-      .then(function (response) {
-        console.log(response.data);
-        setUsers(response.data);
-      });
-  }
-//   const fetchUser =  (id) => {
-//     axios
-//   .get("http://localhost:5000/users/get/${id}")
-//   .then(function (response) {
-//     console.log(response.data);
-//     setUsers(response.data);
-//   });
-// }
+  const getUsers = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/users/getallvol");
+      setUsers(response.data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
 
   const deleteUser = (id) => {
     axios
@@ -34,6 +48,48 @@ export default function ListUser() {
         console.log(response.data);
         getUsers();
       });
+  };
+
+  const changeUserState = (id) => {
+    axios
+      .patch(`http://localhost:5000/users/changeState/${id}`)
+      .then(function (response) {
+        console.log(response.data);
+        getUsers();
+      });
+  };
+
+  const handleCityChange = (e) => {
+    setSelectedCity(e.target.value);
+    setCurrentPage(1); // Reset current page when city changes
+  };
+
+  const handleStateChange = (e) => {
+    setSelectedState(e.target.value);
+    setCurrentPage(1); // Reset current page when state changes
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    setCurrentPage(1); // Reset current page when search query changes
+  };
+
+  // Filter users based on search query, city, and state
+  const filteredUsers = users.filter((user) =>
+    `${user.name} ${user.surname}`.toLowerCase().includes(searchQuery.toLowerCase())
+  ).filter((user) =>
+    selectedCity === "all" || user.city === selectedCity
+  ).filter((user) =>
+    selectedState === "all" || user.userState === selectedState
+  );
+
+  // Paginate filtered users
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -112,6 +168,26 @@ export default function ListUser() {
           <h1 className="mt-4">Volunteer List</h1>
           <div className="row">
             <div className="col-xs-12">
+              <input
+                type="text"
+                placeholder="Search volunteer"
+                value={searchQuery}
+                onChange={handleSearchChange}
+              />
+              <select value={selectedCity} onChange={handleCityChange}>
+                {cities.map((city, index) => (
+                  <option key={index} value={city}>
+                    {city}
+                  </option>
+                ))}
+              </select>
+              <select value={selectedState} onChange={handleStateChange}>
+                {states.map((state, index) => (
+                  <option key={index} value={state}>
+                    {state}
+                  </option>
+                ))}
+              </select>
               <div className="box">
                 <table className="table table-bordered">
                   <thead>
@@ -121,27 +197,25 @@ export default function ListUser() {
                       <th>Surname</th>
                       <th>Email</th>
                       <th>Phone Number</th>
-                      <th>Country</th>
+                      <th>State</th>
                       <th>City</th>
+                      <th>Options</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {users.map((user, key) => (
+                    {currentUsers.map((user, key) => (
                       <tr key={key}>
                         <td>{user.id}</td>
                         <td>{user.name}</td>
                         <td>{user.surname}</td>
                         <td>{user.email}</td>
                         <td>{user.mobile}</td>
-                        <td>{user.country}</td>
+                        <td>{user.userState}</td>
                         <td>{user.city}</td>
                         <td>
-                          <Link
-                            to={`useredit/${user._id}`}
-                            style={{ marginRight: "10px" }}
-                          >
-                            Edit
-                          </Link>
+                          <button onClick={() => changeUserState(user._id)}>
+                            Edit state
+                          </button>
                           <button onClick={() => deleteUser(user._id)}>
                             Delete
                           </button>
@@ -150,6 +224,13 @@ export default function ListUser() {
                     ))}
                   </tbody>
                 </table>
+              </div>
+              <div>
+                {Array.from({ length: Math.ceil(users.length / usersPerPage) }).map((_, index) => (
+                  <button key={index} onClick={() => handlePageChange(index + 1)}>
+                    {index + 1}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
