@@ -1,4 +1,4 @@
-import React, { useContext, useState} from "react";
+import React, { useContext, useState, useEffect} from "react";
 import "./AdminDashboard.scss";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
@@ -9,23 +9,61 @@ import axios from "axios";
 import { AuthContext } from "../../Content/LoginPage/AuthContext";
 
 function AdminDashboard() {
-  const [user, setUser] = useState("");
-  const { setToken } = useContext(AuthContext);
+  const userId = localStorage.getItem("userId");
+  const userName = localStorage.getItem("userName");
+  const userSurname = localStorage.getItem("userSurname");
+  const userRole = localStorage.getItem("userRole");
+
+  const { setToken, token, loading } = useContext(AuthContext);
+  
   const navigate = useNavigate();
   
-  const { token, loading } = useContext(AuthContext);
+  // const fetchUserData = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:5000/users/get/${userId}", {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //   } catch (error) {
+  //     console.error("Error fetching user data:", error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   const cachedName = localStorage.getItem("userName");
+  //   if (cachedName) {
+  //     setUserName(cachedName);
+  //   } else {
+  //     fetchUserData();
+  //   }
+  // }, [token]);
+
+  // useEffect(() => {
+  //   if (userId && token) {
+  //     fetchUserData();
+  //   }
+  // }, [token, userId]);
+
+  //Locks user out of /admindash if !token
   if (loading) {
     return null;
   }
-
   if (!token) {
     return <Navigate to="/login" replace />;
   }
 
+
+  //FOR CREATING THE LOGOUT BUTTON
+  //https://medium.com/@vrinmkansal/quickstart-jwt-based-login-for-react-express-app-eebf4ea9cfe8
   const handleLogout = () => {
     setToken(null); // Clear token from context
     localStorage.removeItem("token"); // Remove token from local storage
-    navigate("/login"); // Navigate user to login page
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userRole"); // Remove user's role from local storage
+    localStorage.removeItem("userName"); // Remove user's name from local storage
+    localStorage.removeItem("userSurname"); // Remove user's name from local storage
+    navigate("/"); // Navigate user to homepage
   };
   
 
@@ -93,13 +131,13 @@ function AdminDashboard() {
                   <div className="sb-nav-link-icon">
                     <i className="fas fa-table"></i>
                   </div>
-                  Calendar
+                  Appointments
                 </a>
               </div>
             </div>
             <div className="sb-sidenav-footer">
               <div className="small">Logged in as:</div>
-              Admin
+              {userName} {userSurname}
             </div>
           </nav>
         </div>
@@ -152,10 +190,10 @@ function AdminDashboard() {
                 </div>
                 <div className="col-xl-3 col-md-6">
                   <div className="card bg-danger text-white mb-4">
-                    <div className="card-body">Calendar</div>
+                    <div className="card-body">Appointments</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
                       {/* Change href to the report */}
-                      <a className="small text-white stretched-link" href="/calendar">
+                      <a className="small text-white stretched-link" href="/appointments">
                         View Details
                       </a>
                       <div className="small text-white">

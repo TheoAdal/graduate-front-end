@@ -11,6 +11,7 @@ export default function RegisterOldUserComponent() {
     surname: "",
     email: "",
     mobile: "",
+    gender: "male", // Default value
     country: "",
     city: "",
     password: "",
@@ -37,10 +38,6 @@ export default function RegisterOldUserComponent() {
     setInputs((prevInputs) => ({ ...prevInputs, [name]: value }));
   };
 
-  // const togglePasswordVisibility = () => {
-  //   setInputs((prevInputs) => ({ ...prevInputs, showPassword: !prevInputs.showPassword }));
-  // };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -52,13 +49,18 @@ export default function RegisterOldUserComponent() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/users/registerolduser",
+        "http://localhost:5000/users/registerolduser", //localhost:5000/olduser/register
         inputs
-      ); //localhost:5000/olduser/register
+      ); 
       console.log(response.data);
-      navigate("/olduserdash");
-    } catch (error) {
+      navigate("/login");                    //login redirect
+    } catch (error) {                       //Email validation
       console.error("Error registering volunteer:", error);
+      if (error.response && error.response.status === 400) {
+        alert("Email address already exists");
+      } else {
+        alert("An error occurred. Please try again later.");
+      }
     }
   };
 
@@ -105,6 +107,18 @@ export default function RegisterOldUserComponent() {
             />
           </div>
           <div>
+            <label>Gender:</label>
+            <select
+              name="gender"
+              value={inputs.gender}
+              onChange={handleChange}
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div>
             <label>Country:</label>
             <select
               name="country"
@@ -129,16 +143,14 @@ export default function RegisterOldUserComponent() {
             />
           </div>
           <div>
-            <label>Password:</label>
+            {/* Create a warning that forces the user to make a stronger password like !?aVgj_hL. or something like that*/}
+            <label>Password:</label> 
             <input
               type={inputs.showPassword ? "text" : "password"}
               name="password"
               value={inputs.password}
               onChange={handleChange}
             />
-            {/* <button type="button" onClick={togglePasswordVisibility}>
-              {inputs.showPassword ? "Hide" : "Show"}
-            </button> */}
           </div>
           <div>
             <label>Confirm Password:</label>

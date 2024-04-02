@@ -8,6 +8,7 @@ import ContentWrapperComponent from "./components/Content/ContentWrapper/Content
 import { AuthProvider } from "./components/Content/LoginPage/AuthContext";
 
 function App() {
+  
   const excludePaths = [
     "/admindash",
     "/volunteerlist",

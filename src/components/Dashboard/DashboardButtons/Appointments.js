@@ -5,24 +5,26 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import "./Button.scss";
 
 export default function ListUser() {
-    const [volunteers, oldusers, setVolunteer, setOldUser] = useState([]);
+    const [volunteers, setVolunteer] = useState([]);
+    const [oldusers, setOldUser] = useState([]);
+
     useEffect(() => {
-        getVolunteer();
-        getOldUser();
+        getActiveVolunteer();
+        getActiveOldUser();
     }, []);
   
-    function getVolunteer() {
+    function getActiveVolunteer() {
       axios
-        .get("http://localhost:5000/users/getallvol")
+        .get("http://localhost:5000/users/getallactivevol")
         .then(function (response) {
           console.log(response.data);
           setVolunteer(response.data);
         });
     }
 
-    function getOldUser() {
+    function getActiveOldUser() {
         axios
-          .get("http://localhost:5000/users/getalloldusers")
+          .get("http://localhost:5000/users/getallactiveold")
           .then(function (response) {
             console.log(response.data);
             setOldUser(response.data);
@@ -32,8 +34,6 @@ export default function ListUser() {
 function getVisits() {
     
   }
-
-
 
     return (
         <div className="sb-nav-fixed">
@@ -117,7 +117,9 @@ function getVisits() {
                         <tr>
                           <th>Date</th>
                           <th>Volunteer Name</th>
+                          <th>State </th>
                           <th>Old User Name</th>
+                          <th>State </th>
                           <th>Kind of Appointment</th>
                           
                         </tr>
@@ -129,12 +131,7 @@ function getVisits() {
                             <td>{user.name} && {user.surname}</td>
                             </tr>
                             ))}
-                        {oldusers.map((user, key) => (
-                          <tr key={key}>
-                            <td>{user.name} && {user.surname}</td>
-                            {/* <td>{visit.kind}</td>  */}
-                        </tr>
-                        ))}
+                       
                       </tbody>
                     </table>
                   </div>
