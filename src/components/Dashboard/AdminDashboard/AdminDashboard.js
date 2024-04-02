@@ -17,6 +17,14 @@ function AdminDashboard() {
   const { setToken, token, loading } = useContext(AuthContext);
   
   const navigate = useNavigate();
+
+  //Locks user out of /admindash if !token
+  if (loading) {
+    return null;
+  }
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
   
   // const fetchUserData = async () => {
   //   try {
@@ -45,18 +53,11 @@ function AdminDashboard() {
   //   }
   // }, [token, userId]);
 
-  //Locks user out of /admindash if !token
-  if (loading) {
-    return null;
-  }
-  if (!token) {
-    return <Navigate to="/login" replace />;
-  }
-
 
   //FOR CREATING THE LOGOUT BUTTON
   //https://medium.com/@vrinmkansal/quickstart-jwt-based-login-for-react-express-app-eebf4ea9cfe8
-  const handleLogout = () => {
+
+  const handleLogout = () => { // MAKE IT INTO SEPERATE FILE
     setToken(null); // Clear token from context
     localStorage.removeItem("token"); // Remove token from local storage
     localStorage.removeItem("userId");
@@ -68,6 +69,7 @@ function AdminDashboard() {
   
 
   return (
+    // {/* MAKE SEPARATE FILE FOR THE SIDE BAR TO AVOID writing it all the time*/}
     <div className="sb-nav-fixed">
       <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         {/* Navbar Brand */}
@@ -140,7 +142,7 @@ function AdminDashboard() {
               {userName} {userSurname}
             </div>
           </nav>
-        </div>
+        </div> {/* MAKE SEPARATE FILE FOR THE SIDE BAR TO AVOID writing it all the time*/}
         <div id="layoutSidenav_content">
           <main>
             <div className="container-fluid px-4">

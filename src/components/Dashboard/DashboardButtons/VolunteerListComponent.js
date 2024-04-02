@@ -34,7 +34,7 @@ export default function ListUser() {
 
   const getUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/users/getallvol");
+      const response = await axios.get("http://localhost:5000/volunteers/getallvol");
       setUsers(response.data);
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -43,7 +43,7 @@ export default function ListUser() {
 
   const deleteUser = (id) => {
     axios
-      .delete(`http://localhost:5000/users/delete/${id}`)
+      .delete(`http://localhost:5000/volunteers/delete/${id}`)
       .then(function (response) {
         console.log(response.data);
         getUsers();
@@ -52,7 +52,7 @@ export default function ListUser() {
 
   const changeUserState = (id) => {
     axios
-      .patch(`http://localhost:5000/users/changeState/${id}`)
+      .patch(`http://localhost:5000/volunteers/changeState/${id}`)
       .then(function (response) {
         console.log(response.data);
         getUsers();
