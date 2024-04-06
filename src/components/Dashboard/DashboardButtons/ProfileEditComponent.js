@@ -1,76 +1,83 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./Button.scss";
 
-//UPDATE USER PROFILE TUTORIAL 
+//UPDATE USER PROFILE TUTORIAL
 //https://www.youtube.com/watch?v=ShejXVOTmKs&ab_channel=SmartSystemSolutions
 
 // Define your functional component
 const ProfileEditComponent = () => {
-    
-    const navigate = useNavigate(); // Access navigate function for navigation
+  const navigate = useNavigate(); // Access navigate function for navigation
 
-    // State variables
-    const [user, setUser] = useState({
-      name: "",
-      surname: "",
-      email: "",
-      mobile: "",
-      country: "",
-      city: "",
-      gender: "",
-      dateofbirth: "",
-      nid: "", //national id number
-      medpapers: "",
-      password: "",
-      confirmpassword: "",
-    });
+  // State variables
+  const [user, setUser] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    mobile: "",
+    country: "",
+    city: "",
+    gender: "",
+    dateofbirth: "",
+    nid: "", //national id number
+    medpapers: "",
+    password: "",
+    confirmpassword: "",
+  });
 
   const [countries, setCountries] = useState([]);
 
-  function fetchUserData(){
+  //Format date to "dd/mm/yy" format
+//   const formatDate = (dateString) => {
+//     const date = new Date(dateString);
+//     const day = date.getDate().toString().padStart(2, '0');
+//     const month = (date.getMonth() + 1).toString().padStart(2, '0');
+//     const year = date.getFullYear().toString().slice(-2);
+//     return `${day}/${month}/${year}`;
+//   };
+
     const userId = localStorage.getItem("userId");
     const userRole = localStorage.getItem("userRole");
-    if (userRole=="admin"){
-        axios
-      .get(`http://localhost:5000/admins/get/${userId}`)
-      .then(function (response) {
-        console.log(response.data);
-        setUser(response.data);
-      });
-    }
-    else if (userRole=="manager"){
-        axios
-      .get(`http://localhost:5000/managers/get/${userId}`)
-      .then(function (response) {
-        console.log(response.data);
-        setUser(response.data);
-      });
-    }
-    else if (userRole=="volunteer"){
-        axios
-      .get(`http://localhost:5000/volunteers/get/${userId}`)
-      .then(function (response) {
-        console.log(response.data);
-        setUser(response.data);
-      });
-    }
-    else if (userRole=="olduser"){
-        axios
-      .get(`http://localhost:5000/oldsusers/get/${userId}`)
-      .then(function (response) {
-        console.log(response.data);
-        setUser(response.data);
-      });
-    }
-    else{
-        console.error("Error updating user:");
-    }
+
+  function fetchUserData() {
     
+    let getUserEndpoint = '';
+
+  switch (userRole) {
+    case 'admin':
+      getUserEndpoint = `http://localhost:5000/admins/get/${userId}`;
+      break;
+    case 'manager':
+      getUserEndpoint = `http://localhost:5000/managers/get/${userId}`;
+      break;
+    case 'volunteer':
+      getUserEndpoint = `http://localhost:5000/volunteers/get/${userId}`;
+      break;
+    case 'olduser':
+      getUserEndpoint = `http://localhost:5000/oldsusers/get/${userId}`;
+      break;
+    default:
+      console.error("Error updating user:");
+      return;
   }
+
+  axios
+    .get(getUserEndpoint)
+    .then(function (response) {
+      console.log(response.data);
+      const userData = response.data;
+      setUser((prevUser) => ({
+        // ...prevUser,
+        // ...userData,
+        // dateofbirth: formatDate(userData.dateofbirth), // Format date before setting in state
+      }));
+    })
+    .catch(function (error) {
+      console.error("Error fetching user data:", error);
+    });
+}
 
   useEffect(() => {
     // Fetch list of countries from an API or a local file
@@ -87,7 +94,6 @@ const ProfileEditComponent = () => {
     fetchUserData();
   }, []);
 
-  
   // Function to handle form input changes
   const handleChange = (e) => {
     setUser({
@@ -100,8 +106,8 @@ const ProfileEditComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch("http://localhost:5000/admins/patch${id}", user); // Replace
-      navigate("/admindash"); // Navigate to the admindash page after successful update
+      await axios.patch(`http://localhost:5000/users/patch/${userId}`, user); 
+      navigate("/admindash"); // if succes go to /admindash
     } catch (error) {
       console.error("Error updating user:", error);
     }
@@ -308,6 +314,7 @@ const ProfileEditComponent = () => {
                           type="date"
                           name="dateOfBirth"
                           value={user.dateofbirth}
+                          //value={user.dateofbirth ? formatDate(user.dateofbirth) : ""}
                           onChange={handleChange}
                         />
                       </div>
@@ -327,20 +334,6 @@ const ProfileEditComponent = () => {
                         />
                       </div>
                     </div>
-                    {/* <div class="column">
-                      <div className="col-md-3 mb-3">
-                        <label htmlFor="file" className="form-label">
-                          Medical Records
-                        </label>
-                        <input
-                          className="form-control"
-                          type="file"
-                          name="medpapers"
-                          value={user.dateofbirth}
-                          onChange={handleChange}
-                        />
-                      </div>
-                    </div> */}
                     <div class="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="password" className="form-label">
@@ -397,5 +390,4 @@ const ProfileEditComponent = () => {
   );
 };
 
-// Export the component
 export default ProfileEditComponent;

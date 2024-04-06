@@ -15,6 +15,22 @@ const ContactUsPageComponent = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    // Retrieve form data
+    const formData = {
+    user_name: e.target.user_name.value,
+    user_email: e.target.user_email.value,
+    message: e.target.message.value
+    };
+
+    // Check if any of the fields are empty
+    if (!formData.user_name || !formData.user_email || !formData.message) {
+      setStateMessage('Name, Email, or Message is not filled');
+      setTimeout(() => {
+        setStateMessage(null);
+      }, 4000); // hide message after 5 seconds
+      return; // Exit early if any field is empty
+    }
+
     emailjs.sendForm( 
       process.env.REACT_APP_SERVICE_ID, 
       process.env.REACT_APP_TEMPLATE_ID, 
@@ -30,13 +46,13 @@ const ContactUsPageComponent = () => {
           }, 5000); // hide message after 5 seconds
         },
         (error) => {
+          console.error('Error sending email:', error);
           setStateMessage('Something went wrong, please try again later');
-          setIsSubmitting(false);
-          setTimeout(() => {
-            setStateMessage(null);
-          }, 5000); // hide message after 5 seconds
         }
-      );
+      )
+      .finally(() => {
+        setIsSubmitting(false);
+      });
 
       e.target.reset();
   };
@@ -52,7 +68,7 @@ const ContactUsPageComponent = () => {
               we'll get back to you as soon as possible.
             </p>
           </div>
-          <Form  onSubmit={sendEmail}>
+          <Form onSubmit={sendEmail}>
             <Form.Group className="mb-3" >
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -79,7 +95,7 @@ const ContactUsPageComponent = () => {
                 placeholder="Type your message here"
               />
             </Form.Group>
-            <Button variant="primary" type="submit" value="Send" disabled={isSubmitting}>
+            <Button variant="primary" type="submit" value="Send">
             {stateMessage && <p>{stateMessage}</p>}
               Submit
               {/* KANE DISABLED TO BUTTON AN EXEI KENA FIELDS */}

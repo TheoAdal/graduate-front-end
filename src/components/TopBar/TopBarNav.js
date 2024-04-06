@@ -61,6 +61,7 @@ function TopBarNav() {
           <Nav className="top-bar-nav">
             <Link to="/">Home</Link>
             <Link to="/about">About us</Link>
+            <Link to="/contact">Contact us</Link>
             {/* {userId ? ( */}
               {/*  <> */}
                 {/* <Link to={getDashboardRoute(userRole)}>Dashboard</Link> */}
