@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./Button.scss";
+import Filter from "./Filters";
 
 const cities = [
   "all", // default value
