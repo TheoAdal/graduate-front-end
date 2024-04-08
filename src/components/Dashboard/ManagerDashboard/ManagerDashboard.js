@@ -1,87 +1,55 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./ManagerDashboard.scss";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
-function ManagerDashboard() {
+import Sidebar from "../DashboardNav/Sidebar";
+import TopNav from "../DashboardNav/TopNav";
+import Footer from "../DashboardNav/Footer";
+
+import { AuthContext } from "../../Content/LoginPage/AuthContext";
+
+const ManagerDashboard = () =>{
+  const userId = localStorage.getItem("userId");
+  const userName = localStorage.getItem("userName");
+  const userSurname = localStorage.getItem("userSurname");
+  const userRole = localStorage.getItem("userRole");
+
+  const { setToken, token, loading } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token && !userRole) {
+      navigate("/login");
+    } else if (userRole == "admin") {
+      navigate("/admindash");
+    } else if (userRole == "manager") {
+      //navigate("/managerdash");
+    } else if (userRole == "volunteer") {
+      navigate("/volunteerdash");
+    } else if (userRole == "olduser") {
+      navigate("/olduserdash");
+    }
+  }, [navigate, token]);
+
   return (
     <div className="sb-nav-fixed">
-      <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        {/* Navbar Brand */}
-        <a className="navbar-brand ps-3" href="/managerdash">
-          Manager Dashboard
-        </a>
-        {/* Sidebar Toggle */}
-        <button
-          className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
-          id="sidebarToggle"
-          href="#"
-        >
-          <i className="fas fa-bars"></i>
-        </button>
-        {/* Navbar */}
-        <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-        <NavDropdown title="Options" id="basic-nav-dropdown">
-            <NavDropdown.Item>
-              <Link to="/profile">Profile</Link>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <Link to="/login">Logout</Link>
-            </NavDropdown.Item>
-          </NavDropdown>
-        </ul>
-      </nav>
+      <TopNav userRole={userRole} />
       <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-          <nav
-            className="sb-sidenav accordion sb-sidenav-dark"
-            id="sidenavAccordion"
-          >
-            <div className="sb-sidenav-menu">
-              <div className="nav">
-                {/* <div className="sb-sidenav-menu-heading">Core</div>
-                <a className="nav-link" href="#">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-tachometer-alt"></i>
-                  </div>
-                  Dashboard Menu
-                </a> */}
-                <div className="sb-sidenav-menu-heading">Addons</div>
-                {/* Change href */}
-                <a className="nav-link" href="#">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-chart-area"></i>
-                  </div>
-                  Volunteer List
-                </a>
-                {/* Change href */}
-                <a className="nav-link" href="#">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-table"></i>
-                  </div>
-                  Old User List
-                </a>
-                {/* Change href */}
-                <a className="nav-link" href="#">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-table"></i>
-                  </div>
-                  Calendar
-                </a>
-              </div>
-            </div>
-            <div className="sb-sidenav-footer">
-              <div className="small">Logged in as:</div>
-              Manager
-            </div>
-          </nav>
+        <Sidebar
+            userRole={userRole}
+            userName={userName}
+            userSurname={userSurname}
+          />
         </div>
         <div id="layoutSidenav_content">
           <main>
             <div className="container-fluid px-4">
-              <h1 className="mt-4">Dashboard</h1>
+              <h1 className="mt-4">Manager Dashboard</h1>
               <div className="row">
                 <div className="col-xl-3 col-md-6">
                   <div className="card bg-primary text-white mb-4">
@@ -116,7 +84,7 @@ function ManagerDashboard() {
                     <div className="card-body">Calendar</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
                       {/* Change href to the report */}
-                      <a className="small text-white stretched-link" href="/calendar">
+                      <a className="small text-white stretched-link" href="/appointmentslist">
                         View Details
                       </a>
                       <div className="small text-white">
@@ -129,20 +97,7 @@ function ManagerDashboard() {
               </div>
             </div>
           </main>
-          <footer className="py-4 bg-light mt-auto">
-            <div className="container-fluid px-4">
-              <div className="d-flex align-items-center justify-content-between small">
-                <div className="text-muted">
-                  Copyright &copy; Your Website 2024
-                </div>
-                <div>
-                  <a href="#">Privacy Policy</a>
-                  &middot;
-                  <a href="#">Terms &amp; Conditions</a>
-                </div>
-              </div>
-            </div>
-          </footer>
+          <Footer/>
         </div>
       </div>
     </div>

@@ -4,7 +4,6 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import axios from "axios";
 
 import Sidebar from "../DashboardNav/Sidebar";
 import TopNav from "../DashboardNav/TopNav";
@@ -12,7 +11,7 @@ import Footer from "../DashboardNav/Footer";
 
 import { AuthContext } from "../../Content/LoginPage/AuthContext";
 
-function AdminDashboard() {
+const AdminDashboard = () => {
   const userId = localStorage.getItem("userId");
   const userName = localStorage.getItem("userName");
   const userSurname = localStorage.getItem("userSurname");
@@ -22,32 +21,35 @@ function AdminDashboard() {
 
   const navigate = useNavigate();
 
-  //Locks user out of /admindash if !token
-  if (loading) {
-    return null;
-  }
-  if (!token) {
-    return <Navigate to="/login" replace />;
-  }
-
-  //FOR CREATING THE LOGOUT BUTTON
-  //https://medium.com/@vrinmkansal/quickstart-jwt-based-login-for-react-express-app-eebf4ea9cfe8
-
-  
+  useEffect(() => {
+    if (!token && !userRole) {
+      navigate("/login");
+    } else if (userRole == "admin") {
+      
+    } else if (userRole == "manager") {
+      navigate("/managerdash");
+    } else if (userRole == "volunteer") {
+      navigate("/volunteerdash");
+    } else if (userRole == "olduser") {
+      navigate("/olduserdash");
+    }
+  }, [navigate, token]);
 
   return (
-    // {/* MAKE SEPARATE FILE TO AVOID writing it all the time*/}
     <div className="sb-nav-fixed">
-      <TopNav userRole={userRole}/>
+      <TopNav userRole={userRole} />
       <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-          <Sidebar userRole={userRole} userName={userName} userSurname={userSurname} />
+          <Sidebar
+            userRole={userRole}
+            userName={userName}
+            userSurname={userSurname}
+          />
         </div>
-        {/* MAKE SEPARATE FILE FOR THE SIDE BAR TO AVOID writing it all the time*/}
         <div id="layoutSidenav_content">
           <main>
             <div className="container-fluid px-4">
-              <h1 className="mt-4">Dashboard</h1>
+              <h1 className="mt-4">Admin Dashboard</h1>
               <div className="row">
                 <div className="col-xl-3 col-md-6">
                   <div className="card bg-primary text-white mb-4">
@@ -120,36 +122,12 @@ function AdminDashboard() {
               </div>
             </div>
           </main>
+          {/* MAKE SEPARATE FILE FOR THE FOOTER */}
           <Footer />
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default AdminDashboard;
-
-// const fetchUserData = async () => {
-//   try {
-//     const response = await axios.get("http://localhost:5000/users/get/${userId}", {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-//   } catch (error) {
-//     console.error("Error fetching user data:", error);
-//   }
-// };
-// useEffect(() => {
-//   const cachedName = localStorage.getItem("userName");
-//   if (cachedName) {
-//     setUserName(cachedName);
-//   } else {
-//     fetchUserData();
-//   }
-// }, [token]);
-// useEffect(() => {
-//   if (userId && token) {
-//     fetchUserData();
-//   }
-// }, [token, userId]);

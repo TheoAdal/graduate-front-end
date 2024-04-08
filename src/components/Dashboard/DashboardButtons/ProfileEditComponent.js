@@ -1,15 +1,33 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./Button.scss";
+
+import Sidebar from "../DashboardNav/Sidebar";
+import TopNav from "../DashboardNav/TopNav";
+import Footer from "../DashboardNav/Footer";
+
+import { AuthContext } from "../../Content/LoginPage/AuthContext";
 
 //UPDATE USER PROFILE TUTORIAL
 //https://www.youtube.com/watch?v=ShejXVOTmKs&ab_channel=SmartSystemSolutions
 
 // Define your functional component
 const ProfileEditComponent = () => {
-  const navigate = useNavigate(); // Access navigate function for navigation
+    const userId = localStorage.getItem("userId");
+    const userName = localStorage.getItem("userName");
+    const userSurname = localStorage.getItem("userSurname");
+    const userRole = localStorage.getItem("userRole");
+
+    const navigate = useNavigate(); // Access navigate function for navigation
+    const { setToken, token, loading } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!token && !userRole) {
+      navigate("/login");
+    }
+  }, [navigate, token]);
 
   // State variables
   const [user, setUser] = useState({
@@ -38,8 +56,7 @@ const ProfileEditComponent = () => {
 //     return `${day}/${month}/${year}`;
 //   };
 
-    const userId = localStorage.getItem("userId");
-    const userRole = localStorage.getItem("userRole");
+    
 
   function fetchUserData() {
     
@@ -69,8 +86,8 @@ const ProfileEditComponent = () => {
       console.log(response.data);
       const userData = response.data;
       setUser((prevUser) => ({
-        // ...prevUser,
-        // ...userData,
+        ...prevUser,
+        ...userData,
         // dateofbirth: formatDate(userData.dateofbirth), // Format date before setting in state
       }));
     })
@@ -107,7 +124,23 @@ const ProfileEditComponent = () => {
     e.preventDefault();
     try {
       await axios.patch(`http://localhost:5000/users/patch/${userId}`, user); 
-      navigate("/admindash"); // if succes go to /admindash
+      // Redirect based on userRole after successful update
+      switch (userRole) {
+        case "admin":
+          navigate("/admindash");
+          break;
+        case "manager":
+          navigate("/managerdash");
+          break;
+        case "volunteer":
+          navigate("/volunteerdash");
+          break;
+        case "olduser":
+          navigate("/olduserdash");
+          break;
+        default:
+          console.error("Invalid user role:", userRole);
+      } 
     } catch (error) {
       console.error("Error updating user:", error);
     }
@@ -115,75 +148,10 @@ const ProfileEditComponent = () => {
 
   return (
     <div className="sb-nav-fixed">
-      <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        {/* Navbar Brand */}
-        <a className="navbar-brand ps-3" href="#">
-          Admin Dashboard
-        </a>
-        {/* Sidebar Toggle */}
-        <button
-          className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
-          id="sidebarToggle"
-          href="#"
-        >
-          <i className="fas fa-bars"></i>
-        </button>
-        {/* Navbar */}
-        <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-          <NavDropdown title="Options" id="basic-nav-dropdown">
-            <NavDropdown.Item>
-              <Link to="/profile">Profile</Link>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <Link to="/login">Logout</Link>
-            </NavDropdown.Item>
-          </NavDropdown>
-        </ul>
-      </nav>
+      <TopNav userRole={userRole}/>
       <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-          <nav
-            className="sb-sidenav accordion sb-sidenav-dark"
-            id="sidenavAccordion"
-          >
-            <div className="sb-sidenav-menu">
-              <div className="nav">
-                <div className="sb-sidenav-menu-heading">Addons</div>
-                {/* Change href */}
-                <a className="nav-link" href="/volunteerlist">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-chart-area"></i>
-                  </div>
-                  Volunteer List
-                </a>
-                {/* Change href */}
-                <a className="nav-link" href="/olduserlist">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-table"></i>
-                  </div>
-                  Old User List
-                </a>
-                {/* Change href */}
-                <a className="nav-link" href="/employeelist">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-table"></i>
-                  </div>
-                  Manager List
-                </a>
-                {/* Change href */}
-                <a className="nav-link" href="/calendar">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-table"></i>
-                  </div>
-                  Calendar
-                </a>
-              </div>
-            </div>
-            <div className="sb-sidenav-footer">
-              <div className="small">Logged in as:</div>
-              Admin
-            </div>
-          </nav>
+        <Sidebar userRole={userRole} userName={userName} userSurname={userSurname} />
         </div>
         <div id="layoutSidenav_content">
           <div class="container-fluid px-4">
@@ -370,20 +338,7 @@ const ProfileEditComponent = () => {
               </div>
             </div>
           </div>
-          <footer className="py-4 bg-light mt-auto">
-            <div className="container-fluid px-4">
-              <div className="d-flex align-items-center justify-content-between small">
-                <div className="text-muted">
-                  Copyright &copy; Your Website 2025
-                </div>
-                <div>
-                  <a href="#">Privacy Policy</a>
-                  &middot;
-                  <a href="#">Terms &amp; Conditions</a>
-                </div>
-              </div>
-            </div>
-          </footer>
+          <Footer />
         </div>
       </div>
     </div>
