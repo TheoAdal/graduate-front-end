@@ -1,12 +1,13 @@
 import "./ContentWrapperStyles.scss";
-import React, { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useState, useContext, Navigate } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "../HomePage/HomePageComponent";
 import Contact from "../ContactUsPage/ContactUsPageComponent";
 import About from "../AboutUsPage/AboutUsPageComponent";
 import RegisterVolunteer from "../RegisterPages/RegisterVolunteerComponent";
 import RegisterOldUser from "../RegisterPages/RegisterOldUserComponent";
 import Login from "../LoginPage/LoginWrapperComponent";
+
 
 import AdminDashboard from "../../Dashboard/AdminDashboard/AdminDashboard";
 import ManagerDashboard from "../../Dashboard/ManagerDashboard/ManagerDashboard";
@@ -47,7 +48,7 @@ function ContentWrapperComponent() {
         <Route exact path="/volunteerlist" element={<VolunteerList />} />
         <Route exact path="/appointmentslist" element={<AppointmentsList />} />
         <Route exact path="/createappointment" element={<CreateAppointment />} />
-        <Route exact path="volunteerlist/useredit/:id" element={<UserEditComponent />} />
+        {/* <Route exact path="volunteerlist/useredit/:id" element={<UserEditComponent />} /> */}
       </Routes>
     </div>
   );

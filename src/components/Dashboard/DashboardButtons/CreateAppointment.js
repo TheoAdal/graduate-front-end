@@ -1,17 +1,44 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./Button.scss";
 
+import Sidebar from "../DashboardNav/Sidebar";
+import TopNav from "../DashboardNav/TopNav";
+import Footer from "../DashboardNav/Footer";
+
+import { AuthContext } from "../../Content/LoginPage/AuthContext";
+
 export default function ListUser() {
+  const userId = localStorage.getItem("userId");
+  const userName = localStorage.getItem("userName");
+  const userSurname = localStorage.getItem("userSurname");
+  const userRole = localStorage.getItem("userRole");
+
+  const { setToken, token, loading } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token && !userRole) {
+      navigate("/login");
+    } else if (userRole == "admin") {
+      getActiveVolunteer();
+      getActiveOldUser();
+    } else if (userRole == "manager") {
+      getActiveVolunteer();
+      getActiveOldUser();
+    } else if (userRole == "volunteer") {
+      navigate("/volunteerdash");
+    } else if (userRole == "olduser") {
+      navigate("/olduserdash");
+    }
+  }, [navigate, token]);
+
   const [volunteers, setVolunteer] = useState([]);
   const [oldusers, setOldUser] = useState([]);
 
-  useEffect(() => {
-    getActiveVolunteer();
-    getActiveOldUser();
-  }, []);
+  //add filter variables here for both volunteers and oldusers
 
   function getActiveVolunteer() {
     axios
@@ -32,81 +59,22 @@ export default function ListUser() {
   }
 
   function getVisits() {
-    
+
   }
 
   return (
     <div className="sb-nav-fixed">
-      <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        {/* Navbar Brand */}
-        <a className="navbar-brand ps-3" href="#">
-          Admin Dashboard
-        </a>
-        {/* Sidebar Toggle */}
-        <button
-          className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
-          id="sidebarToggle"
-          href="#"
-        >
-          <i className="fas fa-bars"></i>
-        </button>
-        {/* Navbar */}
-        <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-          <NavDropdown title="Options" id="basic-nav-dropdown">
-            <NavDropdown.Item>
-              <Link to="/profile">Profile</Link>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <Link to="/login">Logout</Link>
-            </NavDropdown.Item>
-          </NavDropdown>
-        </ul>
-      </nav>
+      <TopNav userRole={userRole} />
       <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-          <nav
-            className="sb-sidenav accordion sb-sidenav-dark"
-            id="sidenavAccordion"
-          >
-            <div className="sb-sidenav-menu">
-              <div className="nav">
-                <div className="sb-sidenav-menu-heading">Addons</div>
-                {/* Change href */}
-                <a className="nav-link" href="/volunteerlist">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-chart-area"></i>
-                  </div>
-                  Volunteer List
-                </a>
-                {/* Change href */}
-                <a className="nav-link" href="/olduserlist">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-table"></i>
-                  </div>
-                  Old User List
-                </a>
-                {/* Change href */}
-                <a className="nav-link" href="/employeelist">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-table"></i>
-                  </div>
-                  Manager List
-                </a>
-                {/* Change href */}
-                <a className="nav-link" href="/appointmentslist">
-                  <div className="sb-nav-link-icon">
-                    <i className="fas fa-table"></i>
-                  </div>
-                  Appointments
-                </a>
-              </div>
-            </div>
-            <div className="sb-sidenav-footer">
-              <div className="small">Logged in as:</div>
-              Admin
-            </div>
-          </nav>
+        <Sidebar
+            userRole={userRole}
+            userName={userName}
+            userSurname={userSurname}
+          />
         </div>
+        <div id="layoutSidenav_content">
+        <main>
         <div className="container-fluid px-4">
           <div className="row">
             {/* <h3 className="mt-4">Create an Appointment</h3> */}
@@ -183,20 +151,9 @@ export default function ListUser() {
             </div>
             {/* CREATE APPOINTMENT BUTTON */}
           </div>
-          <footer className="py-4 bg-light mt-auto">
-            <div className="container-fluid px-4">
-              <div className="d-flex align-items-center justify-content-between small">
-                <div className="text-muted">
-                  Copyright &copy; Your Website 2024
-                </div>
-                <div>
-                  <a href="#">Privacy Policy</a>
-                  &middot;
-                  <a href="#">Terms &amp; Conditions</a>
-                </div>
-              </div>
-            </div>
-          </footer>
+          </div>
+          </main>
+          <Footer/>
         </div>
       </div>
     </div>
