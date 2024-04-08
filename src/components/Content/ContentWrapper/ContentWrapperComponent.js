@@ -14,11 +14,11 @@ import ManagerDashboard from "../../Dashboard/ManagerDashboard/ManagerDashboard"
 import VolunteerDashboard from "../../Dashboard/VolunteerDashboard/VolunteerDashboard";
 import OldUserDashboard from "../../Dashboard/OldUserDasboard/OldUserDashboard";
 
-import EmployeeList from "../../Dashboard/DashboardButtons/EmployeeListComponent";
+import EmployeeList from "../../Dashboard/DashboardButtons/ManagerListComponent";
 import OldUserList from "../../Dashboard/DashboardButtons/OldUserListComponent";
 import ProfileEdit from "../../Dashboard/DashboardButtons/ProfileEditComponent";
 import VolunteerList from "../../Dashboard/DashboardButtons/VolunteerListComponent";
-import UserEditComponent from "../../Dashboard/DashboardButtons/UserEditComponent";
+// import UserEditComponent from "../../Dashboard/DashboardButtons/UserEditComponent";
 import AppointmentsList from "../../Dashboard/DashboardButtons/AppointmentsList";
 import CreateAppointment from "../../Dashboard/DashboardButtons/CreateAppointment";
 
