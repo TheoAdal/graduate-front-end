@@ -1,8 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./AdminDashboard.scss";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import Sidebar from "../DashboardNav/Sidebar";
@@ -25,7 +22,7 @@ const AdminDashboard = () => {
     if (!token && !userRole) {
       navigate("/login");
     } else if (userRole == "admin") {
-      
+      //
     } else if (userRole == "manager") {
       navigate("/managerdash");
     } else if (userRole == "volunteer") {

@@ -49,7 +49,7 @@ export default function RegisterOldUserComponent() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/users/registerolduser", //localhost:5000/olduser/register
+        "http://localhost:5000/oldusers/registerolduser", //localhost:5000/olduser/register
         inputs
       ); 
       console.log(response.data);

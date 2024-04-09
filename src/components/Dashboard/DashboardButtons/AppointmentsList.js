@@ -10,7 +10,7 @@ import Footer from "../DashboardNav/Footer";
 
 import { AuthContext } from "../../Content/LoginPage/AuthContext";
 
-export default function ListUser() {
+export default function ListAppointments() {
   const userId = localStorage.getItem("userId");
   const userName = localStorage.getItem("userName");
   const userSurname = localStorage.getItem("userSurname");
@@ -25,10 +25,7 @@ export default function ListUser() {
   useEffect(() => {
     if (!token && !userRole) {
       navigate("/login");
-    } else if (userRole == "admin") {
-      getActiveVolunteer();
-      getActiveOldUser();
-    } else if (userRole == "manager") {
+    } else if (userRole == "admin" || userRole == "manager") {
       getActiveVolunteer();
       getActiveOldUser();
     } else if (userRole == "volunteer") {
