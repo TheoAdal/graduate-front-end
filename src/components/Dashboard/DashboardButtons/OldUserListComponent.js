@@ -27,7 +27,7 @@ const cities = [
 
 const states = ["all", "active", "inactive"];
 
-export default function ListUser() {
+export default function ListOldUsers() {
   const userId = localStorage.getItem("userId");
   const userName = localStorage.getItem("userName");
   const userSurname = localStorage.getItem("userSurname");
@@ -59,9 +59,9 @@ export default function ListUser() {
 
   const getUsers = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:5000/oldusers/getalloldusers`
-      );
+      const response = await axios
+      .get(`http://localhost:5000/oldusers/getalloldusers`);
+      console.log(response.data);
       setUsers(response.data);
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -141,7 +141,7 @@ export default function ListUser() {
                 <div className="col-xs-12">
                   <input
                     type="text"
-                    placeholder="Search volunteer"
+                    placeholder="Search old user"
                     value={searchQuery}
                     onChange={handleSearchChange}
                   />

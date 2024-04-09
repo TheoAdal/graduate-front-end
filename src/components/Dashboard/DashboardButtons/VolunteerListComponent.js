@@ -27,7 +27,7 @@ const cities = [
 
 const states = ["all", "active", "inactive"];
 
-export default function ListUser() {
+export default function ListVolunteers() {
   const userId = localStorage.getItem("userId");
   const userName = localStorage.getItem("userName");
   const userSurname = localStorage.getItem("userSurname");
@@ -59,9 +59,9 @@ export default function ListUser() {
 
   const getUsers = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/volunteers/getallvol"
-      );
+      const response = await axios
+      .get("http://localhost:5000/volunteers/getallvol");
+      console.log(response.data);
       setUsers(response.data);
     } catch (error) {
       console.error("Error fetching users:", error);

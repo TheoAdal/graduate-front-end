@@ -27,7 +27,7 @@ const cities = [
 
 const states = ["all", "active", "inactive"];
 
-export default function ListUser() {
+export default function ListManagers() {
   const userId = localStorage.getItem("userId");
   const userName = localStorage.getItem("userName");
   const userSurname = localStorage.getItem("userSurname");
@@ -139,7 +139,7 @@ export default function ListUser() {
                 <div className="col-xs-12">
                   <input
                     type="text"
-                    placeholder="Search volunteer"
+                    placeholder="Search manager"
                     value={searchQuery}
                     onChange={handleSearchChange}
                   />

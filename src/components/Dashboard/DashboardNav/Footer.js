@@ -1,5 +1,6 @@
 // Footer.js
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -10,9 +11,8 @@ const Footer = () => {
             Copyright &copy; Your Website 2024
           </div>
           <div>
-            <a href="#">Privacy Policy</a>
-            &middot;
-            <a href="#">Terms &amp; Conditions</a>
+          <Link to= "https://youtu.be/FSxU80akXB4?si=KiOMxE1-Wrd3pBox"  target="_blank">Privacy Policy  </Link>
+          <Link to= "https://youtu.be/U2XP8B7uQ5A?si=RabCBwPs8vthEYQq"  target="_blank">Terms &amp; Conditions  </Link>
           </div>
         </div>
       </div>
@@ -21,3 +21,10 @@ const Footer = () => {
 };
 
 export default Footer;
+
+{/* <div>
+      <a href="#">Privacy Policy</a>
+      &middot;
+      <a href="#">Terms &amp; Conditions</a>
+    </div> 
+*/}
