@@ -47,7 +47,7 @@ export default function CreateAppointment() {
     }
   }, [navigate, token]);
 
-    //variables for volunteers and oldusers respectively
+  //variables for volunteers and oldusers respectively
 
   const [volunteers, setVolunteer] = useState([]);
   const [selectedVolunteerId, setSelectedVolunteerId] = useState(null);
@@ -62,6 +62,10 @@ export default function CreateAppointment() {
   const [selectedOldUserCity, setSelectedOldUserCity] = useState("all");
   const [currentOldUserPage, setCurrentOldUserPage] = useState(1);
   const oldUsersPerPage = 2;
+
+  const [appointmentdate, setAppointmentDate] = useState('');
+  const [appointmenttime, setAppointmentTime] = useState('');
+  const [description, setDescription] = useState('');
 
   function getActiveVolunteer() {
     axios
@@ -81,9 +85,7 @@ export default function CreateAppointment() {
       });
   }
 
-  function getVisits() {
-
-  }
+  function getVisits() {}
 
   const handleVolunteerCityChange = (e) => {
     setSelectedVolunteerCity(e.target.value);
@@ -102,15 +104,19 @@ export default function CreateAppointment() {
         .toLowerCase()
         .includes(searchVolunteerQuery.toLowerCase())
     )
-    .filter((volunteer) => selectedVolunteerCity === "all" 
-                          || volunteer.city === selectedVolunteerCity);
-    
+    .filter(
+      (volunteer) =>
+        selectedVolunteerCity === "all" ||
+        volunteer.city === selectedVolunteerCity
+    );
 
   // Paginate filtered users
   const indexOfLastVolunteer = currentVolunteerPage * volunteersPerPage;
   const indexOfFirstVolunteer = indexOfLastVolunteer - volunteersPerPage;
-  const currentVolunteers = filteredVolunteers.slice(indexOfFirstVolunteer, 
-                                                    indexOfLastVolunteer);
+  const currentVolunteers = filteredVolunteers.slice(
+    indexOfFirstVolunteer,
+    indexOfLastVolunteer
+  );
 
   const handleVolunteerPageChange = (pageNumber) => {
     setCurrentVolunteerPage(pageNumber);
@@ -120,11 +126,11 @@ export default function CreateAppointment() {
     if (event.target.checked) {
       // If checked, set selected volunteer ID
       setSelectedVolunteerId(volunteerId);
-      console.log('Selected volunteer ID:', volunteerId);
+      console.log("Selected volunteer ID:", volunteerId);
     } else {
       // If unchecked, reset ID
       setSelectedVolunteerId(null);
-      console.log('Selected volunteer ID reset');
+      console.log("Selected volunteer ID reset");
     }
   }
 
@@ -145,14 +151,18 @@ export default function CreateAppointment() {
         .toLowerCase()
         .includes(searchOldUserQuery.toLowerCase())
     )
-    .filter((olduser) => selectedOldUserCity === "all" 
-                          || olduser.city === selectedOldUserCity);
-    
+    .filter(
+      (olduser) =>
+        selectedOldUserCity === "all" || olduser.city === selectedOldUserCity
+    );
 
   // Paginate filtered users
   const indexOfLastOldUser = currentOldUserPage * oldUsersPerPage;
   const indexOfFirstOldUser = indexOfLastOldUser - oldUsersPerPage;
-  const currentOldUsers = filteredOldUsers.slice(indexOfFirstOldUser, indexOfLastOldUser);
+  const currentOldUsers = filteredOldUsers.slice(
+    indexOfFirstOldUser,
+    indexOfLastOldUser
+  );
 
   const handleOldUserPageChange = (pageNumber) => {
     setCurrentOldUserPage(pageNumber);
@@ -162,182 +172,232 @@ export default function CreateAppointment() {
     if (event.target.checked) {
       // If checked, set selected old user ID
       setSelectedOldUserId(oldUserId);
-      console.log('Selected old user ID:', oldUserId);
+      console.log("Selected old user ID:", oldUserId);
     } else {
       // If unchecked, reset selected old user ID
       setSelectedOldUserId(null);
-      console.log('Selected old user ID reset');
+      console.log("Selected old user ID reset");
     }
-  } 
+  }
+
+  const handleCreateAppointment = async () => {
+    try {
+      const response = await axios.post(`http://localhost:5000/visits/createappointment`, 
+      {
+        vol_id: selectedVolunteerId,
+        old_id: selectedOldUserId,
+        appointmentdate: appointmentdate,
+        appointmenttime: appointmenttime,
+        description: description
+      });
+      console.log('Appointment created successfully:', response.data);
+    } catch (error) {
+      console.error('Error creating appointment:', error);
+    }
+  };
 
   return (
     <div className="sb-nav-fixed">
       <TopNav userRole={userRole} />
       <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-        <Sidebar
+          <Sidebar
             userRole={userRole}
             userName={userName}
             userSurname={userSurname}
           />
         </div>
         <div id="layoutSidenav_content">
-        <main>
-        <div className="container-fluid px-4">
-          <div className="row">
-            {/* <h3 className="mt-4">Create an Appointment</h3> */}
-            <div className="col-xs-12">
-              <h3 className="mt-4">Old user list</h3>
-              <input
+          <main>
+            <div className="container-fluid px-4">
+              <div className="row">
+                {/* <h3 className="mt-4">Create an Appointment</h3> */}
+                <div className="col-xs-12">
+                  <h3 className="mt-4">Old user list</h3>
+                  <input
                     type="text"
                     placeholder="Search olduser"
                     value={searchOldUserQuery}
                     onChange={handleOldUserSearchChange}
                   />
-                  <select value={selectedOldUserCity} 
-                    onChange={handleOldUserCityChange}>
+                  <select
+                    value={selectedOldUserCity}
+                    onChange={handleOldUserCityChange}
+                  >
                     {cities.map((city, index) => (
                       <option key={index} value={city}>
                         {city}
                       </option>
                     ))}
                   </select>
-              <div className="box">
-                <table className="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>id</th>
-                      <th>Olduser Name</th>
-                      <th>Phone Number </th>
-                      <th>City </th>
-                      <th>Check</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {currentOldUsers.map((olduser, key) => (
-                      <tr key={key}>
-                        <td>{olduser._id}</td>
-                        <td>
-                          {olduser.name} {olduser.surname}
-                        </td>
-                        <td>{olduser.mobile}</td>
-                        <td>{olduser.city}</td>
-                        <td>
+                  <div className="box">
+                    <table className="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>id</th>
+                          <th>Olduser Name</th>
+                          <th>Phone Number </th>
+                          <th>City </th>
+                          <th>Check</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {currentOldUsers.map((olduser, key) => (
+                          <tr key={key}>
+                            <td>{olduser._id}</td>
+                            <td>
+                              {olduser.name} {olduser.surname}
+                            </td>
+                            <td>{olduser.mobile}</td>
+                            <td>{olduser.city}</td>
+                            <td>
+                              <input
+                                type="checkbox"
+                                checked={selectedOldUserId === olduser._id}
+                                onChange={(e) =>
+                                  handleOldUserCheckboxChange(e, olduser._id)
+                                }
+                              />
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    <div>
+                      {Array.from({
+                        length: Math.ceil(
+                          filteredOldUsers.length / oldUsersPerPage
+                        ),
+                      }).map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handleOldUserPageChange(index + 1)}
+                        >
+                          {index + 1}
+                        </button>
+                      ))}
+                    </div>
+                    <h3 className="mt-4">Volunteer list</h3>
+                    <input
+                      type="text"
+                      placeholder="Search volunteer"
+                      value={searchVolunteerQuery}
+                      onChange={handleVolunteerSearchChange}
+                    />
+                    <select
+                      value={selectedVolunteerCity}
+                      onChange={handleVolunteerCityChange}
+                    >
+                      {cities.map((city, index) => (
+                        <option key={index} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                    </select>
+                    <table className="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>id</th>
+                          <th>Volunteer Name</th>
+                          <th>Phone Number </th>
+                          <th>City </th>
+                          <th>Check</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {currentVolunteers.map((volunteer, key) => (
+                          <tr key={key}>
+                            <td>{volunteer._id}</td>
+                            <td>
+                              {volunteer.name} {volunteer.surname}
+                            </td>
+                            <td>{volunteer.mobile}</td>
+                            <td>{volunteer.city}</td>
+                            <td>
+                              <input
+                                type="checkbox"
+                                checked={selectedVolunteerId === volunteer._id}
+                                onChange={(e) =>
+                                  handleVolunteerCheckboxChange(
+                                    e,
+                                    volunteer._id
+                                  )
+                                }
+                              />
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    <div>
+                      {Array.from({
+                        length: Math.ceil(
+                          filteredVolunteers.length / volunteersPerPage
+                        ),
+                      }).map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handleVolunteerPageChange(index + 1)}
+                        >
+                          {index + 1}
+                        </button>
+                      ))}
+                    </div>
+                    <div class="column">
+                      <div className="col-md-3 mb-3">
+                        <label htmlFor="date" className="form-label">
+                          Pick a date
+                        </label>
                         <input
-                              type="checkbox"
-                              checked={selectedOldUserId === olduser._id}
-                              onChange={(e) =>
-                                handleOldUserCheckboxChange(e, olduser._id)
-                              }
-                            />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                <div>
-                    {Array.from({
-                      length: Math.ceil(filteredOldUsers.length / oldUsersPerPage),
-                    }).map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => handleOldUserPageChange(index + 1)}
-                      >
-                        {index + 1}
-                      </button>
-                    ))}
-                  </div>
-                <h3 className="mt-4">Volunteer list</h3>
-                <input
-                    type="text"
-                    placeholder="Search volunteer"
-                    value={searchVolunteerQuery}
-                    onChange={handleVolunteerSearchChange}
-                  />
-                  <select value={selectedVolunteerCity} 
-                    onChange={handleVolunteerCityChange}>
-                    {cities.map((city, index) => (
-                      <option key={index} value={city}>
-                        {city}
-                      </option>
-                    ))}
-                  </select>
-                <table className="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>id</th>
-                      <th>Volunteer Name</th>
-                      <th>Phone Number </th>
-                      <th>City </th>
-                      <th>Check</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {currentVolunteers.map((volunteer, key) => (
-                      <tr key={key}>
-                        <td>{volunteer._id}</td>
-                        <td>
-                          {volunteer.name} {volunteer.surname}
-                        </td>
-                        <td>{volunteer.mobile}</td>
-                        <td>{volunteer.city}</td>
-                        <td>
+                          className="form-control"
+                          type="date"
+                          name="appointmentdate"
+                          value={appointmentdate}
+                          onChange={(e) => setAppointmentDate(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                    <div className="column">
+                      <div className="col-md-3 mb-3">
+                        <label htmlFor="time" className="form-label">
+                          Pick a time
+                        </label>
                         <input
-                              type="checkbox"
-                              checked={selectedVolunteerId === volunteer._id}
-                              onChange={(e) =>
-                                handleVolunteerCheckboxChange(e, volunteer._id)
-                              }
-                            />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                <div>
-                    {Array.from({
-                      length: Math.ceil(filteredVolunteers.length / volunteersPerPage),
-                    }).map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => handleVolunteerPageChange(index + 1)}
-                      >
-                        {index + 1}
-                      </button>
-                    ))}
+                          className="form-control"
+                          type="time"
+                          name="appointmenttime"
+                          value={appointmenttime}
+                          onChange={(e) => setAppointmentTime(e.target.value)}
+                        />
+                      </div>
+                    </div>
                   </div>
-                <div class="column">
-                  <div className="col-md-3 mb-3">
-                    <label htmlFor="date" className="form-label">
-                      Pick a date
+                  <div className="mb-3">
+                    <label htmlFor="description" className="form-label">
+                      Description
                     </label>
                     <input
-                      className="form-control"
-                      type="date"
-                      name="dateOfBirth"
-                      //value={visit.dateofbirth}
-                      //onChange={handleChange}
+                      as="textarea"
+                      rows={4}
+                      name="message"
+                      placeholder="Type here"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
                     />
                   </div>
                 </div>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="description" className="form-label">
-                  Description
-                </label>
-                <input
-                  as="textarea"
-                  rows={4}
-                  name="message"
-                  placeholder="Type here"
-                />
+                <div className="mb-3">
+                  <button
+                    className="btn btn-primary"
+                    onClick={handleCreateAppointment}
+                  >
+                    Create Appointment
+                  </button>
+                </div>
               </div>
             </div>
-            {/* CREATE APPOINTMENT BUTTON */}
-          </div>
-          </div>
           </main>
-          <Footer/>
+          <Footer />
         </div>
       </div>
     </div>

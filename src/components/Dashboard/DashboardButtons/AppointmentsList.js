@@ -55,6 +55,10 @@ export default function ListAppointments() {
       });
   }
 
+  function getAppointments(){
+    
+  }
+
   return (
     <div className="sb-nav-fixed">
       <TopNav userRole={userRole} />
