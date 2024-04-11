@@ -4,6 +4,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function RegisterVolunteerComponent() {
+  //const user = 
+  //const url = windown.location.href
+  // (url.includes("volunteer")? user="volunteer":user="olduser" )
   const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({
@@ -49,7 +52,7 @@ export default function RegisterVolunteerComponent() {
     }
 
     try {
-      const response = await axios.post(
+      const response = await axios.post(//${`user`}
         "http://localhost:5000/volunteers/registervolunteer", //localhost:5000/volunteers/register
         inputs
       );

@@ -343,7 +343,7 @@ export default function CreateAppointment() {
                         </button>
                       ))}
                     </div>
-                    <div class="column">
+                    <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="date" className="form-label">
                           Pick a date

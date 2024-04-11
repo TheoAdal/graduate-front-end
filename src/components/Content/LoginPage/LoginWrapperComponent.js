@@ -5,64 +5,54 @@ import "./LoginWrapperComponent.scss";
 import axios from "axios";
 import { AuthContext } from "./AuthContext";
 
+const LoginWrapperComponent = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null); //For handling error messages
 
+  const navigate = useNavigate();
 
-  const LoginWrapperComponent = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [errorMessage, setErrorMessage] = useState(null); //For handling error messages
+  const { setToken } = useContext(AuthContext);
 
-    const navigate = useNavigate();
+  //FOR CREATING LOGIN AUTHENTICATION
+  //https://medium.com/@simonsruggi/how-to-implement-jwt-authentication-with-react-and-node-js-5d8bf3e718d0
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:5000/login", {
+        email,
+        password,
+      });
+      const { token, _id, name, surname, role } = response.data; // Extract role from response.data
+      setToken(token);
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("userId", _id); // Store user ID in local storage
+      localStorage.setItem("userName", name); // Store user's name in local storage
+      localStorage.setItem("userSurname", surname); // Store user's surname in local storage
+      localStorage.setItem("userRole", role); // Store user's surname in local storage
 
-    const { setToken } = useContext(AuthContext);
-   
-//FOR CREATING LOGIN AUTHENTICATION
-//https://medium.com/@simonsruggi/how-to-implement-jwt-authentication-with-react-and-node-js-5d8bf3e718d0
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      try {
-        const response = await axios.post("http://localhost:5000/login", {
-          email,
-          password,
-        });
-        const { token, _id, name, surname, role } = response.data; // Extract role from response.data
-        setToken(token);
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("userId", _id); // Store user ID in local storage
-        localStorage.setItem("userName", name); // Store user's name in local storage
-        localStorage.setItem("userSurname", surname); // Store user's surname in local storage
-        localStorage.setItem("userRole", role); // Store user's surname in local storage
-
-        //Role redirect 
-        if (role === 'admin') 
-        {
-          navigate("/admindash");
-        } 
-        else if (role === 'manager')
-        {
-          navigate("/managerdash");
-        }
-        else if (role === 'volunteer')
-        {
-          navigate("/volunteerdash");
-        }
-        else if (role === 'olduser')
-        {
-          navigate("/olduserdash");
-        }
-      } catch (error) {
-        //window.alert('Wrong email or password')
-        console.error("Authentication failed:", error);
-        setToken(null);
-        localStorage.removeItem("token");
-        if (error.response && error.response.data) {
-          setErrorMessage(error.response.data); // Set the error message if present in the error response
-        } else {
-          setErrorMessage("An unexpected error occurred. Please try again.");
-        }
+      //Role redirect
+      if (role === "admin") {
+        navigate("/admindash");
+      } else if (role === "manager") {
+        navigate("/managerdash");
+      } else if (role === "volunteer") {
+        navigate("/volunteerdash");
+      } else if (role === "olduser") {
+        navigate("/olduserdash");
       }
-    };
-
+    } catch (error) {
+      //window.alert('Wrong email or password')
+      console.error("Authentication failed:", error);
+      setToken(null);
+      localStorage.removeItem("token");
+      if (error.response && error.response.data) {
+        setErrorMessage(error.response.data); // Set the error message if present in the error response
+      } else {
+        setErrorMessage("An unexpected error occurred. Please try again.");
+      }
+    }
+  };
 
   return (
     <div className="Auth-form-container">
@@ -97,7 +87,11 @@ import { AuthContext } from "./AuthContext";
             </p>
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary" onClick={setToken}>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={setToken}
+            >
               Log In
             </button>
           </div>
@@ -111,4 +105,3 @@ import { AuthContext } from "./AuthContext";
 };
 
 export default LoginWrapperComponent;
-

@@ -154,13 +154,13 @@ const ProfileEditComponent = () => {
         <Sidebar userRole={userRole} userName={userName} userSurname={userSurname} />
         </div>
         <div id="layoutSidenav_content">
-          <div class="container-fluid px-4">
-            <h1 class="mt-4">Edit User</h1>
-            <div class="card-body">
-              <div class="form edit">
+          <div className="container-fluid px-4">
+            <h1 className="mt-4">Edit User</h1>
+            <div className="card-body">
+              <div className="form edit">
                 <form onSubmit={handleSubmit}>
-                  <div class="two-column-form">
-                    <div class="column">
+                  <div className="two-column-form">
+                    <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="name" className="form-label">
                           Name
@@ -175,7 +175,7 @@ const ProfileEditComponent = () => {
                         />
                       </div>
                     </div>
-                    <div class="column">
+                    <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="surname" className="form-label">
                           Surname
@@ -190,7 +190,7 @@ const ProfileEditComponent = () => {
                         />
                       </div>
                     </div>
-                    <div class="column">
+                    <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="email" className="form-label">
                           Email
@@ -205,7 +205,7 @@ const ProfileEditComponent = () => {
                         />
                       </div>
                     </div>
-                    <div class="column">
+                    <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="mobile" className="form-label">
                           Mobile
@@ -220,7 +220,7 @@ const ProfileEditComponent = () => {
                         />
                       </div>
                     </div>
-                    <div class="column">
+                    <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="country" className="form-label">
                           Country
@@ -240,7 +240,7 @@ const ProfileEditComponent = () => {
                         </select>
                       </div>
                     </div>
-                    <div class="column">
+                    <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="city" className="form-label">
                           City
@@ -272,7 +272,7 @@ const ProfileEditComponent = () => {
                         </select>
                       </div>
                     </div> */}
-                    <div class="column">
+                    <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="date" className="form-label">
                           Date of birth
@@ -287,7 +287,7 @@ const ProfileEditComponent = () => {
                         />
                       </div>
                     </div>
-                    <div class="column">
+                    <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="id" className="form-label">
                           National ID
@@ -302,7 +302,7 @@ const ProfileEditComponent = () => {
                         />
                       </div>
                     </div>
-                    <div class="column">
+                    <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="password" className="form-label">
                           Password
@@ -316,7 +316,7 @@ const ProfileEditComponent = () => {
                         />
                       </div>
                     </div>
-                    <div class="column">
+                    <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="password" className="form-label">
                           Confirm Password

@@ -24,44 +24,49 @@ export default function ListAppointments() {
   const [appointmentState, setAppointmentState] = useState("pending");
   const [selectedDate, setSelectedDate] = useState("");
   const [setFilteredAppointments] = useState([]);
-  
+
   const [currentPage, setCurrentPage] = useState(1);
-  const appointmentsPerPage = 2;
-  
-
-
+  const appointmentsPerPage = 5;
 
   useEffect(() => {
     if (!token && !userRole) {
       navigate("/login");
-    } else if (userRole === "admin" || userRole === "manager") {
-      getAppointments();
-    } else if (userRole === "volunteer") {
-      navigate("/volunteerdash");
+    } else if (userRole === "admin" ) {
+        navigate("/admindash");
+    }
+     else if (userRole === "manager" ) {
+        navigate("/managerdash");
+    }
+     else if (userRole === "volunteer") {
+        getAppointments();
     } else if (userRole === "olduser") {
-      navigate("/olduserdash");
+        getAppointments();
     }
   }, [navigate, token, userRole]);
 
   const getAppointments = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/visits/getuserappointments/:id");
-        const sortedAppointments = response.data.sort((a, b) => {
-          return new Date(a.appointmentdate) - new Date(b.appointmentdate);
-        });
+        `http://localhost:5000/visits/getuserappointments/${userId}`
+      );
+      console.log("Response data:", response.data);
+  
+      // Ensure response data is an array
+      const appointments = response.data.userAppointments || [];
+  
+      // Sort appointments by appointment date
+      const sortedAppointments = appointments.sort((a, b) => {
+        return new Date(a.appointmentdate) - new Date(b.appointmentdate);
+      });
+  
       setVisits(sortedAppointments);
     } catch (error) {
-      console.error("Error fetching appointments:", error);
+      console.error("Error fetching users appointments:", error);
     }
   };
 
   const handleStateChange = (e) => {
     setAppointmentState(e.target.value);
-  };
-
-  const handleDateChange = (e) => {
-    setSelectedDate(e.target.value);
   };
 
   const currentDate = new Date();
@@ -83,34 +88,25 @@ export default function ListAppointments() {
       }
     }
   });
-  
+
   const sortedAppointments = [...visits].sort((a, b) => {
     // Convert appointment dates to Date objects for comparison
     const dateA = new Date(a.appointmentdate);
     const dateB = new Date(b.appointmentdate);
-  
+
     // Compare the dates
     if (dateA < dateB) return -1;
     if (dateA > dateB) return 1;
     return 0;
   });
 
-  const deleteAppointment = (id) => {
-    axios
-      .delete(`http://localhost:5000/volunteers/delete/${id}`)
-      .then(function (response) {
-        console.log(response.data);
-        getAppointments();
-      })
-      .catch((error) => {
-        console.error("Error deleting appointment:", error);
-      });
-  };
-
   // Paginate filtered appointments
   const indexOfLastAppointment = currentPage * appointmentsPerPage;
   const indexOfFirstAppointment = indexOfLastAppointment - appointmentsPerPage;
-  const currentAppointments = filteredAppointments.slice(indexOfFirstAppointment,indexOfLastAppointment);
+  const currentAppointments = filteredAppointments.slice(
+    indexOfFirstAppointment,
+    indexOfLastAppointment
+  );
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -131,24 +127,8 @@ export default function ListAppointments() {
           <main>
             <div className="container-fluid px-4">
               <div className="row">
-                <div className="card bg-danger text-white mb-4">
-                  <div className="card-body">Create Appointment</div>
-                  <div className="card-footer d-flex align-items-center justify-content-between">
-                    {/* Change href to the report */}
-                    <a
-                      className="small text-white stretched-link"
-                      href="/createappointment"
-                    >
-                      View Details
-                    </a>
-                    <div className="small text-white">
-                      <i className="fas fa -angle-right"></i>
-                    </div>
-                  </div>
-                </div>
-                {/* <h3 className="mt-4">Create an Appointment</h3> */}
                 <div className="col-xs-12">
-                  <h3 className="mt-4">Appointments List</h3>
+                  <h3 className="mt-4">My Appointments</h3>
                   <div>
                     <label htmlFor="filter">Appointment State:</label>
                     <select
@@ -160,15 +140,6 @@ export default function ListAppointments() {
                       <option value="expired">Expired Appointments</option>
                       <option value="all">All Appointments</option>
                     </select>
-                  </div>
-                  <div>
-                    <label htmlFor="date">Select Date:</label>
-                    <input
-                      type="date"
-                      id="date"
-                      value={selectedDate}
-                      onChange={handleDateChange}
-                    />
                   </div>
                   <div className="box">
                     <table className="table table-bordered">
@@ -182,7 +153,7 @@ export default function ListAppointments() {
                           <th>Date</th>
                           <th>Time</th>
                           <th>Kind of Appointment</th>
-                          <th>Options</th>
+                          {/* <th>Options</th> */}
                         </tr>
                       </thead>
                       <tbody>
@@ -190,42 +161,35 @@ export default function ListAppointments() {
                         {currentAppointments.map((visit, key) => (
                           <tr key={key}>
                             <td>
-                              {visit.volname} {visit.volsurname}
-                            </td>
-                            <td>{visit.vol_number}</td>
-                            <td>
                               {visit.oldname} {visit.oldsurname}
                             </td>
                             <td>{visit.old_number}</td>
+                            <td>
+                              {visit.volname} {visit.volsurname}
+                            </td>
+                            <td>{visit.vol_number}</td>
                             <td>{visit.appointmentdate}</td>
                             <td>{visit.appointmenttime}</td>
                             <td>{visit.description}</td>
-                            <td>
-                              <button
-                                onClick={() => deleteAppointment(visit._id)}
-                              >
-                                Delete
-                              </button>
-                            </td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                     <div>
-                    <div>
-                    {Array.from({
-                      length: Math.ceil(
-                        filteredAppointments.length / appointmentsPerPage
-                      ),
-                    }).map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => handlePageChange(index + 1)}
-                      >
-                        {index + 1}
-                      </button>
-                    ))}
-                  </div>
+                      <div>
+                        {Array.from({
+                          length: Math.ceil(
+                            filteredAppointments.length / appointmentsPerPage
+                          ),
+                        }).map((_, index) => (
+                          <button
+                            key={index}
+                            onClick={() => handlePageChange(index + 1)}
+                          >
+                            {index + 1}
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>

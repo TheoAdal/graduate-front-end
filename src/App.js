@@ -20,6 +20,7 @@ function App() {
     "/profile",
     "/appointmentslist",
     "/createappointment",
+    "userappointmentlist",
     "/useredit",
   ];
 
