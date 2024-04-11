@@ -5,13 +5,41 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./Button.scss";
 
+import Sidebar from "../DashboardNav/Sidebar";
+import TopNav from "../DashboardNav/TopNav";
+import Footer from "../DashboardNav/Footer";
+
+import { AuthContext } from "../../Content/LoginPage/AuthContext";
+
 //UPDATE USER PROFILE TUTORIAL 
 //https://www.youtube.com/watch?v=ShejXVOTmKs&ab_channel=SmartSystemSolutions
 
 // Define your functional component
 const UserEditComponent = () => {
-  const { id } = useParams(); // Access the user ID from URL parameters
+  const userId = localStorage.getItem("userId");
+  const userName = localStorage.getItem("userName");
+  const userSurname = localStorage.getItem("userSurname");
+  const userRole = localStorage.getItem("userRole");
+
   const navigate = useNavigate(); // Access navigate function for navigation
+  const { setToken, token, loading } = useContext(AuthContext);
+
+  const { id } = useParams(); // Access the user ID from URL parameters
+
+    useEffect(() => {
+      console.log("Effect is running");
+      if (!token && !userRole) {
+        navigate("/login");
+      } else if (userRole == "admin") {
+          
+      } else if (userRole == "manager") {
+        navigate("/managerdash");
+      } else if (userRole == "volunteer") {
+        navigate("/volunteerdash");
+      } else if (userRole == "olduser") {
+        navigate("/olduserdash");
+      }
+    }, [navigate, token]);
 
   // State variables
   const [user, setUser] = useState({
@@ -304,7 +332,7 @@ const UserEditComponent = () => {
                           className="form-control"
                           type="file"
                           name="medpapers"
-                          value={user.dateofbirth}
+                          value={user.medpapers}
                           onChange={handleChange}
                         />
                       </div>
@@ -338,6 +366,9 @@ const UserEditComponent = () => {
                       </div>
                     </div>
                   </div>
+                  <button type="submit" className="btn btn-primary">
+                    Update
+                  </button>
                   <button type="submit" className="btn btn-primary">
                     Update
                   </button>
