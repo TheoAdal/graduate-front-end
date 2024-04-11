@@ -47,14 +47,7 @@ const ProfileEditComponent = () => {
 
   const [countries, setCountries] = useState([]);
 
-  //Format date to "dd/mm/yy" format
-//   const formatDate = (dateString) => {
-//     const date = new Date(dateString);
-//     const day = date.getDate().toString().padStart(2, '0');
-//     const month = (date.getMonth() + 1).toString().padStart(2, '0');
-//     const year = date.getFullYear().toString().slice(-2);
-//     return `${day}/${month}/${year}`;
-//   };
+
 
     
 
@@ -88,7 +81,6 @@ const ProfileEditComponent = () => {
       setUser((prevUser) => ({
         ...prevUser,
         ...userData,
-        // dateofbirth: formatDate(userData.dateofbirth), // Format date before setting in state
       }));
     })
     .catch(function (error) {
@@ -280,9 +272,8 @@ const ProfileEditComponent = () => {
                         <input
                           className="form-control"
                           type="date"
-                          name="dateOfBirth"
+                          name="dateofbirth" 
                           value={user.dateofbirth}
-                          //value={user.dateofbirth ? formatDate(user.dateofbirth) : ""}
                           onChange={handleChange}
                         />
                       </div>
