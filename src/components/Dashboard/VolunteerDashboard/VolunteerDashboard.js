@@ -71,7 +71,7 @@ const VolunteerDashboard = () => {
                     <div className="card-body">Appointments</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
                       {/* CHANGE HREF */}{/* CHANGE HREF */}{/* CHANGE HREF */}
-                      <a className="small text-white stretched-link" href="/calendar">
+                      <a className="small text-white stretched-link" href="/userappointmentlist">
                         View Details
                       </a>
                       <div className="small text-white">

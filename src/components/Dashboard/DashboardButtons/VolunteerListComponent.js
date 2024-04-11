@@ -39,13 +39,13 @@ export default function ListVolunteers() {
   useEffect(() => {
     if (!token && !userRole) {
       navigate("/login");
-    } else if (userRole == "admin") {
+    } else if (userRole === "admin") {
       getUsers();
-    } else if (userRole == "manager") {
+    } else if (userRole === "manager") {
       getUsers();
-    } else if (userRole == "volunteer") {
+    } else if (userRole === "volunteer") {
       navigate("/volunteerdash");
-    } else if (userRole == "olduser") {
+    } else if (userRole === "olduser") {
       navigate("/olduserdash");
     }
   }, [navigate, token]);

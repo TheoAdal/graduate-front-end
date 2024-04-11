@@ -21,6 +21,7 @@ import VolunteerList from "../../Dashboard/DashboardButtons/VolunteerListCompone
 // import UserEditComponent from "../../Dashboard/DashboardButtons/UserEditComponent";
 import AppointmentsList from "../../Dashboard/DashboardButtons/AppointmentsList";
 import CreateAppointment from "../../Dashboard/DashboardButtons/CreateAppointment";
+import UserAppointmentList from "../../Dashboard/DashboardButtons/UserAppointmentList";
 
 function ContentWrapperComponent() {
   return (
@@ -48,6 +49,7 @@ function ContentWrapperComponent() {
         <Route exact path="/volunteerlist" element={<VolunteerList />} />
         <Route exact path="/appointmentslist" element={<AppointmentsList />} />
         <Route exact path="/createappointment" element={<CreateAppointment />} />
+        <Route exact path="/userappointmentlist" element={<UserAppointmentList />} />
         {/* <Route exact path="volunteerlist/useredit/:id" element={<UserEditComponent />} /> */}
       </Routes>
     </div>
