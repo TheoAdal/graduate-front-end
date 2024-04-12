@@ -82,8 +82,8 @@ const LoginWrapperComponent = () => {
           {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}{" "}
           <div className="form-group mt-2">
             <p>
-              Participate in our program as a <a href="#">Volunteer</a> or a{" "}
-              <a href="#">Beneficiary</a>
+              Participate in our program as a <a href="/volunteer">Volunteer</a> or a{" "}
+              <a href="/olduser">Beneficiary</a>
             </p>
           </div>
           <div className="d-grid gap-2 mt-3">
@@ -95,9 +95,9 @@ const LoginWrapperComponent = () => {
               Log In
             </button>
           </div>
-          <p className="forgot-password text-right">
+          {/* <p className="forgot-password text-right">
             Forgot <a href="#">password?</a>
-          </p>
+          </p> */}
         </div>
       </form>
     </div>

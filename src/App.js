@@ -22,6 +22,7 @@ function App() {
     "/createappointment",
     "userappointmentlist",
     "/useredit",
+    "/registermanager",
   ];
 
   const RenderComponent = !excludePaths.some((path) =>
