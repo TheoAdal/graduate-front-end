@@ -134,8 +134,24 @@ export default function ListManagers() {
         <div id="layoutSidenav_content">
           <main>
             <div className="container-fluid px-4">
+            <div className="row">
+              <div className="card bg-danger text-white mb-4">
+                <div className="card-body">Create Manager</div>
+                <div className="card-footer d-flex align-items-center justify-content-between">
+                  {/* Change href to the report */}
+                  <a
+                    className="small text-white stretched-link"
+                    href="/registermanager"
+                  >
+                    View Details
+                  </a>
+                  <div className="small text-white">
+                    <i className="fas fa -angle-right"></i>
+                  </div>
+                </div>
+              </div>
               <h1 className="mt-4">Manager List</h1>
-              <div className="row">
+              
                 <div className="col-xs-12">
                   <input
                     type="text"
