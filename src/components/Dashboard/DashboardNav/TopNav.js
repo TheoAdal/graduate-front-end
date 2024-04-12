@@ -38,6 +38,9 @@ const TopNav = ({ handleLogout, userRole }) => {
       </button>
       <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
         <NavDropdown title="Options" id="basic-nav-dropdown">
+        <NavDropdown.Item>
+            <Link to="/">Homepage</Link>
+          </NavDropdown.Item>
           <NavDropdown.Item>
             <Link to="/profile">Profile</Link>
           </NavDropdown.Item>
