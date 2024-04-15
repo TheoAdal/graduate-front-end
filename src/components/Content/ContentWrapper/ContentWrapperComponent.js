@@ -7,7 +7,7 @@ import About from "../AboutUsPage/AboutUsPageComponent";
 import RegisterVolunteer from "../RegisterPages/RegisterVolunteerComponent";
 import RegisterOldUser from "../RegisterPages/RegisterOldUserComponent";
 import Login from "../LoginPage/LoginWrapperComponent";
-
+import EmailVerify from "../LoginPage/EmailVerify";
 
 import AdminDashboard from "../../Dashboard/AdminDashboard/AdminDashboard";
 import ManagerDashboard from "../../Dashboard/ManagerDashboard/ManagerDashboard";
@@ -18,13 +18,13 @@ import EmployeeList from "../../Dashboard/DashboardButtons/ManagerListComponent"
 import OldUserList from "../../Dashboard/DashboardButtons/OldUserListComponent";
 import ProfileEdit from "../../Dashboard/DashboardButtons/ProfileEditComponent";
 import VolunteerList from "../../Dashboard/DashboardButtons/VolunteerListComponent";
-// import UserEditComponent from "../../Dashboard/DashboardButtons/UserEditComponent";
 import AppointmentsList from "../../Dashboard/DashboardButtons/AppointmentsList";
 import CreateAppointment from "../../Dashboard/DashboardButtons/CreateAppointment";
 import UserAppointmentList from "../../Dashboard/DashboardButtons/UserAppointmentList";
 import RegisterManager from "../../Dashboard/DashboardButtons/RegisterManager";
+import UserEditComponent from "../../Dashboard/DashboardButtons/UserEditComponent";
 
-//
+
 function ContentWrapperComponent() {
   return (
     <div className="content-wrapper-container">
@@ -37,6 +37,7 @@ function ContentWrapperComponent() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/volunteer" element={<RegisterVolunteer />} />
           <Route exact path="/olduser" element={<RegisterOldUser />} />
+          <Route exact path="/users/:id/verify/:token" element={<EmailVerify />} />
         </Routes>
       </div>
       <Routes>
@@ -53,7 +54,7 @@ function ContentWrapperComponent() {
         <Route exact path="/createappointment" element={<CreateAppointment />} />
         <Route exact path="/userappointmentlist" element={<UserAppointmentList />} />
         <Route exact path="/registermanager" element={<RegisterManager />} />
-        {/* <Route exact path="volunteerlist/useredit/:id" element={<UserEditComponent />} /> */}
+        <Route exact path="/useredit/:id" element={<UserEditComponent />} />
       </Routes>
     </div>
   );
