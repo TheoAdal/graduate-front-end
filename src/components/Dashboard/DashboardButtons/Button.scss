@@ -723,6 +723,129 @@ progress {
   //background-color: #434343;
   //border: 1px solid grey;
 }
+//Styles for the filters//
+.filters-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; // Center horizontally
+  margin-bottom: 20px;
+
+  .filters-search {
+    input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 200px;
+      margin-right: 10px;
+    }
+  }
+
+  .filters-city, .filters-state {
+    label {
+      font-weight: bold;
+      margin-left: 10px;
+      margin-right: 10px;
+      color: white; /* Change label color to white */
+      font-size: 1.1rem; /* Increase font size */
+    }
+  
+    select {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      //color: white; /* Change select text color to white */
+      font-size: 1.1rem; /* Increase font size */
+      //background-color: #aea3a3; /* Set background color */
+    }
+  }
+}
+
+.table-container-user {
+  overflow-x: auto; /* Add horizontal scroll if needed */
+}
+
+.table-user {
+  width: 100%; /* Make table fill its container */
+  border-collapse: collapse; /* Collapse table borders */
+}
+
+.table-user th,
+.table-user td {
+  padding: 10px; /* Add padding to table cells */
+  border: 2px solid #000000; /* Add borders to table cells */
+}
+
+.table-user th {
+  background-color: #ffffff; /*  header background color */
+  color: #000000; /*  header text color */
+  font-weight: bold;
+  text-align: center; /* Center align header text */
+}
+
+.table-user td {
+  text-align: center; /* Center align table data */
+  background-color: #ced1d3; /* table background color */ 
+  color: #000000; /*  table text color */
+}
+
+/* Styles for the buttons */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+}
+
+.button-container button {
+  padding: 8px 10px; /* Adjusted padding for smaller buttons */
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px; /* Reduced font size */
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.button-container button.change-state {
+  background-color: #0056b3; /* #4CAF50 */
+  color: white;
+}
+
+.button-container button.delete {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+.button-container button:hover {
+  // transform: translateY(-2px);
+  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0.8; /* Reduce opacity on hover */
+}
+
+// Styles for Pagination //
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Add some top margin for spacing */
+}
+
+.pagination-button {
+  padding: 8px 12px;
+  margin: 0 4px; /* Add some horizontal margin between buttons */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #ffffff; /* Blue background color */ //20C988
+  color: #20C988; /* White text color */
+  transition: all 0.3s ease;
+}
+
+.pagination-button:hover {
+  background-color: #139165; /* Darker blue on hover */ //#0056b3
+  color: #ffffff; /* White text color */
+}
+
 
 .col {
   flex: 1 0 0%;
