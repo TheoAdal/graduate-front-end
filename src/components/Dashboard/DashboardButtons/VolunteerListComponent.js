@@ -59,8 +59,9 @@ export default function ListVolunteers() {
 
   const getUsers = async () => {
     try {
-      const response = await axios
-      .get("http://localhost:5000/volunteers/getallvol");
+      const response = await axios.get(
+        "http://localhost:5000/volunteers/getallvol"
+      );
       console.log(response.data);
       setUsers(response.data);
     } catch (error) {
@@ -139,28 +140,42 @@ export default function ListVolunteers() {
               <h1 className="mt-4">Volunteer List</h1>
               <div className="row">
                 <div className="col-xs-12">
-                  <input
-                    type="text"
-                    placeholder="Search volunteer"
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                  />
-                  <select value={selectedCity} onChange={handleCityChange}>
-                    {cities.map((city, index) => (
-                      <option key={index} value={city}>
-                        {city}
-                      </option>
-                    ))}
-                  </select>
-                  <select value={selectedState} onChange={handleStateChange}>
-                    {states.map((state, index) => (
-                      <option key={index} value={state}>
-                        {state}
-                      </option>
-                    ))}
-                  </select>
-                  <div className="box">
-                    <table className="table table-bordered">
+                  {/* FILTERS */}
+                  <div className="filters-container">
+                    <div className="filters-search">
+                      <input
+                        type="text"
+                        placeholder="Search volunteer"
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                      />
+                    </div>
+                    <div className="filters-city">
+                      <label>Filter by Country:</label>
+                      <select value={selectedCity} onChange={handleCityChange}>
+                        {cities.map((city, index) => (
+                          <option key={index} value={city}>
+                            {city}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="filters-state">
+                      <label>Filter by State:</label>
+                      <select
+                        value={selectedState}
+                        onChange={handleStateChange}
+                      >
+                        {states.map((state, index) => (
+                          <option key={index} value={state}>
+                            {state}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="table-container-user">
+                    <table className="table-user">
                       <thead>
                         <tr>
                           <th>id</th>
@@ -184,24 +199,33 @@ export default function ListVolunteers() {
                             <td>{user.userState}</td>
                             <td>{user.city}</td>
                             <td>
-                              <button onClick={() => changeUserState(user._id)}>
-                                Edit state
-                              </button>
-                              <button onClick={() => deleteUser(user._id)}>
-                                Delete
-                              </button>
+                              <div className="button-container">
+                                <button
+                                  className="change-state"
+                                  onClick={() => changeUserState(user._id)}
+                                >
+                                  Edit state
+                                </button>
+                                <button
+                                  className="delete"
+                                  onClick={() => deleteUser(user._id)}
+                                >
+                                  Delete
+                                </button>
+                              </div>
                             </td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
-                  <div>
+                  <div className="pagination-container">
                     {Array.from({
                       length: Math.ceil(users.length / usersPerPage),
                     }).map((_, index) => (
                       <button
                         key={index}
+                        className="pagination-button"
                         onClick={() => handlePageChange(index + 1)}
                       >
                         {index + 1}
