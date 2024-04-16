@@ -26,7 +26,7 @@ export default function ListAppointments() {
   const [setFilteredAppointments] = useState([]);
   
   const [currentPage, setCurrentPage] = useState(1);
-  const appointmentsPerPage = 2;
+  const appointmentsPerPage = 10;
   
 
 
@@ -46,7 +46,7 @@ export default function ListAppointments() {
   const getAppointments = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/visits/getuserappointments/:id");
+        "http://localhost:5000/visits/getallappointments");
         const sortedAppointments = response.data.sort((a, b) => {
           return new Date(a.appointmentdate) - new Date(b.appointmentdate);
         });
