@@ -112,9 +112,9 @@ const LoginWrapperComponent = () => {
               Log In
             </button>
           </div>
-          {/* <p className="forgot-password text-right">
-            Forgot <a href="#">password?</a>
-          </p> */}
+          <p className="forgot-password text-right">
+            Forgot <a href="/forgotpassword">password?</a>
+          </p>
         </div>
       </form>
     </div>
