@@ -7,7 +7,10 @@ import About from "../AboutUsPage/AboutUsPageComponent";
 import RegisterVolunteer from "../RegisterPages/RegisterVolunteerComponent";
 import RegisterOldUser from "../RegisterPages/RegisterOldUserComponent";
 import Login from "../LoginPage/LoginWrapperComponent";
+
 import EmailVerify from "../LoginPage/EmailVerify";
+import ForgotPasswordPage from "../LoginPage/ForgotPasswordPage";
+import PasswordResetPage from "../LoginPage/PasswordResetPage";
 
 import AdminDashboard from "../../Dashboard/AdminDashboard/AdminDashboard";
 import ManagerDashboard from "../../Dashboard/ManagerDashboard/ManagerDashboard";
@@ -38,6 +41,8 @@ function ContentWrapperComponent() {
           <Route exact path="/volunteer" element={<RegisterVolunteer />} />
           <Route exact path="/olduser" element={<RegisterOldUser />} />
           <Route exact path="/users/:id/verify/:token" element={<EmailVerify />} />
+          <Route exact path="/forgotpassword" element={<ForgotPasswordPage />} />
+          <Route exact path="/reset-password/:token" element={<PasswordResetPage />} />
         </Routes>
       </div>
       <Routes>
