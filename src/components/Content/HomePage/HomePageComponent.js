@@ -7,13 +7,13 @@ import "./HomePageStyles.scss";
 function HomePageComponent() {
   return (
     <div>
-      HomePageComponent
+      {/* HomePageComponent */}
       <div className="home-page-container">
         <CarouselAnimation />
         <div className="opening-title">
           <h1>Καλώς ορίσατε </h1> {/* Add your opening text here */}
           <div className="opening-text1">
-            <p>Βαλε μια μικρη opening περιγραφη του σιτε εδω </p>
+            {/* <p>Βαλε μια μικρη opening περιγραφη του σιτε εδω </p> */}
           </div>
         </div>
         <CardComponent/>

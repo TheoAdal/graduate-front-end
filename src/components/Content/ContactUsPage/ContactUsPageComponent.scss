@@ -42,6 +42,10 @@
     .btn-primary {
       background-color: #00695c;
       border: none;
+      &:hover {
+        color: rgb(0, 0, 0);
+        background-color: #00695c;  // Adjust the color to your preference
+      }
     }
   }
   

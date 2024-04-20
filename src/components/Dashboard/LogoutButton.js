@@ -24,7 +24,7 @@ const LogoutButton = () => {
 
   return (
     <button className="dropdown-item" onClick={handleLogout}>
-      Logout
+      <a>Logout</a>
     </button>
   );
 };

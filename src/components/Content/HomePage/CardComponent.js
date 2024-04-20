@@ -22,10 +22,10 @@ function CardComponent()
           <Card className="card">
             <Card.Img variant="top" src="another-image-url.jpg" /> {/*src={Img4} */}
             <Card.Body>
-              <Card.Title>Καταπολέμησε την μοναξιά</Card.Title>
+              {/* <Card.Title>Καταπολέμησε την μοναξιά</Card.Title> */}
+              <Card.Title>Εγγραφή ως άτομο τρίτης ηλικίας</Card.Title>
               <Card.Text>
-                Πάρε μέρος στο πρόγραμμα μας για να μην ξανανιώσεις ποτε 
-                μονος
+                Πάρε μέρος στο πρόγραμμα μας για να καταπολεμήσεις την μοναξιά
               </Card.Text>
               <Button variant="primary" href="/olduser">Πάρε μέρος</Button>
             </Card.Body>

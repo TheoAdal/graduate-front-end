@@ -53,13 +53,13 @@ function TopBarNav() {
             Site
           </Navbar.Brand>
           <Nav className="top-bar-nav">
-            <Link to="/">Home</Link>
-            <Link to="/about">About us</Link>
-            <Link to="/contact">Contact us</Link>
+            <Link to="/">Αρχική</Link>
+            <Link to="/about">Σχετικά με εμάς</Link>
+            <Link to="/contact">Επικοινωνία</Link>
             {token ? (
               <>
                 <Link to={getDashboardLink()}>Dashboard</Link> 
-                <NavDropdown title="Options" id="basic-nav-dropdown">
+                <NavDropdown title="Options" id="basic-nav-dropdown" className="nav-dropdown">
                   <NavDropdown.Item>
                     <Link to="/profile">Profile</Link>
                   </NavDropdown.Item>
@@ -71,12 +71,12 @@ function TopBarNav() {
             ) : (
               <>
                 <Link to="/login">Log in</Link>
-                <NavDropdown title="Register as" id="basic-nav-dropdown">
-                  <NavDropdown.Item>
-                    <Link to="/volunteer">Volunteer</Link>
+                <NavDropdown title="Εγγραφή ως" id="basic-nav-dropdown" className="nav-dropdown">
+                  <NavDropdown.Item className="dropdown-item">
+                    <Link to="/volunteer">Εθελοντής</Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                    <Link to="/olduser">Person in need</Link>
+                    <Link to="/olduser">Άτομο τρίτης ηλικίας</Link>
                   </NavDropdown.Item>
                 </NavDropdown>
               </>
