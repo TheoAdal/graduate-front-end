@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./Button.scss";
+// import searchbar from "../../../images/searchbar.webp";
 //import Filter from "./Filters";
 
 import Sidebar from "../DashboardNav/Sidebar";

@@ -14,9 +14,26 @@
   }
 }
 
+.nav-dropdown .dropdown-menu {
+  background-color: #1b8877; // Set the dropdown menu background color
+  .dropdown-item {
+    color: rgb(255, 255, 255);
+    &:hover {
+      color: rgb(255, 255, 255);
+      background-color: #00A98F;  // Adjust the color to your preference
+    }
+  }
+}
+
+
+.dropdown .dropdown-toggle {
+  color: white !important;
+}
+
 .navbar-brand {
   display: flex;
   font-family: Helvetica-Nue;
+  color: #ffffff !important;
 }
 
 .navbar-expand .navbar-nav {
