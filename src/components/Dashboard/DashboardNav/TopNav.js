@@ -38,21 +38,21 @@ const TopNav = ({ handleLogout, userRole }) => {
       </button>
       <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
         <NavDropdown title="Options" id="basic-nav-dropdown">
-          <NavDropdown.Item>
+          <NavDropdown.Item  as="div">
             <Link to="/">
               <button className="dropdown-item">
-                <a>Homepage</a>
+                Homepage
               </button>
             </Link>
           </NavDropdown.Item>
-          <NavDropdown.Item>
+          <NavDropdown.Item  as="div">
             <Link to="/profile">
               <button className="dropdown-item">
-                <a>Profile</a>
+                Profile
               </button>
             </Link>
           </NavDropdown.Item>
-          <NavDropdown.Item>
+          <NavDropdown.Item  as="div">
             <LogoutButton handleLogout={handleLogout} />
           </NavDropdown.Item>
         </NavDropdown>

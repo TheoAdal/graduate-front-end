@@ -144,6 +144,7 @@ export default function ListVolunteers() {
                   {/* FILTERS */}
                   <div className="filters-container">
                     <div className="filters-search">
+                      <label>Search User:</label>
                       <input
                         type="text"
                         placeholder="Search volunteer"
@@ -152,7 +153,7 @@ export default function ListVolunteers() {
                       />
                     </div>
                     <div className="filters-city">
-                      <label>Filter by Country:</label>
+                      <label>Filter by City:</label>
                       <select value={selectedCity} onChange={handleCityChange}>
                         {cities.map((city, index) => (
                           <option key={index} value={city}>
@@ -222,11 +223,13 @@ export default function ListVolunteers() {
                   </div>
                   <div className="pagination-container">
                     {Array.from({
-                      length: Math.ceil(users.length / usersPerPage),
+                      length: Math.ceil(filteredUsers.length / usersPerPage),
                     }).map((_, index) => (
                       <button
                         key={index}
-                        className="pagination-button"
+                        className={`pagination-button ${
+                          currentPage === index + 1 ? "active" : ""
+                        }`} // Added active class for current page
                         onClick={() => handlePageChange(index + 1)}
                       >
                         {index + 1}
