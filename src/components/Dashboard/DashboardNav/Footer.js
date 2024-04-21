@@ -1,6 +1,7 @@
 // Footer.js
 import React from "react";
 import { Link } from "react-router-dom";
+// import "./Footer.scss";
 
 const Footer = () => {
   return (
@@ -22,9 +23,3 @@ const Footer = () => {
 
 export default Footer;
 
-{/* <div>
-      <a href="#">Privacy Policy</a>
-      &middot;
-      <a href="#">Terms &amp; Conditions</a>
-    </div> 
-*/}

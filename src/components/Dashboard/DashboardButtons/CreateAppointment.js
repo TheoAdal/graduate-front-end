@@ -63,9 +63,9 @@ export default function CreateAppointment() {
   const [currentOldUserPage, setCurrentOldUserPage] = useState(1);
   const oldUsersPerPage = 2;
 
-  const [appointmentdate, setAppointmentDate] = useState('');
-  const [appointmenttime, setAppointmentTime] = useState('');
-  const [description, setDescription] = useState('');
+  const [appointmentdate, setAppointmentDate] = useState("");
+  const [appointmenttime, setAppointmentTime] = useState("");
+  const [description, setDescription] = useState("");
 
   function getActiveVolunteer() {
     axios
@@ -182,17 +182,19 @@ export default function CreateAppointment() {
 
   const handleCreateAppointment = async () => {
     try {
-      const response = await axios.post(`http://localhost:5000/visits/createappointment`, 
-      {
-        vol_id: selectedVolunteerId,
-        old_id: selectedOldUserId,
-        appointmentdate: appointmentdate,
-        appointmenttime: appointmenttime,
-        description: description
-      });
-      console.log('Appointment created successfully:', response.data);
+      const response = await axios.post(
+        `http://localhost:5000/visits/createappointment`,
+        {
+          vol_id: selectedVolunteerId,
+          old_id: selectedOldUserId,
+          appointmentdate: appointmentdate,
+          appointmenttime: appointmenttime,
+          description: description,
+        }
+      );
+      console.log("Appointment created successfully:", response.data);
     } catch (error) {
-      console.error('Error creating appointment:', error);
+      console.error("Error creating appointment:", error);
     }
   };
 
@@ -214,24 +216,32 @@ export default function CreateAppointment() {
                 {/* <h3 className="mt-4">Create an Appointment</h3> */}
                 <div className="col-xs-12">
                   <h3 className="mt-4">Old user list</h3>
-                  <input
-                    type="text"
-                    placeholder="Search olduser"
-                    value={searchOldUserQuery}
-                    onChange={handleOldUserSearchChange}
-                  />
-                  <select
-                    value={selectedOldUserCity}
-                    onChange={handleOldUserCityChange}
-                  >
-                    {cities.map((city, index) => (
-                      <option key={index} value={city}>
-                        {city}
-                      </option>
-                    ))}
-                  </select>
-                  <div className="box">
-                    <table className="table table-bordered">
+                  <div className="filters-container">
+                    <div className="filters-search">
+                      <label>Search OldUser:</label>
+                      <input
+                        type="text"
+                        placeholder="Search olduser"
+                        value={searchOldUserQuery}
+                        onChange={handleOldUserSearchChange}
+                      />
+                    </div>
+                    <div className="filters-city">
+                      <label>Filter by City:</label>
+                      <select
+                        value={selectedOldUserCity}
+                        onChange={handleOldUserCityChange}
+                      >
+                        {cities.map((city, index) => (
+                          <option key={index} value={city}>
+                            {city}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="table-container-user">
+                    <table className="table-user">
                       <thead>
                         <tr>
                           <th>id</th>
@@ -251,50 +261,65 @@ export default function CreateAppointment() {
                             <td>{olduser.mobile}</td>
                             <td>{olduser.city}</td>
                             <td>
-                              <input
-                                type="checkbox"
-                                checked={selectedOldUserId === olduser._id}
-                                onChange={(e) =>
-                                  handleOldUserCheckboxChange(e, olduser._id)
-                                }
-                              />
+                              <div className="check-container">
+                                <input
+                                  type="checkbox"
+                                  checked={selectedOldUserId === olduser._id}
+                                  onChange={(e) =>
+                                    handleOldUserCheckboxChange(e, olduser._id)
+                                  }
+                                />
+                              </div>
                             </td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
-                    <div>
-                      {Array.from({
-                        length: Math.ceil(
-                          filteredOldUsers.length / oldUsersPerPage
-                        ),
-                      }).map((_, index) => (
-                        <button
-                          key={index}
-                          onClick={() => handleOldUserPageChange(index + 1)}
-                        >
-                          {index + 1}
-                        </button>
-                      ))}
+                  </div>
+                  <div className="pagination-container">
+                    {Array.from({
+                      length: Math.ceil(
+                        filteredOldUsers.length / oldUsersPerPage
+                      ),
+                    }).map((_, index) => (
+                      <button
+                        key={index}
+                        className={`pagination-button ${
+                          currentOldUserPage === index + 1 ? "active" : ""
+                        }`}
+                        onClick={() => handleOldUserPageChange(index + 1)}
+                      >
+                        {index + 1}
+                      </button>
+                    ))}
+                  </div>
+                  <h3 className="mt-4">Volunteer list</h3>
+                  <div className="filters-container">
+                    <div className="filters-search">
+                      <label>Search Volunteer:</label>
+                      <input
+                        type="text"
+                        placeholder="Search volunteer"
+                        value={searchVolunteerQuery}
+                        onChange={handleVolunteerSearchChange}
+                      />
                     </div>
-                    <h3 className="mt-4">Volunteer list</h3>
-                    <input
-                      type="text"
-                      placeholder="Search volunteer"
-                      value={searchVolunteerQuery}
-                      onChange={handleVolunteerSearchChange}
-                    />
-                    <select
-                      value={selectedVolunteerCity}
-                      onChange={handleVolunteerCityChange}
-                    >
-                      {cities.map((city, index) => (
-                        <option key={index} value={city}>
-                          {city}
-                        </option>
-                      ))}
-                    </select>
-                    <table className="table table-bordered">
+                    <div className="filters-city">
+                      <label>Filter by City:</label>
+                      <select
+                        value={selectedVolunteerCity}
+                        onChange={handleVolunteerCityChange}
+                      >
+                        {cities.map((city, index) => (
+                          <option key={index} value={city}>
+                            {city}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="table-container-user">
+                    <table className="table-user">
                       <thead>
                         <tr>
                           <th>id</th>
@@ -329,22 +354,27 @@ export default function CreateAppointment() {
                         ))}
                       </tbody>
                     </table>
-                    <div>
-                      {Array.from({
-                        length: Math.ceil(
-                          filteredVolunteers.length / volunteersPerPage
-                        ),
-                      }).map((_, index) => (
-                        <button
-                          key={index}
-                          onClick={() => handleVolunteerPageChange(index + 1)}
-                        >
-                          {index + 1}
-                        </button>
-                      ))}
-                    </div>
-                    <div className="column">
-                      <div className="col-md-3 mb-3">
+                  </div>
+                  <div className="pagination-container">
+                    {Array.from({
+                      length: Math.ceil(
+                        filteredVolunteers.length / volunteersPerPage
+                      ),
+                    }).map((_, index) => (
+                      <button
+                        key={index}
+                        className={`pagination-button ${
+                          currentVolunteerPage === index + 1 ? "active" : ""
+                        }`} // Added active class for current page
+                        onClick={() => handleVolunteerPageChange(index + 1)}
+                      >
+                        {index + 1}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="appointment-creation">
+                    <div className="date-time-container">
+                      <div className="appointment-date">
                         <label htmlFor="date" className="form-label">
                           Pick a date
                         </label>
@@ -356,9 +386,8 @@ export default function CreateAppointment() {
                           onChange={(e) => setAppointmentDate(e.target.value)}
                         />
                       </div>
-                    </div>
-                    <div className="column">
-                      <div className="col-md-3 mb-3">
+
+                      <div className="appointment-time">
                         <label htmlFor="time" className="form-label">
                           Pick a time
                         </label>
@@ -371,28 +400,29 @@ export default function CreateAppointment() {
                         />
                       </div>
                     </div>
+                    {/* </div> */}
+                    <div className="appointment-description">
+                      <label htmlFor="description" className="form-label">
+                        Description
+                      </label>
+                      <input
+                        as="textarea"
+                        rows={4}
+                        name="message"
+                        placeholder="Type here"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                      />
+                    </div>
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="description" className="form-label">
-                      Description
-                    </label>
-                    <input
-                      as="textarea"
-                      rows={4}
-                      name="message"
-                      placeholder="Type here"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                    />
+                    <button
+                      className="btn btn-primary"
+                      onClick={handleCreateAppointment}
+                    >
+                      Create Appointment
+                    </button>
                   </div>
-                </div>
-                <div className="mb-3">
-                  <button
-                    className="btn btn-primary"
-                    onClick={handleCreateAppointment}
-                  >
-                    Create Appointment
-                  </button>
                 </div>
               </div>
             </div>

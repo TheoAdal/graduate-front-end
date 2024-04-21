@@ -752,12 +752,20 @@ progress {
     }
   }
 
-  .filters-city, .filters-state {
+  .filters-city, .filters-state, .filters-date {
     label {
       font-weight: bold;
       margin-left: 10px;
       margin-right: 10px;
       color: white; /* Change label color to white */
+      font-size: 1.1rem; /* Increase font size */
+    }
+
+    input{
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      //color: white; /* Change select text color to white */
       font-size: 1.1rem; /* Increase font size */
     }
   
@@ -805,6 +813,10 @@ progress {
   display: flex;
   justify-content: space-between;
   margin: 5px;
+}
+
+.check-container{
+
 }
 
 .button-container button {
@@ -856,6 +868,65 @@ progress {
 .pagination-button:hover {
   background-color: #139165; /* Darker blue on hover */ //#0056b3
   color: #ffffff; /* White text color */
+}
+
+.appointment-creation {
+  display: flex; // Use flexbox to position children elements
+  align-items: flex-start; // Align children to the start of the cross axis
+
+  .date-time-container {
+    display: flex;
+    flex-direction: column; // Stack the date and time inputs vertically
+    margin-right: 20px; // Add some margin to the right of the date and time container
+  }
+
+  .appointment-description {
+    flex-grow: 1; // Let the description take up the remaining space
+    // Add additional styling if needed for the description input
+  }
+  .appointment-date,
+  .appointment-time,
+  .appointment-description {
+    label {
+      font-weight: bold;
+      margin-left: 10px;
+      margin-right: 10px;
+      color: white; /* Change label color to white */
+      font-size: 1.1rem; /* Increase font size */
+    }
+    margin-bottom: 15px; // Spacing between each field
+  }
+
+  .appointment-date input,
+  .appointment-time input {
+    width: 100%; // Full width of the container
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .appointment-description input {
+    width: 100%; // Full width of the container
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 100px; // Fixed height for the description box
+  }
+
+  .appointment-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px; // Spacing from the last input to the button
+    background-color: #007bff; // Example button color
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken(#007bff, 5%);
+    }
+  }
 }
 
 

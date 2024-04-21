@@ -24,12 +24,9 @@ export default function ListAppointments() {
   const [appointmentState, setAppointmentState] = useState("pending");
   const [selectedDate, setSelectedDate] = useState("");
   const [setFilteredAppointments] = useState([]);
-  
+
   const [currentPage, setCurrentPage] = useState(1);
   const appointmentsPerPage = 10;
-  
-
-
 
   useEffect(() => {
     if (!token && !userRole) {
@@ -46,10 +43,11 @@ export default function ListAppointments() {
   const getAppointments = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/visits/getallappointments");
-        const sortedAppointments = response.data.sort((a, b) => {
-          return new Date(a.appointmentdate) - new Date(b.appointmentdate);
-        });
+        "http://localhost:5000/visits/getallappointments"
+      );
+      const sortedAppointments = response.data.sort((a, b) => {
+        return new Date(a.appointmentdate) - new Date(b.appointmentdate);
+      });
       setVisits(sortedAppointments);
     } catch (error) {
       console.error("Error fetching appointments:", error);
@@ -83,12 +81,12 @@ export default function ListAppointments() {
       }
     }
   });
-  
+
   const sortedAppointments = [...visits].sort((a, b) => {
     // Convert appointment dates to Date objects for comparison
     const dateA = new Date(a.appointmentdate);
     const dateB = new Date(b.appointmentdate);
-  
+
     // Compare the dates
     if (dateA < dateB) return -1;
     if (dateA > dateB) return 1;
@@ -110,7 +108,10 @@ export default function ListAppointments() {
   // Paginate filtered appointments
   const indexOfLastAppointment = currentPage * appointmentsPerPage;
   const indexOfFirstAppointment = indexOfLastAppointment - appointmentsPerPage;
-  const currentAppointments = filteredAppointments.slice(indexOfFirstAppointment,indexOfLastAppointment);
+  const currentAppointments = filteredAppointments.slice(
+    indexOfFirstAppointment,
+    indexOfLastAppointment
+  );
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -149,29 +150,31 @@ export default function ListAppointments() {
                 {/* <h3 className="mt-4">Create an Appointment</h3> */}
                 <div className="col-xs-12">
                   <h3 className="mt-4">Appointments List</h3>
-                  <div>
-                    <label htmlFor="filter">Appointment State:</label>
-                    <select
-                      id="filter"
-                      value={appointmentState}
-                      onChange={handleStateChange}
-                    >
-                      <option value="pending">Pending Appointments</option>
-                      <option value="expired">Expired Appointments</option>
-                      <option value="all">All Appointments</option>
-                    </select>
+                  <div className="filters-container">
+                    <div className="filters-state">
+                      <label>Appointment State:</label>
+                      <select
+                        // id="filter"
+                        value={appointmentState}
+                        onChange={handleStateChange}
+                      >
+                        <option value="pending">Pending Appointments</option>
+                        <option value="expired">Expired Appointments</option>
+                        <option value="all">All Appointments</option>
+                      </select>
+                    </div>
+                    <div className="filters-date">
+                      <label>Select Date:</label>
+                      <input
+                        type="date"
+                        // id="date"
+                        value={selectedDate}
+                        onChange={handleDateChange}
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <label htmlFor="date">Select Date:</label>
-                    <input
-                      type="date"
-                      id="date"
-                      value={selectedDate}
-                      onChange={handleDateChange}
-                    />
-                  </div>
-                  <div className="box">
-                    <table className="table table-bordered">
+                  <div className="table-container-user">
+                    <table className="table-user">
                       {/* Table headers */}
                       <thead>
                         <tr>
@@ -201,31 +204,35 @@ export default function ListAppointments() {
                             <td>{visit.appointmenttime}</td>
                             <td>{visit.description}</td>
                             <td>
-                              <button
-                                onClick={() => deleteAppointment(visit._id)}
-                              >
-                                Delete
-                              </button>
+                              <div className="button-container">
+                                <button
+                                  className="delete"
+                                  onClick={() => deleteAppointment(visit._id)}
+                                >
+                                  Delete
+                                </button>
+                              </div>
                             </td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
-                    <div>
-                    <div>
-                    {Array.from({
-                      length: Math.ceil(
-                        filteredAppointments.length / appointmentsPerPage
-                      ),
-                    }).map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => handlePageChange(index + 1)}
-                      >
-                        {index + 1}
-                      </button>
-                    ))}
-                  </div>
+                    <div className="pagination-container">
+                      {Array.from({
+                        length: Math.ceil(
+                          filteredAppointments.length / appointmentsPerPage
+                        ),
+                      }).map((_, index) => (
+                        <button
+                          key={index}
+                          className={`pagination-button ${
+                            currentPage === index + 1 ? "active" : ""
+                          }`} // Added active class for current page
+                          onClick={() => handlePageChange(index + 1)}
+                        >
+                          {index + 1}
+                        </button>
+                      ))}
                     </div>
                   </div>
                 </div>
