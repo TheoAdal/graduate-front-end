@@ -36,9 +36,11 @@
     //gap: 50px; 
     padding: 0 70px; /* Gap on both sides of the cards */
     margin: 0 auto;
+    
   }
   
   .card{
+    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
     width: 18rem;
     flex: 1;
     margin-left: 25;

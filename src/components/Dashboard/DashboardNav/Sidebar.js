@@ -40,7 +40,7 @@ const Sidebar = ({ userRole, userName, userSurname }) => {
       {/* Navigation items */}
       <div className="sb-sidenav-menu">
         <div className="nav">
-          <div className="sb-sidenav-menu-heading">Addons</div>
+          <div className="sb-sidenav-menu-heading">Menu</div>
           {navigationLinks.map((link, index) => (
             <a key={index} className="nav-link" href={link.path}>
               <div className="sb-nav-link-icon">
