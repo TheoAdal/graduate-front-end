@@ -134,47 +134,60 @@ export default function ListManagers() {
         <div id="layoutSidenav_content">
           <main>
             <div className="container-fluid px-4">
-            <div className="row">
-              <div className="card bg-danger text-white mb-4">
-                <div className="card-body">Create Manager</div>
-                <div className="card-footer d-flex align-items-center justify-content-between">
-                  {/* Change href to the report */}
-                  <a
-                    className="small text-white stretched-link"
-                    href="/registermanager"
-                  >
-                    View Details
-                  </a>
-                  <div className="small text-white">
-                    <i className="fas fa -angle-right"></i>
+              <div className="row">
+                <div className="card bg-danger text-white mb-4">
+                  <div className="card-body">Create Manager</div>
+                  <div className="card-footer d-flex align-items-center justify-content-between">
+                    {/* Change href to the report */}
+                    <a
+                      className="small text-white stretched-link"
+                      href="/registermanager"
+                    >
+                      View Details
+                    </a>
+                    <div className="small text-white">
+                      <i className="fas fa -angle-right"></i>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <h1 className="mt-4">Manager List</h1>
-              
+                <h1 className="mt-4">Manager List</h1>
                 <div className="col-xs-12">
-                  <input
-                    type="text"
-                    placeholder="Search manager"
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                  />
-                  <select value={selectedCity} onChange={handleCityChange}>
-                    {cities.map((city, index) => (
-                      <option key={index} value={city}>
-                        {city}
-                      </option>
-                    ))}
-                  </select>
-                  <select value={selectedState} onChange={handleStateChange}>
-                    {states.map((state, index) => (
-                      <option key={index} value={state}>
-                        {state}
-                      </option>
-                    ))}
-                  </select>
-                  <div className="box">
-                    <table className="table table-bordered">
+                  <div className="filters-container">
+                    <div className="filters-search">
+                      <label>Search User:</label>
+                      <input
+                        type="text"
+                        placeholder="Search manager"
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                      />
+                    </div>
+                    <div className="filters-city">
+                      <label>Filter by City:</label>
+                      <select value={selectedCity} onChange={handleCityChange}>
+                        {cities.map((city, index) => (
+                          <option key={index} value={city}>
+                            {city}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="filters-state">
+                      <label>Filter by State:</label>
+                      <select
+                        value={selectedState}
+                        onChange={handleStateChange}
+                      >
+                        {states.map((state, index) => (
+                          <option key={index} value={state}>
+                            {state}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="table-container-user">
+                    <table className="table-user">
                       <thead>
                         <tr>
                           <th>id</th>
@@ -198,24 +211,35 @@ export default function ListManagers() {
                             <td>{user.userState}</td>
                             <td>{user.city}</td>
                             <td>
-                              <button onClick={() => changeUserState(user._id)}>
-                                Edit state
-                              </button>
-                              <button onClick={() => deleteUser(user._id)}>
-                                Delete
-                              </button>
+                              <div className="button-container">
+                                <button
+                                  className="change-state"
+                                  onClick={() => changeUserState(user._id)}
+                                >
+                                  Edit state
+                                </button>
+                                <button
+                                  className="delete"
+                                  onClick={() => deleteUser(user._id)}
+                                >
+                                  Delete
+                                </button>
+                              </div>
                             </td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
-                  <div>
+                  <div className="pagination-container">
                     {Array.from({
-                      length: Math.ceil(users.length / usersPerPage),
+                      length: Math.ceil(filteredUsers.length / usersPerPage),
                     }).map((_, index) => (
                       <button
                         key={index}
+                        className={`pagination-button ${
+                          currentPage === index + 1 ? "active" : ""
+                        }`} // Added active class for current page
                         onClick={() => handlePageChange(index + 1)}
                       >
                         {index + 1}

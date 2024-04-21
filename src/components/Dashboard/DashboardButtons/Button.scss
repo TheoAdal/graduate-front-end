@@ -736,6 +736,13 @@ progress {
   margin-bottom: 20px;
 
   .filters-search {
+    label {
+      font-weight: bold;
+      margin-left: 10px;
+      margin-right: 10px;
+      color: white; /* Change label color to white */
+      font-size: 1.1rem; /* Increase font size */
+    }
     input {
       padding: 8px;
       border: 1px solid #ccc;
