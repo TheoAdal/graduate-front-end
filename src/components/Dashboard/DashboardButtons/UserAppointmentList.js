@@ -31,16 +31,14 @@ export default function ListAppointments() {
   useEffect(() => {
     if (!token && !userRole) {
       navigate("/login");
-    } else if (userRole === "admin" ) {
-        navigate("/admindash");
-    }
-     else if (userRole === "manager" ) {
-        navigate("/managerdash");
-    }
-     else if (userRole === "volunteer") {
-        getAppointments();
+    } else if (userRole === "admin") {
+      navigate("/admindash");
+    } else if (userRole === "manager") {
+      navigate("/managerdash");
+    } else if (userRole === "volunteer") {
+      getAppointments();
     } else if (userRole === "olduser") {
-        getAppointments();
+      getAppointments();
     }
   }, [navigate, token, userRole]);
 
@@ -50,15 +48,15 @@ export default function ListAppointments() {
         `http://localhost:5000/visits/getuserappointments/${userId}`
       );
       console.log("Response data:", response.data);
-  
+
       // Ensure response data is an array
       const appointments = response.data.userAppointments || [];
-  
+
       // Sort appointments by appointment date
       const sortedAppointments = appointments.sort((a, b) => {
         return new Date(a.appointmentdate) - new Date(b.appointmentdate);
       });
-  
+
       setVisits(sortedAppointments);
     } catch (error) {
       console.error("Error fetching users appointments:", error);
@@ -129,20 +127,22 @@ export default function ListAppointments() {
               <div className="row">
                 <div className="col-xs-12">
                   <h3 className="mt-4">My Appointments</h3>
-                  <div>
-                    <label htmlFor="filter">Appointment State:</label>
-                    <select
-                      id="filter"
-                      value={appointmentState}
-                      onChange={handleStateChange}
-                    >
-                      <option value="pending">Pending Appointments</option>
-                      <option value="expired">Expired Appointments</option>
-                      <option value="all">All Appointments</option>
-                    </select>
+                  <div className="filters-container">
+                    <div className="filters-state">
+                      <label htmlFor="filter">Appointment State:</label>
+                      <select
+                        id="filter"
+                        value={appointmentState}
+                        onChange={handleStateChange}
+                      >
+                        <option value="pending">Pending Appointments</option>
+                        <option value="expired">Expired Appointments</option>
+                        <option value="all">All Appointments</option>
+                      </select>
+                    </div>
                   </div>
-                  <div className="box">
-                    <table className="table table-bordered">
+                  <div className="table-container-user">
+                    <table className="table-user">
                       {/* Table headers */}
                       <thead>
                         <tr>
@@ -175,8 +175,7 @@ export default function ListAppointments() {
                         ))}
                       </tbody>
                     </table>
-                    <div>
-                      <div>
+                    <div className="pagination-container">
                         {Array.from({
                           length: Math.ceil(
                             filteredAppointments.length / appointmentsPerPage
@@ -184,12 +183,15 @@ export default function ListAppointments() {
                         }).map((_, index) => (
                           <button
                             key={index}
+                            className={`pagination-button ${
+                              currentPage === index + 1 ? "active" : ""
+                            }`} // Added active class for current page
                             onClick={() => handlePageChange(index + 1)}
                           >
                             {index + 1}
                           </button>
                         ))}
-                      </div>
+                      
                     </div>
                   </div>
                 </div>
