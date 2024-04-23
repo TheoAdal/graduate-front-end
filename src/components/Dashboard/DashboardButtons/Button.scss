@@ -705,8 +705,16 @@ progress {
 
 }
 
+.button-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); // Creates 2 columns of equal width
+  gap: 1.5rem; // Adjusts the gap between grid items
+}
 
 
+.row-button{
+//??????????????????
+}
 
 .row {
   height: auto;
@@ -717,7 +725,6 @@ progress {
   margin-top: calc(-1 * var(--bs-gutter-y));
   margin-right: calc(-0.5 * var(--bs-gutter-x));
   margin-left: calc(-0.5 * var(--bs-gutter-x));
-  //background-color: #c5ccce;
 }
 .row > * {
   flex-shrink: 0;

@@ -47,10 +47,6 @@ const ProfileEditComponent = () => {
 
   const [countries, setCountries] = useState([]);
 
-
-
-    
-
   function fetchUserData() {
     
     let getUserEndpoint = '';
