@@ -26,7 +26,7 @@ export default function ListAppointments() {
   const [setFilteredAppointments] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const appointmentsPerPage = 10;
+  const appointmentsPerPage = 4;
 
   useEffect(() => {
     if (!token && !userRole) {
@@ -184,7 +184,7 @@ export default function ListAppointments() {
                           <th>Phone Number</th>
                           <th>Date</th>
                           <th>Time</th>
-                          <th>Kind of Appointment</th>
+                          <th>Type of Appointment</th>
                           <th>Options</th>
                         </tr>
                       </thead>

@@ -405,8 +405,9 @@ export default function CreateAppointment() {
                       <label htmlFor="description" className="form-label">
                         Description
                       </label>
-                      <input
+                      <textarea
                         as="textarea"
+                        className="textarea-description"
                         rows={4}
                         name="message"
                         placeholder="Type here"

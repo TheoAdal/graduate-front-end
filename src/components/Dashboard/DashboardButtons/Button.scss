@@ -709,6 +709,7 @@ progress {
 
 
 .row {
+  height: auto;
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
   display: flex;
@@ -850,6 +851,7 @@ progress {
   display: flex;
   justify-content: center;
   margin-top: 20px; /* Add some top margin for spacing */
+  // margin-bottom: 20px; /* Add some top margin for spacing */
 }
 
 .pagination-button {
@@ -905,12 +907,31 @@ progress {
     border-radius: 4px;
   }
 
-  .appointment-description input {
-    width: 100%; // Full width of the container
-    padding: 8px;
+  // .appointment-description input {
+    
+  //   width: 100%; // Full width of the container
+  //   padding: 8px;
+  //   border: 1px solid #ccc;
+  //   border-radius: 4px;
+  //   height: 133px; // Fixed height for the description box
+  // }
+
+  .textarea-description {
+    width: 100%; /* Adjust width as needed */
+    height: 133px; /* Adjust height as needed */
+    padding: 8px; /* Adjust padding as needed */
+    box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
-    height: 100px; // Fixed height for the description box
+    background-color: #f8f8f8;
+    resize: none; /* Prevent resizing if you want a fixed size */
+  }
+
+  .textarea-description::placeholder {
+    text-align: start;
+    vertical-align: top;
+    line-height: 1.5; /* Adjust line height as needed */
+    color: #848484;
   }
 
   .appointment-button {
@@ -922,6 +943,7 @@ progress {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    
 
     &:hover {
       background-color: darken(#007bff, 5%);
@@ -3294,13 +3316,17 @@ textarea.form-control-lg {
 
 .btn-primary {
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  background-color: #20C988;
+  border-color: #20C988;
+  // margin-bottom: 10px;
+  text-align: center;
+  margin-top: 1rem; /* Adjust as necessary */
+  
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #0b5ed7;
-  border-color: #0a58ca;
+  background-color: #139165;
+  border-color: #139165;
 }
 .btn-check:focus + .btn-primary, .btn-primary:focus {
   color: #fff;
@@ -4813,7 +4839,7 @@ textarea.form-control-lg {
 .card-body {
   flex: 1 1 auto;
   padding: 1rem 1rem;
-  //background-color: #04414d;
+  // background-color: #04414d;
 }
 
 .card-title {
@@ -8076,16 +8102,19 @@ textarea.form-control-lg {
 }
 
 .bg-primary {
+  margin-top:50px;
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-secondary {
+  margin-top:50px;
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-success {
+  margin-top:50px;
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
 }
@@ -8096,16 +8125,19 @@ textarea.form-control-lg {
 }
 
 .bg-warning {
+  margin-top:50px;
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-warning-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-danger {
+  margin-top:50px;
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-danger-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-light {
+  // margin-top: 100px;
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
 }
