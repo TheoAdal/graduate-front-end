@@ -376,7 +376,7 @@ export default function CreateAppointment() {
                     <div className="date-time-container">
                       <div className="appointment-date">
                         <label htmlFor="date" className="form-label">
-                          Pick a date
+                          Pick a date:
                         </label>
                         <input
                           className="form-control"
@@ -389,7 +389,7 @@ export default function CreateAppointment() {
 
                       <div className="appointment-time">
                         <label htmlFor="time" className="form-label">
-                          Pick a time
+                          Pick a time:
                         </label>
                         <input
                           className="form-control"
@@ -403,7 +403,7 @@ export default function CreateAppointment() {
                     {/* </div> */}
                     <div className="appointment-description">
                       <label htmlFor="description" className="form-label">
-                        Description
+                        Description:
                       </label>
                       <textarea
                         as="textarea"
