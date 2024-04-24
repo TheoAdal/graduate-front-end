@@ -679,14 +679,16 @@ progress {
   }
 }
 .form.edit {
+  margin-left: 50px;
+  margin-right: 50px;
   flex-shrink: 0;
   width: 90%;
   max-width: 100%;
   padding-right: calc(var(--bs-gutter-x) * 0.5);
   padding-left: calc(var(--bs-gutter-x) * 0.5);
   margin-top: var(--bs-gutter-y);
-  //background-color: #b30b0b;
-  border: 1px solid grey;
+  // background-color: #b30b0b;
+  // border: 1px solid grey;
 
   form{
     background-color: #434343;
@@ -694,10 +696,22 @@ progress {
 
   .two-column-form{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr 1fr;
 
     .column{
-    
+      // border: 1px solid grey;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; // This centers the content vertically
+      align-items: center; // This centers the content horizontally
+      padding: 1rem; // Add padding as needed
+
+      input,
+      select,
+      textarea {
+        width: 100%; // Make sure input fields take up the full width of the column
+        // You may want to add more styles for inputs if necessary
+      }
     }
   }
 
@@ -800,7 +814,8 @@ progress {
 .table-user th,
 .table-user td {
   padding: 10px; /* Add padding to table cells */
-  border: 2px solid #000000; /* Add borders to table cells */
+  border: 2px solid #000000; /* Add borders to table cells */ 
+  // #00695C
 }
 
 .table-user th {
@@ -897,6 +912,7 @@ progress {
   .appointment-time,
   .appointment-description {
     label {
+      display:flex; //KANE COMMENT GIA NA GINE CENTERED
       font-weight: bold;
       margin-left: 10px;
       margin-right: 10px;

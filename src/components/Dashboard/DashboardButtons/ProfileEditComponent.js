@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import "./Button.scss";
 
 import Sidebar from "../DashboardNav/Sidebar";
@@ -143,7 +142,7 @@ const ProfileEditComponent = () => {
         </div>
         <div id="layoutSidenav_content">
           <div className="container-fluid px-4">
-            <h1 className="mt-4">Edit User</h1>
+            <h1 className="mt-4">Edit Profile</h1>
             <div className="card-body">
               <div className="form edit">
                 <form onSubmit={handleSubmit}>
