@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate, Navigate } from "react-router-dom";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { useNavigate } from "react-router-dom";
 import "./Button.scss";
 // import searchbar from "../../../images/searchbar.webp";
 //import Filter from "./Filters";
@@ -29,12 +28,11 @@ const cities = [
 const states = ["all", "active", "inactive"];
 
 export default function ListVolunteers() {
-  const userId = localStorage.getItem("userId");
   const userName = localStorage.getItem("userName");
   const userSurname = localStorage.getItem("userSurname");
   const userRole = localStorage.getItem("userRole");
 
-  const { setToken, token, loading } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
