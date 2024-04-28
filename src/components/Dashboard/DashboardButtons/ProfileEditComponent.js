@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Button.scss";
 
 import Sidebar from "../DashboardNav/Sidebar";
@@ -20,7 +20,7 @@ const ProfileEditComponent = () => {
   const userRole = localStorage.getItem("userRole");
 
   const navigate = useNavigate(); // Access navigate function for navigation
-  const { setToken, token, loading } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     if (!token && !userRole) {

@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 // import "./AdminDashboard.scss";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 import Sidebar from "../DashboardNav/Sidebar";
 import TopNav from "../DashboardNav/TopNav";
@@ -9,25 +9,24 @@ import Footer from "../DashboardNav/Footer";
 import { AuthContext } from "../../Content/LoginPage/AuthContext";
 
 const AdminDashboard = () => {
-  const userId = localStorage.getItem("userId");
   const userName = localStorage.getItem("userName");
   const userSurname = localStorage.getItem("userSurname");
   const userRole = localStorage.getItem("userRole");
 
-  const { setToken, token, loading } = useContext(AuthContext);
+  const {token} = useContext(AuthContext);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!token && !userRole) {
       navigate("/login");
-    } else if (userRole == "admin") {
+    } else if (userRole === "admin") {
       //
-    } else if (userRole == "manager") {
+    } else if (userRole === "manager") {
       navigate("/managerdash");
-    } else if (userRole == "volunteer") {
+    } else if (userRole === "volunteer") {
       navigate("/volunteerdash");
-    } else if (userRole == "olduser") {
+    } else if (userRole === "olduser") {
       navigate("/olduserdash");
     }
   }, [navigate, token]);

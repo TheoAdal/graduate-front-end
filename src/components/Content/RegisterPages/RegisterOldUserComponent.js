@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./RegisterComponent.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -52,7 +52,7 @@ export default function RegisterOldUserComponent() {
         "http://localhost:5000/oldusers/registerolduser", //localhost:5000/olduser/register
         inputs
       ); 
-      // console.log(response.data);
+      console.log(response.data);
       alert("User registered succesfully, check your email for verification");
       navigate("/login");                    //login redirect
     } catch (error) {                       //Email validation
