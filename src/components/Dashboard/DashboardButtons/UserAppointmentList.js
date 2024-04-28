@@ -9,15 +9,13 @@ import Footer from "../DashboardNav/Footer";
 
 import { AuthContext } from "../../Content/LoginPage/AuthContext";
 
-const statuses = ["all", "pending", "expired"];
-
 export default function ListAppointments() {
   const userId = localStorage.getItem("userId");
   const userName = localStorage.getItem("userName");
   const userSurname = localStorage.getItem("userSurname");
   const userRole = localStorage.getItem("userRole");
 
-  const { setToken, token, loading } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [visits, setVisits] = useState([]);

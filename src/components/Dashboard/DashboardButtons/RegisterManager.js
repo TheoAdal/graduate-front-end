@@ -1,8 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { useParams, useNavigate } from "react-router-dom";
 import "./Button.scss";
 
 import Sidebar from "../DashboardNav/Sidebar";
@@ -13,13 +11,12 @@ import { AuthContext } from "../../Content/LoginPage/AuthContext";
 
 // Define your functional component
 const RegisterManager = () => {
-  const userId = localStorage.getItem("userId");
   const userName = localStorage.getItem("userName");
   const userSurname = localStorage.getItem("userSurname");
   const userRole = localStorage.getItem("userRole");
 
   const navigate = useNavigate(); // Access navigate function for navigation
-  const { setToken, token, loading } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
 
   const { id } = useParams(); // Access the user ID from URL parameters
 
@@ -27,12 +24,12 @@ const RegisterManager = () => {
     console.log("Effect is running");
     if (!token && !userRole) {
       navigate("/login");
-    } else if (userRole == "admin") {
-    } else if (userRole == "manager") {
+    } else if (userRole === "admin") {
+    } else if (userRole === "manager") {
       navigate("/managerdash");
-    } else if (userRole == "volunteer") {
+    } else if (userRole === "volunteer") {
       navigate("/volunteerdash");
-    } else if (userRole == "olduser") {
+    } else if (userRole === "olduser") {
       navigate("/olduserdash");
     }
   }, [navigate, token]);
