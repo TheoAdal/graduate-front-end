@@ -47,7 +47,7 @@ function App() {
 
           {/* Render footer if not in excluded paths */}
           {RenderComponent && (
-            <div className="footer">
+            <div className="footer-container">
               <FooterWrapper />
             </div>
           )}

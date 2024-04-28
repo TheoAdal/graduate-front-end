@@ -7,7 +7,7 @@ import Img3 from "../../../images/img3.webp";
 function CarouselAnimation() {
   return (
     <Carousel fade>
-      <Carousel.Item>
+      <Carousel.Item className="">
         <img
           className="carousel-image"
           src={Img1}
@@ -15,8 +15,8 @@ function CarouselAnimation() {
           text="First slide"
         />
         <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h3>Καταπολέμησε την μοναξιά</h3>
+          <p>Πάρε και εσύ μέρος στην πλατφόρμα μας</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>

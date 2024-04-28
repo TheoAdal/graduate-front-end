@@ -14,13 +14,13 @@ import { AuthContext } from "../../Content/LoginPage/AuthContext";
 
 // Define your functional component
 const ProfileEditComponent = () => {
-    const userId = localStorage.getItem("userId");
-    const userName = localStorage.getItem("userName");
-    const userSurname = localStorage.getItem("userSurname");
-    const userRole = localStorage.getItem("userRole");
+  const userId = localStorage.getItem("userId");
+  const userName = localStorage.getItem("userName");
+  const userSurname = localStorage.getItem("userSurname");
+  const userRole = localStorage.getItem("userRole");
 
-    const navigate = useNavigate(); // Access navigate function for navigation
-    const { setToken, token, loading } = useContext(AuthContext);
+  const navigate = useNavigate(); // Access navigate function for navigation
+  const { setToken, token, loading } = useContext(AuthContext);
 
   useEffect(() => {
     if (!token && !userRole) {
@@ -47,41 +47,40 @@ const ProfileEditComponent = () => {
   const [countries, setCountries] = useState([]);
 
   function fetchUserData() {
-    
-    let getUserEndpoint = '';
+    let getUserEndpoint = "";
 
-  switch (userRole) {
-    case 'admin':
-      getUserEndpoint = `http://localhost:5000/admins/get/${userId}`;
-      break;
-    case 'manager':
-      getUserEndpoint = `http://localhost:5000/managers/get/${userId}`;
-      break;
-    case 'volunteer':
-      getUserEndpoint = `http://localhost:5000/volunteers/get/${userId}`;
-      break;
-    case 'olduser':
-      getUserEndpoint = `http://localhost:5000/oldsusers/get/${userId}`;
-      break;
-    default:
-      console.error("Error updating user:");
-      return;
+    switch (userRole) {
+      case "admin":
+        getUserEndpoint = `http://localhost:5000/admins/get/${userId}`;
+        break;
+      case "manager":
+        getUserEndpoint = `http://localhost:5000/managers/get/${userId}`;
+        break;
+      case "volunteer":
+        getUserEndpoint = `http://localhost:5000/volunteers/get/${userId}`;
+        break;
+      case "olduser":
+        getUserEndpoint = `http://localhost:5000/oldsusers/get/${userId}`;
+        break;
+      default:
+        console.error("Error updating user:");
+        return;
+    }
+
+    axios
+      .get(getUserEndpoint)
+      .then(function (response) {
+        console.log(response.data);
+        const userData = response.data;
+        setUser((prevUser) => ({
+          ...prevUser,
+          ...userData,
+        }));
+      })
+      .catch(function (error) {
+        console.error("Error fetching user data:", error);
+      });
   }
-
-  axios
-    .get(getUserEndpoint)
-    .then(function (response) {
-      console.log(response.data);
-      const userData = response.data;
-      setUser((prevUser) => ({
-        ...prevUser,
-        ...userData,
-      }));
-    })
-    .catch(function (error) {
-      console.error("Error fetching user data:", error);
-    });
-}
 
   useEffect(() => {
     // Fetch list of countries from an API or a local file
@@ -110,7 +109,7 @@ const ProfileEditComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`http://localhost:5000/users/patch/${userId}`, user); 
+      await axios.patch(`http://localhost:5000/users/patch/${userId}`, user);
       // Redirect based on userRole after successful update
       switch (userRole) {
         case "admin":
@@ -127,7 +126,7 @@ const ProfileEditComponent = () => {
           break;
         default:
           console.error("Invalid user role:", userRole);
-      } 
+      }
     } catch (error) {
       console.error("Error updating user:", error);
     }
@@ -135,10 +134,14 @@ const ProfileEditComponent = () => {
 
   return (
     <div className="sb-nav-fixed">
-      <TopNav userRole={userRole}/>
+      <TopNav userRole={userRole} />
       <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-        <Sidebar userRole={userRole} userName={userName} userSurname={userSurname} />
+          <Sidebar
+            userRole={userRole}
+            userName={userName}
+            userSurname={userSurname}
+          />
         </div>
         <div id="layoutSidenav_content">
           <div className="container-fluid px-4">
@@ -267,7 +270,7 @@ const ProfileEditComponent = () => {
                         <input
                           className="form-control"
                           type="date"
-                          name="dateofbirth" 
+                          name="dateofbirth"
                           value={user.dateofbirth}
                           onChange={handleChange}
                         />
