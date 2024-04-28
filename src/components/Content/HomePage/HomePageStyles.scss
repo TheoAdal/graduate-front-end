@@ -35,21 +35,39 @@
     justify-content: space-between;
     //gap: 50px; 
     padding: 0 70px; /* Gap on both sides of the cards */
-    margin: 0 auto;
+    justify-content: space-around; // This creates space between the cards
+    margin: 2rem 0;
     
   }
   
   .card{
-    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+    // box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
     width: 18rem;
     flex: 1;
     margin-left: 25;
     max-width: calc(40% - 25px);
+
+    &:hover {
+      transform: translateY(-5px); // Raises the card slightly on hover
+    }
   }
 
   .contributors-title{
     margin-top: 50px; //margin 
     margin-bottom: 50px;
+    text-align: center; // Center the title text
+  img {
+    display: block; // Ensures the image is block level
+    margin: 1rem auto; // Centers the image horizontally
+    max-width: 400px; // Adjust the size as needed
+  }
+  }
+
+  h1, h2 {
+    font-family: 'YourFontFamily', sans-serif; // Replace with your font
+    color: #333; // A color that contrasts well with the background
   }
 
   

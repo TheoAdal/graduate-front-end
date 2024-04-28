@@ -1,5 +1,5 @@
 import "./TopBarNavStyles.scss";
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -10,7 +10,6 @@ import logo from "../../images/logo192.png";
 import { AuthContext } from "../Content/LoginPage/AuthContext";
 import LogoutButton from "../Dashboard/LogoutButton";
 
-//#00A98F or #03957F #1B365D #193782 #A61E2F  #D47700 #24785E
 function TopBarNav() {
   const userId = localStorage.getItem("userId");
   const userName = localStorage.getItem("userName");
@@ -40,8 +39,6 @@ function TopBarNav() {
     backgroundColor: "#00A98F",
   };
 
-  
-
   return (
     <div className="nav-bar-container">
       <Navbar style={navbarStyle} data-bs-theme="dark">
@@ -58,24 +55,32 @@ function TopBarNav() {
             <Link to="/contact">Επικοινωνία</Link>
             {token ? (
               <>
-                <Link to={getDashboardLink()}>Dashboard</Link> 
-                <NavDropdown title="Options" id="basic-nav-dropdown" className="nav-dropdown">
+                <Link to={getDashboardLink()}>Dashboard</Link>
+                <NavDropdown
+                  title="Options"
+                  id="basic-nav-dropdown"
+                  className="nav-dropdown"
+                >
                   <NavDropdown.Item>
                     <Link to="/profile">Profile</Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                    <LogoutButton />  
+                    <LogoutButton />
                   </NavDropdown.Item>
                 </NavDropdown>
               </>
             ) : (
               <>
                 <Link to="/login">Log in</Link>
-                <NavDropdown title="Εγγραφή ως" id="basic-nav-dropdown" className="nav-dropdown">
-                  <NavDropdown.Item className="dropdown-item">
+                <NavDropdown
+                  title="Εγγραφή ως"
+                  id="basic-nav-dropdown"
+                  className="nav-dropdown"
+                >
+                  <NavDropdown.Item as="div" className="dropdown-item">
                     <Link to="/volunteer">Εθελοντής</Link>
                   </NavDropdown.Item>
-                  <NavDropdown.Item>
+                  <NavDropdown.Item as="div" className="dropdown-item">
                     <Link to="/olduser">Άτομο τρίτης ηλικίας</Link>
                   </NavDropdown.Item>
                 </NavDropdown>
