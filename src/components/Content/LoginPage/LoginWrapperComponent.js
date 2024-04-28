@@ -13,18 +13,19 @@ const LoginWrapperComponent = () => {
 
   const navigate = useNavigate();
 
-  const { setToken, token, loading } = useContext(AuthContext);
+  const { setToken, token } = useContext(AuthContext);
+  // const { setToken, token, loading } = useContext(AuthContext);
 
   useEffect(() => {
     if (token) {
       const userRole = localStorage.getItem("userRole");
-      if (userRole == "admin") {
+      if (userRole === "admin") {
         navigate("/admindash");
-      } else if (userRole == "manager") {
+      } else if (userRole === "manager") {
         navigate("/managerdash");
-      } else if (userRole == "volunteer") {
+      } else if (userRole === "volunteer") {
         navigate("/volunteerdash");
-      } else if (userRole == "olduser") {
+      } else if (userRole === "olduser") {
         navigate("/olduserdash");
       }
     }

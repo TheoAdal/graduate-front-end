@@ -4,20 +4,18 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../images/sitelogo2.png";
 
 import { AuthContext } from "../Content/LoginPage/AuthContext";
 import LogoutButton from "../Dashboard/LogoutButton";
 
 function TopBarNav() {
-  const userId = localStorage.getItem("userId");
-  const userName = localStorage.getItem("userName");
-  const userSurname = localStorage.getItem("userSurname");
+  
   const userRole = localStorage.getItem("userRole");
 
   const { token } = useContext(AuthContext); // Access token from AuthContext
-  const navigate = useNavigate();
+  
 
   // Function to generate the dashboard link based on user's role
   const getDashboardLink = () => {

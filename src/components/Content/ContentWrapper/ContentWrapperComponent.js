@@ -1,6 +1,6 @@
 import "./ContentWrapperStyles.scss";
-import React, { useState, useContext, Navigate } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 import Home from "../HomePage/HomePageComponent";
 import Contact from "../ContactUsPage/ContactUsPageComponent";
 import About from "../AboutUsPage/AboutUsPageComponent";

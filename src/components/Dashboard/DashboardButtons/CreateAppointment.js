@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate, Navigate } from "react-router-dom";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { useNavigate } from "react-router-dom";
 import "./Button.scss";
 
 import Sidebar from "../DashboardNav/Sidebar";
@@ -25,24 +24,23 @@ const cities = [
 ];
 
 export default function CreateAppointment() {
-  const userId = localStorage.getItem("userId");
   const userName = localStorage.getItem("userName");
   const userSurname = localStorage.getItem("userSurname");
   const userRole = localStorage.getItem("userRole");
 
-  const { setToken, token, loading } = useContext(AuthContext);
+  const {token } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log("Effect is running");
     if (!token && !userRole) {
       navigate("/login");
-    } else if (userRole == "admin" || userRole == "manager") {
+    } else if (userRole === "admin" || userRole === "manager") {
       getActiveVolunteer();
       getActiveOldUser();
-    } else if (userRole == "volunteer") {
+    } else if (userRole === "volunteer") {
       navigate("/volunteerdash");
-    } else if (userRole == "olduser") {
+    } else if (userRole === "olduser") {
       navigate("/olduserdash");
     }
   }, [navigate, token]);
@@ -84,8 +82,6 @@ export default function CreateAppointment() {
         setOldUser(response.data);
       });
   }
-
-  function getVisits() {}
 
   const handleVolunteerCityChange = (e) => {
     setSelectedVolunteerCity(e.target.value);
