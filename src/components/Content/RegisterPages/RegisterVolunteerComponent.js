@@ -18,20 +18,20 @@ export default function RegisterVolunteerComponent() {
     confirmPassword: "",
   });
 
-  const [countries, setCountries] = useState([]);
+  // const [countries, setCountries] = useState([]);
 
-  useEffect(() => {
-    // Fetch list of countries from an API or a local file
-    axios
-      .get("https://restcountries.com/v3.1/all")
-      .then((response) => {
-        const countries = response.data.map((country) => country.name.common);
-        setCountries(countries);
-      })
-      .catch((error) => {
-        console.error("Error fetching countries:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // Fetch list of countries from an API or a local file
+  //   axios
+  //     .get("https://restcountries.com/v3.1/all")
+  //     .then((response) => {
+  //       const countries = response.data.map((country) => country.name.common);
+  //       setCountries(countries);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching countries:", error);
+  //     });
+  // }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -53,7 +53,8 @@ export default function RegisterVolunteerComponent() {
         "http://localhost:5000/volunteers/registervolunteer", //localhost:5000/volunteers/register
         inputs
       );
-      console.log(response.data);
+      // console.log(response.data);
+      alert("User registered succesfully, check your email for verification");
       navigate("/login");                           //login redirect
     } catch (error) {                               //Email validation
       console.error("Error registering volunteer:", error);
@@ -119,7 +120,7 @@ export default function RegisterVolunteerComponent() {
               <option value="other">Other</option>
             </select>
           </div>
-          <div>
+          {/* <div>
             <label>Country:</label>
             <select
               name="country"
@@ -133,15 +134,25 @@ export default function RegisterVolunteerComponent() {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
           <div>
             <label>City:</label>
-            <input
+            <select
               type="text"
               name="city"
               value={inputs.city}
               onChange={handleChange}
-            />
+              >
+              <option value="Nicosia">Nicosia</option>
+              <option value="Limassol">Limassol</option>
+              <option value="Famagusta">Famagusta</option>
+              <option value="Paphos">Paphos</option>
+              <option value="Kyrenia">Kyrenia</option>
+              <option value="Protaras">Protaras</option>
+              <option value="Polis">Polis</option>
+              <option value="Ayia Napa">Ayia Napa</option>
+              <option value="Troodos">Troodos</option>
+            </select>
           </div>
           <div>
             {/* Create a warning that forces the user to make a stronger password like !?aVgj_hL. or something like that*/}

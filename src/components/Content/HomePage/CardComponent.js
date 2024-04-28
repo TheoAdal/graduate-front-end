@@ -15,7 +15,7 @@ function CardComponent()
               <Card.Text>
                 Μπες και εσύ στην ομάδα και πάρε μέρος στο έργο μας
               </Card.Text>
-              <Button variant="primary" href="/volunteer">Πάρε μέρος</Button>
+              <Button className="button" href="/volunteer">Πάρε μέρος</Button>
             </Card.Body>
           </Card>
     
@@ -27,7 +27,7 @@ function CardComponent()
               <Card.Text>
                 Πάρε μέρος στο πρόγραμμα μας για να καταπολεμήσεις την μοναξιά
               </Card.Text>
-              <Button variant="primary" href="/olduser">Πάρε μέρος</Button>
+              <Button className="button" href="/olduser">Πάρε μέρος</Button>
             </Card.Body>
           </Card>
         </div>

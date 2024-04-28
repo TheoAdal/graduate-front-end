@@ -27,6 +27,8 @@
 }
 
 
+
+
 .dropdown .dropdown-toggle {
   color: white !important;
 }
@@ -35,6 +37,14 @@
   display: flex;
   font-family: Helvetica-Nue;
   color: #ffffff !important;
+  // margin-bottom: 5px;
+
+  .nav-logo {
+    width: 50px; /* Adjust the logo size as needed */
+    margin-right: 5px; /* Add margin between logo and text */
+    margin-bottom: -5px;
+    margin-left: 10px;
+  }
 }
 
 .navbar-expand .navbar-nav {

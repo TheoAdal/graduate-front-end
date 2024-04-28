@@ -18,16 +18,16 @@ const LoginWrapperComponent = () => {
   useEffect(() => {
     if (token) {
       const userRole = localStorage.getItem("userRole");
-     if (userRole == "admin") {
-      navigate("/admindash");
-    } else if (userRole == "manager") {
-      navigate("/managerdash");
-    } else if (userRole == "volunteer") {
-      navigate("/volunteerdash");
-    } else if (userRole == "olduser") {
-      navigate("/olduserdash");
+      if (userRole == "admin") {
+        navigate("/admindash");
+      } else if (userRole == "manager") {
+        navigate("/managerdash");
+      } else if (userRole == "volunteer") {
+        navigate("/volunteerdash");
+      } else if (userRole == "olduser") {
+        navigate("/olduserdash");
+      }
     }
-  }
   }, [navigate, token]);
 
   //FOR CREATING LOGIN AUTHENTICATION
@@ -98,10 +98,10 @@ const LoginWrapperComponent = () => {
           </div>
           {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}{" "}
           <div className="form-group mt-2">
-            <p>
-              Participate in our program as a <a href="/volunteer">Volunteer</a> or a{" "}
-              <a href="/olduser">Beneficiary</a>
-            </p>
+            <div className="options">
+              Participate in our program as a <a href="/volunteer">Volunteer</a>{" "}
+              or a <a href="/olduser">Beneficiary</a>
+            </div>
           </div>
           <div className="d-grid gap-2 mt-3">
             <button
@@ -112,9 +112,9 @@ const LoginWrapperComponent = () => {
               Log In
             </button>
           </div>
-          <p className="forgot-password text-right">
-            Forgot <a href="/forgotpassword">password?</a>
-          </p>
+          <div className="options">
+            Forgot your <a href="/forgotpassword">password?</a>
+          </div>
         </div>
       </form>
     </div>

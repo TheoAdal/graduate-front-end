@@ -1,6 +1,6 @@
 import React from "react";
 import "./FooterStyles.scss";
-import logo from "../../images/logo192.png"; // Import your company logo
+import logo from "../../images/sitelogo2.png"; // Import your company logo
 
 function FooterWrapper() {
   return (
