@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../images/logo192.png";
+import logo from "../../images/sitelogo2.png";
 
 import { AuthContext } from "../Content/LoginPage/AuthContext";
 import LogoutButton from "../Dashboard/LogoutButton";
@@ -45,9 +45,9 @@ function TopBarNav() {
         <Container>
           <Navbar.Brand>
             <Link to="/">
-              <img src={logo} alt="LOGO" width="30" height="24" />
+              <img src={logo} alt="LOGO" className="nav-logo"/>
             </Link>
-            Site
+            {/* Site */}
           </Navbar.Brand>
           <Nav className="top-bar-nav">
             <Link to="/">Αρχική</Link>

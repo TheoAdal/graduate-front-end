@@ -1,46 +1,36 @@
-.home-page-container 
-{
-  
-  .carousel-image 
-  {
-
+.home-page-container {
+  .carousel-image {
     height: 50vh;
     width: 80vw;
 
     @media only screen and (max-width: 768px) {
-
       width: 100%;
     }
 
     @media only screen and (min-width: 1360px) {
-
       max-width: 1088px;
     }
   }
 
-  .opening-title{
+  .opening-title {
+    margin-top: 50px; //margin
 
-    margin-top: 50px; //margin 
-    
     .opening-text1 {
       margin-top: 50px;
       margin-bottom: 50px;
     }
-
   }
 
-
-  .card-container{  
+  .card-container {
     display: flex;
     justify-content: space-between;
-    //gap: 50px; 
+    //gap: 50px;
     padding: 0 70px; /* Gap on both sides of the cards */
     justify-content: space-around; // This creates space between the cards
     margin: 2rem 0;
-    
   }
-  
-  .card{
+
+  .card {
     // box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
@@ -52,23 +42,35 @@
     &:hover {
       transform: translateY(-5px); // Raises the card slightly on hover
     }
+
+    .button {
+      color: #fff;
+      background-color: #20c988;
+      border-color: #20c988;
+      // margin-bottom: 10px;
+      text-align: center;
+      margin-top: 1rem; /* Adjust as necessary */
+
+      &:hover {
+        background-color: #00A98F;
+      }
+    }
   }
 
-  .contributors-title{
-    margin-top: 50px; //margin 
+  .contributors-title {
+    margin-top: 50px; //margin
     margin-bottom: 50px;
     text-align: center; // Center the title text
-  img {
-    display: block; // Ensures the image is block level
-    margin: 1rem auto; // Centers the image horizontally
-    max-width: 400px; // Adjust the size as needed
-  }
+    img {
+      display: block; // Ensures the image is block level
+      margin: 1rem auto; // Centers the image horizontally
+      max-width: 400px; // Adjust the size as needed
+    }
   }
 
-  h1, h2 {
-    font-family: 'YourFontFamily', sans-serif; // Replace with your font
+  h1,
+  h2 {
+    font-family: "YourFontFamily", sans-serif; // Replace with your font
     color: #333; // A color that contrasts well with the background
   }
-
-  
 }
