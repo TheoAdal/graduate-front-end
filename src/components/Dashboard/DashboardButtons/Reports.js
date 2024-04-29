@@ -57,11 +57,16 @@ const Reports = () => {
     datasets: [],
   });
 
+  const [oldUserChartData, setOldUserChartData] = useState({
+    datasets: [],
+  });
+
   useEffect(() => {
     if (!token && !userRole) {
       navigate("/login");
     } else if (userRole === "admin") {
       fetchUserReportData();
+      fetchOldUserReportData();
     } else if (userRole === "manager") {
       navigate("/managerdash");
     } else if (userRole === "volunteer") {
@@ -82,13 +87,13 @@ const Reports = () => {
       return acc;
     }, {});
 
-    rawData.forEach(item => {
+    rawData.forEach((item) => {
       const city = item._id;
       if (!initialCityData[city]) {
         initialCityData[city] = { male: 0, female: 0, other: 0, total: 0 };
       }
 
-      item.genders.forEach(genderData => {
+      item.genders.forEach((genderData) => {
         const gender = genderData.gender.toLowerCase();
         initialCityData[city][gender] += genderData.count;
       });
@@ -99,51 +104,132 @@ const Reports = () => {
     return initialCityData;
   };
 
-  const createChartData = (transformedData) => {
-    // Assuming your transformed data is an object with city names as keys
-  // and each city has an object containing male, female, other, and total
-  const chartData = {
-    labels: Object.keys(transformedData), // The city names
-    datasets: [
-      {
-        label: 'Male',
-        data: Object.values(transformedData).map(data => data.male),
-        backgroundColor: 'rgba(54, 162, 235, 0.5)',
-        borderColor: 'rgba(54, 162, 235, 1)',
-      },
-      {
-        label: 'Female',
-        data: Object.values(transformedData).map(data => data.female),
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        borderColor: 'rgba(255, 99, 132, 1)',
-      },
-      {
-        label: 'Other',
-        data: Object.values(transformedData).map(data => data.other),
-        backgroundColor: 'rgba(153, 102, 255, 0.5)',
-        borderColor: 'rgba(153, 102, 255, 1)',
-      },
-      {
-        label: 'Total',
-        data: Object.values(transformedData).map(data => data.total),
-        backgroundColor: '#20C988',
-        borderColor: '#',
-      },
-    ],
+  const transformOldUserData = (rawData) => {
+    const initialCityData = cities.reduce((acc, city) => {
+      acc[city] = { male: 0, female: 0, other: 0, total: 0 };
+      return acc;
+    }, {});
+
+    rawData.forEach((item) => {
+      const city = item._id.trim();
+
+      if (!initialCityData[city]) {
+        initialCityData[city] = { male: 0, female: 0, other: 0, total: 0 };
+      }
+
+      // Sum the counts for each gender within the city
+      item.genders.forEach((genderData) => {
+        const gender = genderData.gender.toLowerCase();
+        initialCityData[city][gender] += genderData.count;
+      });
+
+      // Sum the total counts for the city
+      initialCityData[city].total += item.total;
+    });
+
+    return initialCityData;
   };
 
-  return chartData;
-};
+  const createChartData = (transformedData) => {
+    const chartData = {
+      labels: Object.keys(transformedData), // city names
+      datasets: [
+        {
+          label: "Male",
+          data: Object.values(transformedData).map((data) => data.male),
+          backgroundColor: "rgba(54, 162, 235, 0.5)",
+          borderColor: "rgba(54, 162, 235, 1)",
+        },
+        {
+          label: "Female",
+          data: Object.values(transformedData).map((data) => data.female),
+          backgroundColor: "rgba(255, 99, 132, 0.5)",
+          borderColor: "rgba(255, 99, 132, 1)",
+        },
+        {
+          label: "Other",
+          data: Object.values(transformedData).map((data) => data.other),
+          backgroundColor: "rgba(153, 102, 255, 0.5)",
+          borderColor: "rgba(153, 102, 255, 1)",
+        },
+        {
+          label: "Total",
+          data: Object.values(transformedData).map((data) => data.total),
+          backgroundColor: "#20C988",
+          borderColor: "#",
+        },
+      ],
+    };
+
+    return chartData;
+  };
+
+  const createOldUserChartData = (transformedData) => {
+    const labels = Object.keys(transformedData);
+    const maleData = labels.map((city) => transformedData[city].male);
+    const femaleData = labels.map((city) => transformedData[city].female);
+    const otherData = labels.map((city) => transformedData[city].other);
+    const totalData = labels.map((city) => transformedData[city].total);
+
+    return {
+      labels,
+      datasets: [
+        {
+            label: "Male",
+            data: Object.values(transformedData).map((data) => data.male),
+            backgroundColor: "rgba(54, 162, 235, 0.5)",
+            borderColor: "rgba(54, 162, 235, 1)",
+          },
+          {
+            label: "Female",
+            data: Object.values(transformedData).map((data) => data.female),
+            backgroundColor: "rgba(255, 99, 132, 0.5)",
+            borderColor: "rgba(255, 99, 132, 1)",
+          },
+          {
+            label: "Other",
+            data: Object.values(transformedData).map((data) => data.other),
+            backgroundColor: "rgba(153, 102, 255, 0.5)",
+            borderColor: "rgba(153, 102, 255, 1)",
+          },
+          {
+            label: "Total",
+            data: Object.values(transformedData).map((data) => data.total),
+            backgroundColor: "#20C988",
+            borderColor: "#",
+          },
+      ],
+    };
+  };
 
   const fetchUserReportData = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get("http://localhost:5000/volunteers/volunteer-stats"); // Ensure this API sends structured data
+      const { data } = await axios.get(
+        "http://localhost:5000/volunteers/volunteer-stats"
+      );
       const transformedData = transformData(data); // Transform the raw data
-      const formatChartData = createChartData(transformedData); // Create the chart data from transformed data
+      const formatChartData = createChartData(transformedData); // Create chart from transformed data
       setChartData(formatChartData); // Update state with new chart data
     } catch (error) {
       console.error("Error fetching report data:", error);
+      setError("Failed to fetch data.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchOldUserReportData = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(
+        "http://localhost:5000/oldusers/olduser-stats"
+      );
+      const transformedData = transformOldUserData(data);
+      const chartDataForOldUser = createOldUserChartData(transformedData);
+      setOldUserChartData(chartDataForOldUser);
+    } catch (error) {
+      console.error("Error fetching old user stats:", error);
       setError("Failed to fetch data.");
     } finally {
       setLoading(false);
@@ -159,6 +245,24 @@ const Reports = () => {
       title: {
         display: true,
         text: "Volunteer Distribution by City and Gender",
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+
+  const options2 = {
+    // maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Beneficiary Distribution by City and Gender",
       },
     },
     scales: {
@@ -191,6 +295,12 @@ const Reports = () => {
                     <Bar data={chartData} options={options} />
                   </div>
                 </div>
+                <div className="col-xs-12">
+                  <div className="chart">
+                    {/* <h2>Old Users Distribution by City and Gender</h2> */}
+                    <Bar data={oldUserChartData} options={options2} />
+                  </div>
+                </div>
               </div>
             </div>
           </main>
@@ -205,7 +315,7 @@ export default Reports;
 
 // setLoading(true);
 //     try {
-//       const { data } = await axios.get("http://localhost:5000/volunteers/volunteer-stats"); 
+//       const { data } = await axios.get("http://localhost:5000/volunteers/volunteer-stats");
 //       const labels = data.map((item) => item._id);
 //       const dataset = data.map((city) => ({
 //         label: city._id,
