@@ -45,7 +45,7 @@ export default function ListOldUsers() {
     } else if (userRole === "olduser") {
       navigate("/olduserdash");
     }
-  }, [navigate, token]);
+  }, [navigate, token, userRole]);
 
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");

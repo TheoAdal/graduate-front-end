@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Table, Spinner, Alert } from "react-bootstrap";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,

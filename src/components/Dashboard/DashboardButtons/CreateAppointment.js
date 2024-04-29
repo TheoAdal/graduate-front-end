@@ -43,7 +43,7 @@ export default function CreateAppointment() {
     } else if (userRole === "olduser") {
       navigate("/olduserdash");
     }
-  }, [navigate, token]);
+  }, [navigate, token, userRole]);
 
   //variables for volunteers and oldusers respectively
 
