@@ -26,6 +26,7 @@ import CreateAppointment from "../../Dashboard/DashboardButtons/CreateAppointmen
 import UserAppointmentList from "../../Dashboard/DashboardButtons/UserAppointmentList";
 import RegisterManager from "../../Dashboard/DashboardButtons/RegisterManager";
 import UserEditComponent from "../../Dashboard/DashboardButtons/UserEditComponent";
+import Reports from "../../Dashboard/DashboardButtons/Reports";
 
 
 function ContentWrapperComponent() {
@@ -60,6 +61,7 @@ function ContentWrapperComponent() {
         <Route exact path="/userappointmentlist" element={<UserAppointmentList />} />
         <Route exact path="/registermanager" element={<RegisterManager />} />
         <Route exact path="/useredit/:id" element={<UserEditComponent />} />
+        <Route exact path="/reports" element={<Reports />} />
       </Routes>
     </div>
   );

@@ -868,12 +868,19 @@ progress {
   opacity: 0.8; /* Reduce opacity on hover */
 }
 
+.chart{
+  background-color: #ffffff; /* Blue background color */ //20C988
+  display: block; // removes any extra space below the canvas element
+  width: 90% !important; // overrides any inline styles
+  // height: 100% !important;
+}
+
 // Styles for Pagination //
 .pagination-container {
   display: flex;
   justify-content: center;
   margin-top: 20px; /* Add some top margin for spacing */
-  // margin-bottom: 20px; /* Add some top margin for spacing */
+  margin-bottom: 20px; /* Add some top margin for spacing */
 }
 
 .pagination-button {

@@ -134,7 +134,8 @@ export default function ListOldUsers() {
         <div id="layoutSidenav_content">
           <main>
             <div className="container-fluid px-4">
-              <h1 className="mt-4">Old User List</h1>
+              <h1 className="mt-4">Beneficiary List</h1>
+              <h5 className="mt-4"># of Beneficiaries: {filteredUsers.length}</h5>
               <div className="row">
                 <div className="col-xs-12">
                   {/* FILTERS */}
@@ -143,7 +144,7 @@ export default function ListOldUsers() {
                       <label>Search User:</label>
                       <input
                         type="text"
-                        placeholder="Search old user"
+                        placeholder="Search beneficiary"
                         value={searchQuery}
                         onChange={handleSearchChange}
                       />
