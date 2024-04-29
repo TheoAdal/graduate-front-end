@@ -40,7 +40,7 @@ const RegisterManager = () => {
     email: "",
     mobile: "",
     gender: "male", // Default value
-    country: "",
+    country: "Cyprus",
     city: "",
     dateofbirth: "",
     password: "",
@@ -48,20 +48,20 @@ const RegisterManager = () => {
     confirmPassword: "",
   });
 
-  const [countries, setCountries] = useState([]);
+  // const [countries, setCountries] = useState([]);
 
-  useEffect(() => {
-    // Fetch list of countries from an API or a local file
-    axios
-      .get("https://restcountries.com/v3.1/all")
-      .then((response) => {
-        const countries = response.data.map((country) => country.name.common);
-        setCountries(countries);
-      })
-      .catch((error) => {
-        console.error("Error fetching countries:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // Fetch list of countries from an API or a local file
+  //   axios
+  //     .get("https://restcountries.com/v3.1/all")
+  //     .then((response) => {
+  //       const countries = response.data.map((country) => country.name.common);
+  //       setCountries(countries);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching countries:", error);
+  //     });
+  // }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -78,13 +78,20 @@ const RegisterManager = () => {
     }
 
     try {
-      await axios.post(
+      const response = await axios.post(
         "http://localhost:5000/managers/registermanager",
         inputs
-      ); // Replace
-      navigate("/admindash"); // Navigate to the volunteer list page after successful update
+      ); 
+      console.log(response.data);
+      alert("Manager registered succesfully, proceed for verification");
+      navigate("/employeelist"); // Navigate to the manager list page after successful registration
     } catch (error) {
-      console.error("Error registering user:", error);
+      console.error("Error registering manager:", error);
+      if (error.response && error.response.status === 400) {
+        alert("Email address already exists");
+      } else {
+        alert("An error occurred. Please try again later.");
+      }
     }
   };
 
@@ -101,7 +108,7 @@ const RegisterManager = () => {
         </div>
         <div id="layoutSidenav_content">
           <div className="container-fluid px-4">
-            <h1 className="mt-4">Edit User</h1>
+            <h1 className="mt-4">Create Manager</h1>
             <div className="card-body">
               <div className="form edit">
                 <form onSubmit={handleSubmit}>
@@ -166,7 +173,7 @@ const RegisterManager = () => {
                         />
                       </div>
                     </div>
-                    <div className="column">
+                    {/* <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="country" className="form-label">
                           Country
@@ -185,7 +192,7 @@ const RegisterManager = () => {
                           ))}
                         </select>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="city" className="form-label">

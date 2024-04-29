@@ -11,9 +11,6 @@ import Footer from "../DashboardNav/Footer";
 
 import { AuthContext } from "../../Content/LoginPage/AuthContext";
 
-//UPDATE USER PROFILE TUTORIAL 
-//https://www.youtube.com/watch?v=ShejXVOTmKs&ab_channel=SmartSystemSolutions
-
 // Define your functional component
 const UserEditComponent = () => {
   const userId = localStorage.getItem("userId");
@@ -72,16 +69,7 @@ const UserEditComponent = () => {
         console.error("Error fetching countries:", error);
       });
 
-    // const fetchUser = async () => {
-    //   try {
-    //     const response = await axios.get("http://localhost:5000/users/get/${id}"); 
-    //     setUser(response.data); // Update state with fetched user data
-    //   } catch (error) {
-    //     console.error("Error fetching user data:", error);
-    //   }
-    // };
-
-    // fetchUser();
+    
   }, [id]); // Dependency array ensures useEffect runs whenever the 'id' parameter changes
 
   // Function to handle form input changes
@@ -177,7 +165,7 @@ const UserEditComponent = () => {
                         />
                       </div>
                     </div>
-                    <div class="column">
+                    {/* <div class="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="country" className="form-label">
                           Country
@@ -196,7 +184,7 @@ const UserEditComponent = () => {
                           ))}
                         </select>
                       </div>
-                    </div>
+                    </div> */}
                     <div class="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="city" className="form-label">
@@ -258,7 +246,7 @@ const UserEditComponent = () => {
                         />
                       </div>
                     </div>
-                    <div class="column">
+                    {/* <div class="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="file" className="form-label">
                           Medical Records
@@ -271,7 +259,7 @@ const UserEditComponent = () => {
                           onChange={handleChange}
                         />
                       </div>
-                    </div>
+                    </div> */}
                     <div class="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="password" className="form-label">
@@ -301,9 +289,6 @@ const UserEditComponent = () => {
                       </div>
                     </div>
                   </div>
-                  <button type="submit" className="btn btn-primary">
-                    Update
-                  </button>
                   <button type="submit" className="btn btn-primary">
                     Update
                   </button>
