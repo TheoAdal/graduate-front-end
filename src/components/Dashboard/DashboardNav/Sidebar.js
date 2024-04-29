@@ -10,6 +10,7 @@ const Sidebar = ({ userRole, userName, userSurname }) => {
           { title: "Beneficiary List", path: "/olduserlist" },
           { title: "Manager List", path: "/employeelist" },
           { title: "Appointments", path: "/appointmentslist" },
+          { title: "Reports", path: "/reports" },
         ];
       case "manager":
         return [

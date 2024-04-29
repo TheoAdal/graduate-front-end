@@ -1,7 +1,6 @@
 import React from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-//import Img4 from "../../../images/tepak.png";
 import "./HomePageStyles.scss";
 
 function CardComponent() 
