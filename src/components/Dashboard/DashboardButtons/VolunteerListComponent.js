@@ -53,6 +53,7 @@ export default function ListVolunteers() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCity, setSelectedCity] = useState("all");
   const [selectedState, setSelectedState] = useState("all");
+  const [selectedGender, setSelectedGender] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 2;
 
@@ -68,14 +69,14 @@ export default function ListVolunteers() {
     }
   };
 
-  const deleteUser = (id) => {
-    axios
-      .delete(`http://localhost:5000/volunteers/delete/${id}`)
-      .then(function (response) {
-        console.log(response.data);
-        getUsers();
-      });
-  };
+  // const deleteUser = (id) => {
+  //   axios
+  //     .delete(`http://localhost:5000/volunteers/delete/${id}`)
+  //     .then(function (response) {
+  //       console.log(response.data);
+  //       getUsers();
+  //     });
+  // };
 
   const changeUserState = (id) => {
     axios
@@ -101,7 +102,11 @@ export default function ListVolunteers() {
     setCurrentPage(1); // Reset current page when search query changes
   };
 
-  // Filter users based on search query, city, and state
+  const handleGenderChange = (e) => {
+    setSelectedGender(e.target.value);
+  };
+
+  // Filter users based on search query, city, state and gender
   const filteredUsers = users
     .filter((user) =>
       `${user.name} ${user.surname}`
@@ -111,6 +116,11 @@ export default function ListVolunteers() {
     .filter((user) => selectedCity === "all" || user.city === selectedCity)
     .filter(
       (user) => selectedState === "all" || user.userState === selectedState
+    )
+    .filter(
+      (user) =>
+        selectedGender === "all" ||
+        user.gender?.toLowerCase() === selectedGender.toLowerCase()
     );
 
   // Paginate filtered users
@@ -159,6 +169,18 @@ export default function ListVolunteers() {
                             {city}
                           </option>
                         ))}
+                      </select>
+                    </div>
+                    <div className="filters-gender">
+                      <label>Filter by Gender:</label>
+                      <select
+                        value={selectedGender}
+                        onChange={handleGenderChange}
+                      >
+                        <option value="all">All</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
                       </select>
                     </div>
                     <div className="filters-state">
