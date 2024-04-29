@@ -64,8 +64,8 @@ const ContactUsPageComponent = () => {
           <div className="section-box">
             <h2>Contact Us</h2>
             <p>
-              We'd love to hear from you! Please fill out the form below, and
-              we'll get back to you as soon as possible.
+            Θα θέλαμε να ακούσουμε νέα σας! Συμπληρώστε την παρακάτω φόρμα και 
+            θα επικοινωνήσουμε μαζί σας το συντομότερο δυνατό.
             </p>
           </div>
           <Form onSubmit={sendEmail}>

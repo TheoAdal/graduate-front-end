@@ -27,8 +27,8 @@ function CarouselAnimation() {
           text="Second slide"
         />
         <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h3>Κάνε εγγραφή ως εθελοντής</h3>
+          <p>Γίνετε μέλος σε μικρές ομάδες αφιερωμένες στη σύνδεση με άτομα της Τρίτης Ηλικίας.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -39,9 +39,9 @@ function CarouselAnimation() {
           text="Third slide"
         />
         <Carousel.Caption>
-          <h3>Third slide label</h3>
+          <h3>Κάνε εγγραφή ως άτομο τρίτης ηλικίας</h3>
           <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+          Συνδεθείτε με μια μικρή ομάδα αφοσιωμένων εθελοντών.
           </p>
         </Carousel.Caption>
       </Carousel.Item>

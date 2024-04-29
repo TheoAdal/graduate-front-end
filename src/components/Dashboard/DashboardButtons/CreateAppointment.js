@@ -188,6 +188,8 @@ export default function CreateAppointment() {
           description: description,
         }
       );
+      alert("Appointment created succesfully");
+      navigate("/appointmentslist");                           //appointments list redirect
       console.log("Appointment created successfully:", response.data);
     } catch (error) {
       console.error("Error creating appointment:", error);
