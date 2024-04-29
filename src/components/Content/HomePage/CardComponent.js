@@ -9,7 +9,7 @@ function CardComponent()
     return (
         <div className="card-container"> {/* */}
           <Card className="card">
-            <Card.Img variant="top" src="holder.js/100px180" />
+            {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
             <Card.Body>
               <Card.Title>Εγγραφή ως εθελοντής</Card.Title>
               <Card.Text>
@@ -20,7 +20,7 @@ function CardComponent()
           </Card>
     
           <Card className="card">
-            <Card.Img variant="top" src="another-image-url.jpg" /> {/*src={Img4} */}
+            {/* <Card.Img variant="top" src="another-image-url.jpg" />  */}
             <Card.Body>
               {/* <Card.Title>Καταπολέμησε την μοναξιά</Card.Title> */}
               <Card.Title>Εγγραφή ως άτομο τρίτης ηλικίας</Card.Title>

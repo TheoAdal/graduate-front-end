@@ -871,8 +871,8 @@ progress {
 .chart{
   background-color: #ffffff; /* Blue background color */ //20C988
   display: block; // removes any extra space below the canvas element
-  width: 90% !important; // overrides any inline styles
-  // height: 100% !important;
+  width: 80% !important; // overrides any inline styles
+  height: auto !important;
 }
 
 // Styles for Pagination //
