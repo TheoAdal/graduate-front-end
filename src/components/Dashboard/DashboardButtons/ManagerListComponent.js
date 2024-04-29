@@ -148,6 +148,7 @@ export default function ListManagers() {
                   </div>
                 </div>
                 <h1 className="mt-4">Manager List</h1>
+                <h5 className="mt-4"># of Managers: {filteredUsers.length}</h5>
                 <div className="col-xs-12">
                   <div className="filters-container">
                     <div className="filters-search">

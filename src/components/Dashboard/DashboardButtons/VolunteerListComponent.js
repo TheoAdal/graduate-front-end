@@ -141,11 +141,7 @@ export default function ListVolunteers() {
               <div className="row">
                 <div className="col-xs-12">
                   {/* FILTERS */}
-                  
                   <div className="filters-container">
-                  {/* <div className="volunteer-count">
-                    <h5 className="mt-4">({filteredUsers.length})</h5>
-                  </div> */}
                     <div className="filters-search">
                       <label>Search User:</label>
                       <input

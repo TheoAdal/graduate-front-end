@@ -7,14 +7,14 @@ const Sidebar = ({ userRole, userName, userSurname }) => {
       case "admin":
         return [
           { title: "Volunteer List", path: "/volunteerlist" },
-          { title: "Old User List", path: "/olduserlist" },
+          { title: "Beneficiary List", path: "/olduserlist" },
           { title: "Manager List", path: "/employeelist" },
           { title: "Appointments", path: "/appointmentslist" },
         ];
       case "manager":
         return [
           { title: "Volunteer List", path: "/volunteerlist" },
-          { title: "Old User List", path: "/olduserlist" },
+          { title: "Beneficiary List", path: "/olduserlist" },
           { title: "Appointments", path: "/appointmentslist" },
         ];
       case "volunteer":// SHOWS ONLY THE USERS APPOINTMENT AND PROFILE
