@@ -51,6 +51,7 @@ export default function ListManagers() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCity, setSelectedCity] = useState("all");
   const [selectedState, setSelectedState] = useState("all");
+  const [selectedGender, setSelectedGender] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 2;
 
@@ -63,14 +64,14 @@ export default function ListManagers() {
       });
   }
 
-  const deleteUser = (id) => {
-    axios
-      .delete(`http://localhost:5000/managers/delete/${id}`)
-      .then(function (response) {
-        console.log(response.data);
-        getUsers();
-      });
-  };
+  // const deleteUser = (id) => {
+  //   axios
+  //     .delete(`http://localhost:5000/managers/delete/${id}`)
+  //     .then(function (response) {
+  //       console.log(response.data);
+  //       getUsers();
+  //     });
+  // };
 
   const changeUserState = (id) => {
     axios
@@ -96,7 +97,11 @@ export default function ListManagers() {
     setCurrentPage(1); // Reset current page when search query changes
   };
 
-  // Filter users based on search query, city, and state
+  const handleGenderChange = (e) => {
+    setSelectedGender(e.target.value);
+  };
+
+  // Filter users based on search query, city, state and gender
   const filteredUsers = users
     .filter((user) =>
       `${user.name} ${user.surname}`
@@ -106,6 +111,11 @@ export default function ListManagers() {
     .filter((user) => selectedCity === "all" || user.city === selectedCity)
     .filter(
       (user) => selectedState === "all" || user.userState === selectedState
+    )
+    .filter(
+      (user) =>
+        selectedGender === "all" ||
+        user.gender?.toLowerCase() === selectedGender.toLowerCase()
     );
 
   // Paginate filtered users
@@ -170,6 +180,18 @@ export default function ListManagers() {
                         ))}
                       </select>
                     </div>
+                    <div className="filters-gender">
+                      <label>Filter by Gender:</label>
+                      <select
+                        value={selectedGender}
+                        onChange={handleGenderChange}
+                      >
+                        <option value="all">All</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
                     <div className="filters-state">
                       <label>Filter by Status:</label>
                       <select
@@ -193,6 +215,7 @@ export default function ListManagers() {
                           <th>Surname</th>
                           <th>Email</th>
                           <th>Phone Number</th>
+                          <th>Gender</th>
                           <th>Status</th>
                           <th>City</th>
                           <th>Options</th>
@@ -206,6 +229,7 @@ export default function ListManagers() {
                             <td>{user.surname}</td>
                             <td>{user.email}</td>
                             <td>{user.mobile}</td>
+                            <td>{user.gender}</td>
                             <td>{user.userState}</td>
                             <td>{user.city}</td>
                             <td>

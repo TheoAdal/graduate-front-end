@@ -51,6 +51,7 @@ export default function ListOldUsers() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCity, setSelectedCity] = useState("all");
   const [selectedState, setSelectedState] = useState("all");
+  const [selectedGender, setSelectedGender] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 2;
 
@@ -66,14 +67,14 @@ export default function ListOldUsers() {
     }
   };
 
-  const deleteUser = (id) => {
-    axios
-      .delete(`http://localhost:5000/oldusers/delete/${id}`)
-      .then(function (response) {
-        console.log(response.data);
-        getUsers();
-      });
-  };
+  // const deleteUser = (id) => {
+  //   axios
+  //     .delete(`http://localhost:5000/oldusers/delete/${id}`)
+  //     .then(function (response) {
+  //       console.log(response.data);
+  //       getUsers();
+  //     });
+  // };
 
   const changeUserState = (id) => {
     axios
@@ -99,6 +100,10 @@ export default function ListOldUsers() {
     setCurrentPage(1); // Reset current page when search query changes
   };
 
+  const handleGenderChange = (e) => {
+    setSelectedGender(e.target.value);
+  };
+
   // Filter users based on search query, city, and state
   const filteredUsers = users
     .filter((user) =>
@@ -109,6 +114,11 @@ export default function ListOldUsers() {
     .filter((user) => selectedCity === "all" || user.city === selectedCity)
     .filter(
       (user) => selectedState === "all" || user.userState === selectedState
+    )
+    .filter(
+      (user) =>
+        selectedGender === "all" ||
+        user.gender?.toLowerCase() === selectedGender.toLowerCase()
     );
 
   // Paginate filtered users
@@ -135,7 +145,9 @@ export default function ListOldUsers() {
           <main>
             <div className="container-fluid px-4">
               <h1 className="mt-4">Beneficiary List</h1>
-              <h5 className="mt-4"># of Beneficiaries: {filteredUsers.length}</h5>
+              <h5 className="mt-4">
+                # of Beneficiaries: {filteredUsers.length}
+              </h5>
               <div className="row">
                 <div className="col-xs-12">
                   {/* FILTERS */}
@@ -157,6 +169,18 @@ export default function ListOldUsers() {
                             {city}
                           </option>
                         ))}
+                      </select>
+                    </div>
+                    <div className="filters-gender">
+                      <label>Filter by Gender:</label>
+                      <select
+                        value={selectedGender}
+                        onChange={handleGenderChange}
+                      >
+                        <option value="all">All</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
                       </select>
                     </div>
                     <div className="filters-state">
@@ -182,6 +206,7 @@ export default function ListOldUsers() {
                           <th>Surname</th>
                           <th>Email</th>
                           <th>Phone Number</th>
+                          <th>Gender</th>
                           <th>State</th>
                           <th>City</th>
                           <th>Options</th>
@@ -195,6 +220,7 @@ export default function ListOldUsers() {
                             <td>{user.surname}</td>
                             <td>{user.email}</td>
                             <td>{user.mobile}</td>
+                            <td>{user.gender}</td>
                             <td>{user.userState}</td>
                             <td>{user.city}</td>
                             <td>
