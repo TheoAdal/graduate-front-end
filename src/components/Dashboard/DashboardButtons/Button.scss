@@ -873,6 +873,8 @@ progress {
   display: block; // removes any extra space below the canvas element
   width: 80% !important; // overrides any inline styles
   height: auto !important;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 // Styles for Pagination //

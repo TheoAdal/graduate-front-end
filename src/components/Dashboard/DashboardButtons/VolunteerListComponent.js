@@ -184,6 +184,7 @@ export default function ListVolunteers() {
                           <th>Surname</th>
                           <th>Email</th>
                           <th>Phone Number</th>
+                          <th>Gender</th>
                           <th>Status</th>
                           <th>City</th>
                           <th>Options</th>
@@ -197,6 +198,7 @@ export default function ListVolunteers() {
                             <td>{user.surname}</td>
                             <td>{user.email}</td>
                             <td>{user.mobile}</td>
+                            <td>{user.gender}</td>
                             <td>{user.userState}</td>
                             <td>{user.city}</td>
                             <td>
