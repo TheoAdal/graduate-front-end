@@ -29,7 +29,7 @@ const OldUserDashboard = () => {
     } else if (userRole === "olduser") {
       //navigate("/olduserdash");
     }
-  }, [navigate, token]);
+  }, [navigate, token, userRole]);
 
   return (
     <div className="sb-nav-fixed">

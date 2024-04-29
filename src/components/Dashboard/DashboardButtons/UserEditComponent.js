@@ -1,8 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { useParams, useNavigate } from "react-router-dom";
 import "./Button.scss";
 
 import Sidebar from "../DashboardNav/Sidebar";
@@ -13,13 +11,12 @@ import { AuthContext } from "../../Content/LoginPage/AuthContext";
 
 // Define your functional component
 const UserEditComponent = () => {
-  const userId = localStorage.getItem("userId");
   const userName = localStorage.getItem("userName");
   const userSurname = localStorage.getItem("userSurname");
   const userRole = localStorage.getItem("userRole");
 
   const navigate = useNavigate(); // Access navigate function for navigation
-  const { setToken, token, loading } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
 
   const { id } = useParams(); // Access the user ID from URL parameters
 
@@ -27,16 +24,16 @@ const UserEditComponent = () => {
       console.log("Effect is running");
       if (!token && !userRole) {
         navigate("/login");
-      } else if (userRole == "admin") {
+      } else if (userRole === "admin") {
           
-      } else if (userRole == "manager") {
+      } else if (userRole === "manager") {
         navigate("/managerdash");
-      } else if (userRole == "volunteer") {
+      } else if (userRole === "volunteer") {
         navigate("/volunteerdash");
-      } else if (userRole == "olduser") {
+      } else if (userRole === "olduser") {
         navigate("/olduserdash");
       }
-    }, [navigate, token]);
+    }, [navigate, token, userRole]);
 
   // State variables
   const [user, setUser] = useState({
@@ -55,22 +52,22 @@ const UserEditComponent = () => {
     confirmpassword: "",
   });
 
-  const [countries, setCountries] = useState([]);
+  // const [countries, setCountries] = useState([]);
 
-  useEffect(() => {
-    // Fetch list of countries from an API or a local file
-    axios
-      .get("https://restcountries.com/v3.1/all")
-      .then((response) => {
-        const countries = response.data.map((country) => country.name.common);
-        setCountries(countries);
-      })
-      .catch((error) => {
-        console.error("Error fetching countries:", error);
-      });
+  // useEffect(() => {
+  //   // Fetch list of countries from an API or a local file
+  //   axios
+  //     .get("https://restcountries.com/v3.1/all")
+  //     .then((response) => {
+  //       const countries = response.data.map((country) => country.name.common);
+  //       setCountries(countries);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching countries:", error);
+  //     });
 
     
-  }, [id]); // Dependency array ensures useEffect runs whenever the 'id' parameter changes
+  // }, [id]); // Dependency array ensures useEffect runs whenever the 'id' parameter changes
 
   // Function to handle form input changes
   const handleChange = (e) => {

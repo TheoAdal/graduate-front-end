@@ -32,7 +32,7 @@ const RegisterManager = () => {
     } else if (userRole === "olduser") {
       navigate("/olduserdash");
     }
-  }, [navigate, token]);
+  }, [navigate, token, userRole]);
 
   const [inputs, setInputs] = useState({
     name: "",

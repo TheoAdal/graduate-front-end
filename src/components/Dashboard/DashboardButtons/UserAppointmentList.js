@@ -21,7 +21,7 @@ export default function ListAppointments() {
   const [visits, setVisits] = useState([]);
   const [appointmentState, setAppointmentState] = useState("pending");
   const [selectedDate, setSelectedDate] = useState("");
-  const [setFilteredAppointments] = useState([]);
+  // const [setFilteredAppointments] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const appointmentsPerPage = 5;
