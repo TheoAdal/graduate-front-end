@@ -136,11 +136,16 @@ export default function ListVolunteers() {
         <div id="layoutSidenav_content">
           <main>
             <div className="container-fluid px-4">
-              <h1 className="mt-4">Volunteer List</h1>
+              <h1 className="mt-4">Volunteer List </h1>
+              <h5 className="mt-4"># of Volunteers: {filteredUsers.length}</h5>
               <div className="row">
                 <div className="col-xs-12">
                   {/* FILTERS */}
+                  
                   <div className="filters-container">
+                  {/* <div className="volunteer-count">
+                    <h5 className="mt-4">({filteredUsers.length})</h5>
+                  </div> */}
                     <div className="filters-search">
                       <label>Search User:</label>
                       <input
@@ -161,7 +166,7 @@ export default function ListVolunteers() {
                       </select>
                     </div>
                     <div className="filters-state">
-                      <label>Filter by State:</label>
+                      <label>Filter by Status:</label>
                       <select
                         value={selectedState}
                         onChange={handleStateChange}
@@ -178,12 +183,12 @@ export default function ListVolunteers() {
                     <table className="table-user">
                       <thead>
                         <tr>
-                          <th>id</th>
+                          {/* <th>id</th> */}
                           <th>Name</th>
                           <th>Surname</th>
                           <th>Email</th>
                           <th>Phone Number</th>
-                          <th>State</th>
+                          <th>Status</th>
                           <th>City</th>
                           <th>Options</th>
                         </tr>
@@ -191,7 +196,7 @@ export default function ListVolunteers() {
                       <tbody>
                         {currentUsers.map((user, key) => (
                           <tr key={key}>
-                            <td>{user.id}</td>
+                            {/* <td>{user.id}</td> */}
                             <td>{user.name}</td>
                             <td>{user.surname}</td>
                             <td>{user.email}</td>
@@ -204,14 +209,14 @@ export default function ListVolunteers() {
                                   className="change-state"
                                   onClick={() => changeUserState(user._id)}
                                 >
-                                  Edit state
+                                  Edit status
                                 </button>
-                                <button
+                                {/* <button
                                   className="delete"
                                   onClick={() => deleteUser(user._id)}
                                 >
                                   Delete
-                                </button>
+                                </button> */}
                               </div>
                             </td>
                           </tr>

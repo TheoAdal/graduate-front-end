@@ -159,7 +159,7 @@ export default function ListOldUsers() {
                       </select>
                     </div>
                     <div className="filters-state">
-                      <label>Filter by State:</label>
+                      <label>Filter by Status:</label>
                       <select
                         value={selectedState}
                         onChange={handleStateChange}
@@ -176,7 +176,7 @@ export default function ListOldUsers() {
                     <table className="table-user">
                       <thead>
                         <tr>
-                          <th>id</th>
+                          {/* <th>id</th> */}
                           <th>Name</th>
                           <th>Surname</th>
                           <th>Email</th>
@@ -189,7 +189,7 @@ export default function ListOldUsers() {
                       <tbody>
                         {currentUsers.map((user, key) => (
                           <tr key={key}>
-                            <td>{user.id}</td>
+                            {/* <td>{user.id}</td> */}
                             <td>{user.name}</td>
                             <td>{user.surname}</td>
                             <td>{user.email}</td>
@@ -202,14 +202,14 @@ export default function ListOldUsers() {
                                   className="change-state"
                                   onClick={() => changeUserState(user._id)}
                                 >
-                                  Edit state
+                                  Edit status
                                 </button>
-                                <button
+                                {/* <button
                                   className="delete"
                                   onClick={() => deleteUser(user._id)}
                                 >
                                   Delete
-                                </button>
+                                </button> */}
                               </div>
                             </td>
                           </tr>

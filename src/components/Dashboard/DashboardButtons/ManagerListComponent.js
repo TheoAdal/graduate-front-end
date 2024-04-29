@@ -170,7 +170,7 @@ export default function ListManagers() {
                       </select>
                     </div>
                     <div className="filters-state">
-                      <label>Filter by State:</label>
+                      <label>Filter by Status:</label>
                       <select
                         value={selectedState}
                         onChange={handleStateChange}
@@ -187,12 +187,12 @@ export default function ListManagers() {
                     <table className="table-user">
                       <thead>
                         <tr>
-                          <th>id</th>
+                          {/* <th>id</th> */}
                           <th>Name</th>
                           <th>Surname</th>
                           <th>Email</th>
                           <th>Phone Number</th>
-                          <th>State</th>
+                          <th>Status</th>
                           <th>City</th>
                           <th>Options</th>
                         </tr>
@@ -200,7 +200,7 @@ export default function ListManagers() {
                       <tbody>
                         {currentUsers.map((user, key) => (
                           <tr key={key}>
-                            <td>{user.id}</td>
+                            {/* <td>{user.id}</td> */}
                             <td>{user.name}</td>
                             <td>{user.surname}</td>
                             <td>{user.email}</td>
@@ -213,14 +213,14 @@ export default function ListManagers() {
                                   className="change-state"
                                   onClick={() => changeUserState(user._id)}
                                 >
-                                  Edit state
+                                  Edit status
                                 </button>
-                                <button
+                                {/* <button
                                   className="delete"
                                   onClick={() => deleteUser(user._id)}
                                 >
                                   Delete
-                                </button>
+                                </button> */}
                               </div>
                             </td>
                           </tr>

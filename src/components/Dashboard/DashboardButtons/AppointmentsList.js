@@ -188,16 +188,16 @@ export default function ListAppointments() {
                       </thead>
                       <tbody>
                         {/* Appointments data */}
-                        {currentAppointments.map((visit, key) => (
+                        {currentAppointments.map((visit, key) => (//oldname oldsurname volsurname volname
                           <tr key={key}>
+                            <td>
+                              {visit.oldname} {visit.oldsurname} 
+                            </td>
+                            <td>{visit.old_number}</td>
                             <td>
                               {visit.volname} {visit.volsurname}
                             </td>
                             <td>{visit.vol_number}</td>
-                            <td>
-                              {visit.oldname} {visit.oldsurname}
-                            </td>
-                            <td>{visit.old_number}</td>
                             <td>{visit.appointmentdate}</td>
                             <td>{visit.appointmenttime}</td>
                             <td>{visit.description}</td>

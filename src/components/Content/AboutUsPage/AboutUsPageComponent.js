@@ -65,7 +65,7 @@ function AboutUsPageComponent() {
               </li>
             </ul>
           </div>
-          <div className="section-box">
+          {/* <div className="section-box">
             <div className="card-box">
               <Row className="cards">
                 <h3>Γνωρίστε την ομάδα μας:</h3>
@@ -110,7 +110,7 @@ function AboutUsPageComponent() {
                 </Col>
               </Row>
             </div>
-          </div>
+          </div> */}
         </Col>
       </Row>
     </Container>
