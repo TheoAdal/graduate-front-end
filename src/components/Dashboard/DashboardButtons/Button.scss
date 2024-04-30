@@ -804,6 +804,7 @@ progress {
 
 .table-container-user {
   overflow-x: auto; /* Add horizontal scroll if needed */
+  margin: 10px;
 }
 
 .table-user {
@@ -855,11 +856,13 @@ progress {
 .button-container button.change-state {
   background-color: #0056b3; /* #4CAF50 */
   color: white;
+  margin: 2px;
 }
 
 .button-container button.delete {
   background-color: #f44336; /* Red */
   color: white;
+  margin: 2px;
 }
 
 .button-container button:hover {
@@ -8152,6 +8155,7 @@ textarea.form-control-lg {
 }
 
 .bg-info {
+  margin-top:50px;
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-info-rgb), var(--bs-bg-opacity)) !important;
 }

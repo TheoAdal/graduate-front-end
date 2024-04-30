@@ -18,13 +18,14 @@ const Sidebar = ({ userRole, userName, userSurname }) => {
           { title: "Beneficiary List", path: "/olduserlist" },
           { title: "Appointments", path: "/appointmentslist" },
         ];
-      case "volunteer":// SHOWS ONLY THE USERS APPOINTMENT AND PROFILE
+      case "volunteer":
         return [{ title: "Profile", path: "/profile" },
-                { title: "Appointments", path: "/userappointments" }
+                { title: "Appointments", path: "/userappointmentlist", },
+                { title: "Requests", path: "/volunteerappointmentlist" }
         ];  
-      case "olduser":// SHOWS ONLY THE USERS APPOINTMENT AND PROFILE                                                 
+      case "olduser":                                                 
         return [{ title: "Profile", path: "/profile" },
-                { title: "Appointments", path: "/userappointments" }
+                // { title: "Appointments", path: "/userappointments" }
         ]; 
       default:
         return [];

@@ -13,7 +13,6 @@ import { AuthContext } from "../../Content/LoginPage/AuthContext";
 
 
 const VolunteerDashboard = () => {
-  const userId = localStorage.getItem("userId");
   const userName = localStorage.getItem("userName");
   const userSurname = localStorage.getItem("userSurname");
   const userRole = localStorage.getItem("userRole");
@@ -70,12 +69,25 @@ const VolunteerDashboard = () => {
                   <div className="card bg-danger text-white mb-4">
                     <div className="card-body">Appointments</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
-                      {/* CHANGE HREF */}{/* CHANGE HREF */}{/* CHANGE HREF */}
                       <a className="small text-white stretched-link" href="/userappointmentlist">
                         View Details
                       </a>
                       <div className="small text-white">
                         <i className="fas fa -angle-right"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-3 col-md-6">
+                  <div className="card bg-info text-white mb-4">
+                    <div className="card-body"> Requests</div>
+                    <div className="card-footer d-flex align-items-center justify-content-between">
+                      {/* Change href to the report */}
+                      <a className="small text-white stretched-link" href="/volunteerappointmentlist">
+                        View Details
+                      </a>
+                      <div className="small text-white">
+                        <i className="fas fa-angle-right"></i>
                       </div>
                     </div>
                   </div>

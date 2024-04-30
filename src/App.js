@@ -24,7 +24,8 @@ function App() {
     "/useredit",
     "/registermanager",
     "/users/:id/verify/:token",
-    "/reports"
+    "/reports",
+    "/volunteerappointmentlist"
   ];
 
   const RenderComponent = !excludePaths.some((path) =>
