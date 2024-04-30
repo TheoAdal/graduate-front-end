@@ -21,7 +21,7 @@ export default function ListAppointments() {
   const [visits, setVisits] = useState([]);
   const [appointmentState, setAppointmentState] = useState("pending");
   const [selectedDate, setSelectedDate] = useState("");
-  const [filteredAppointments, setFilteredAppointments] = useState([]);
+  const [matchingRequests, setMatchingRequests] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const appointmentsPerPage = 5;
@@ -33,63 +33,73 @@ export default function ListAppointments() {
       navigate("/admindash");
     } else if (userRole === "manager") {
       navigate("/managerdash");
-    } else if (userRole === "volunteer" || userRole === "olduser") {
-      getAcceptedRequests();
+    } else if (userRole === "volunteer") {
+      getMatchingRequests();
+    } else if (userRole === "olduser") {
+      navigate("/olduserdash");
     }
   }, [navigate, token, userRole]);
 
-  const getAcceptedRequests = async () => {
+  const getMatchingRequests = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/requests/appointmentrequests/accepted/${userId}`
+        `http://localhost:5000/volunteers/matching-requests/${userId}`
       );
-      console.log("Accepted Requests:", response.data);
-      setVisits(response.data);
+      console.log("Response data:", response.data);
+      setMatchingRequests(response.data);
     } catch (error) {
-      console.error("Error fetching accepted requests:", error);
+      console.error("Error fetching matching requests:", error);
+    }
+  };
+
+  // Function to accept an appointment request
+  const handleAccept = async (id) => {
+    try {
+      await axios.patch(`http://localhost:5000/requests/accept/${id}`, {
+        volunteerId: userId, // Assuming the volunteer ID is stored in localStorage
+      });
+      // Refresh the list of appointments after accepting
+      alert("You have accepted an appointment");
+      navigate("/volunteerappointmentlist"); // Navigate to the manager list page after successful registration
+    } catch (error) {
+      console.error("Error accepting request:", error);
     }
   };
 
   const handleStateChange = (e) => {
     setAppointmentState(e.target.value);
-    setCurrentPage(1); // Reset page number when filter changes
-    filterAcceptedRequests(e.target.value);
   };
 
-  const currentDate = new Date(); // Get the current date
+  const currentDate = new Date();
 
-  const filterAcceptedRequests = (state) => {
-    let filteredRequests = [];
-  
-    if (state === "pending") {
-      filteredRequests = visits.filter((visit) => {
-        const appointmentDate = new Date(visit.appointmentDate);
-        return appointmentDate >= currentDate; // Check if appointment date is greater than or equal to the current date
-      });
-    } else if (state === "expired") {
-      filteredRequests = visits.filter((visit) => {
-        const appointmentDate = new Date(visit.appointmentDate);
-        return appointmentDate < currentDate; // Check if appointment date is less than the current date
-      });
-    } else if (state === "all") {
-      // Show all appointments
-      filteredRequests = [...visits];
+  const filteredAppointments = visits.filter((visit) => {
+    if (selectedDate !== "") {
+      // If a date is selected, filter by date
+      return visit.appointmentdate === selectedDate;
+    } else {
+      // Otherwise, filter by appointment state
+      if (appointmentState === "pending") {
+        const appointmentDate = new Date(visit.appointmentdate);
+        return appointmentDate >= currentDate;
+      } else if (appointmentState === "expired") {
+        const appointmentDate = new Date(visit.appointmentdate);
+        return appointmentDate < currentDate;
+      } else {
+        return true;
+      }
     }
-  
-    setFilteredAppointments(filteredRequests);
-  };
-  
+  });
 
-  // const sortedAppointments = [...visits].sort((a, b) => {
-  //   // Convert appointment dates to Date objects for comparison
-  //   const dateA = new Date(a.appointmentdate);
-  //   const dateB = new Date(b.appointmentdate);
+  const sortedAppointments = [...visits].sort((a, b) => {
+    // Convert appointment dates to Date objects for comparison
+    const dateA = new Date(a.appointmentdate);
+    const dateB = new Date(b.appointmentdate);
 
-  //   // Compare the dates
-  //   if (dateA < dateB) return -1;
-  //   if (dateA > dateB) return 1;
-  //   return 0;
-  // });
+    // Compare the dates
+    if (dateA < dateB) return -1;
+    if (dateA > dateB) return 1;
+    return 0;
+  });
 
   // Paginate filtered appointments
   const indexOfLastAppointment = currentPage * appointmentsPerPage;
@@ -119,60 +129,53 @@ export default function ListAppointments() {
             <div className="container-fluid px-4">
               <div className="row">
                 <div className="col-xs-12">
-                  <h3 className="mt-4">My Appointments</h3>
-                  <div className="filters-container">
-                    <div className="filters-state">
-                      <label htmlFor="filter">Appointment State:</label>
-                      <select
-                        id="filter"
-                        value={appointmentState}
-                        onChange={handleStateChange}
-                      >
-                        <option value="pending">Pending Appointments</option>
-                        <option value="expired">Expired Appointments</option>
-                        <option value="all">All Appointments</option>
-                      </select>
-                    </div>
-                  </div>
+                  <h3 className="mt-4">Matching Requests</h3>
                   <div className="table-container-user">
                     <table className="table-user">
                       {/* Table headers */}
                       <thead>
                         <tr>
-                          <th>Olduser Name</th>
-                          <th>Phone Number</th>
-                          <th>Volunteer Name</th>
-                          <th>Phone Number</th>
+                          <th>Old User Name</th>
+                          <th>Old User Phone Number</th>
+                          <th>Preferred Age</th>
+                          <th>Preferred City</th>
+                          <th>Preferred Gender</th>
                           <th>Appointment Date</th>
                           <th>Appointment Time</th>
                           <th>Description</th>
+                          <th>Options</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {/* Appointments data */}
-                        {currentAppointments.map((visit, index) => (
-                          <tr key={index}>
+                        {/* Matching Requests data */}
+                        {matchingRequests.map((request, key) => (
+                          <tr key={key}>
                             <td>
-                              {visit.oldUserId
-                                ? `${visit.oldUserId.name} ${visit.oldUserId.surname}`
-                                : "N/A"}
+                              {request.oldUserId.name}{" "}
+                              {request.oldUserId.surname}
                             </td>
+                            <td>{request.oldUserId.mobile}</td>
+                            <td>{request.preferredAge}</td>
+                            <td>{request.preferredCity}</td>
+                            <td>{request.preferredGender}</td>
+                            <td>{request.appointmentDate}</td>
+                            <td>{request.appointmentTime}</td>
+                            <td>{request.description}</td>
                             <td>
-                              {visit.oldUserId ? visit.oldUserId.mobile : "N/A"}
+                              <div className="button-container">
+                                <button
+                                  className="change-state"
+                                  onClick={() => handleAccept(request._id)}
+                                >
+                                  Accept
+                                </button>
+                                {/* <button className="delete"
+                                onClick={() => handleDecline(request._id)}
+                              >
+                                Decline
+                              </button> */}
+                              </div>
                             </td>
-                            <td>
-                              {visit.acceptedBy
-                                ? `${visit.acceptedBy.name} ${visit.acceptedBy.surname}`
-                                : "N/A"}
-                            </td>
-                            <td>
-                              {visit.acceptedBy
-                                ? visit.acceptedBy.mobile
-                                : "N/A"}
-                            </td>
-                            <td>{visit.appointmentDate}</td>
-                            <td>{visit.appointmentTime}</td>
-                            <td>{visit.description}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -180,7 +183,7 @@ export default function ListAppointments() {
                     <div className="pagination-container">
                       {Array.from({
                         length: Math.ceil(
-                          filteredAppointments.length / appointmentsPerPage
+                          matchingRequests.length / appointmentsPerPage
                         ),
                       }).map((_, index) => (
                         <button
