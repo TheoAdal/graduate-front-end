@@ -24,7 +24,7 @@ export default function ListAppointments() {
   const [filteredAppointments, setFilteredAppointments] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const appointmentsPerPage = 5;
+  const appointmentsPerPage = 3;
 
   useEffect(() => {
     if (!token && !userRole) {
@@ -44,6 +44,12 @@ export default function ListAppointments() {
         `http://localhost:5000/requests/appointmentrequests/accepted/${userId}`
       );
       console.log("Accepted Requests:", response.data);
+      response.data.sort((a, b) => {
+        const dateA = new Date(a.appointmentDate);
+        const dateB = new Date(b.appointmentDate);
+        return dateA - dateB;
+      });
+
       setVisits(response.data);
     } catch (error) {
       console.error("Error fetching accepted requests:", error);
@@ -78,18 +84,6 @@ export default function ListAppointments() {
   
     setFilteredAppointments(filteredRequests);
   };
-  
-
-  // const sortedAppointments = [...visits].sort((a, b) => {
-  //   // Convert appointment dates to Date objects for comparison
-  //   const dateA = new Date(a.appointmentdate);
-  //   const dateB = new Date(b.appointmentdate);
-
-  //   // Compare the dates
-  //   if (dateA < dateB) return -1;
-  //   if (dateA > dateB) return 1;
-  //   return 0;
-  // });
 
   // Paginate filtered appointments
   const indexOfLastAppointment = currentPage * appointmentsPerPage;

@@ -942,15 +942,6 @@ progress {
     border-radius: 4px;
   }
 
-  // .appointment-description input {
-    
-  //   width: 100%; // Full width of the container
-  //   padding: 8px;
-  //   border: 1px solid #ccc;
-  //   border-radius: 4px;
-  //   height: 133px; // Fixed height for the description box
-  // }
-
   .textarea-description {
     width: 100%; /* Adjust width as needed */
     height: 133px; /* Adjust height as needed */
@@ -984,6 +975,54 @@ progress {
       background-color: darken(#007bff, 5%);
     }
   }
+}
+
+.request-creation {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  
+  .request-age-container,
+  .request-gender-container{
+    flex-basis: calc(50% - 10px); 
+    margin-bottom: 20px; // Spacing between each container
+  }
+  .request-city-container,
+  .request-date-container,
+  .request-time-container {
+    flex-basis: calc(50% - 10px); 
+    margin-bottom: 20px; // Spacing between each container
+  }
+  .request-description-container {
+    flex-basis: calc(50% - 6px); // Full width description container
+    margin-bottom: 20px; // Spacing between each container
+  }
+
+  .form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: white;
+    font-size: 1.1rem;
+  }
+
+  .form-select,
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+
+  .textarea-description {
+    max-height: 50px !important; // Adjust height as needed
+    max-width: 450px !important; 
+    resize: vertical; // Allow vertical resizing
+  }
+
+  
 }
 
 

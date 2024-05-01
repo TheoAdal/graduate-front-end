@@ -25,7 +25,8 @@ const Sidebar = ({ userRole, userName, userSurname }) => {
         ];  
       case "olduser":                                                 
         return [{ title: "Profile", path: "/profile" },
-                // { title: "Appointments", path: "/userappointments" }
+                { title: "Appointments", path: "/userappointmentlist" },
+                { title: "Create Requests", path: "/createrequestpage" }
         ]; 
       default:
         return [];
