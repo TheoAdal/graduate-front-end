@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 // import "./AdminDashboard.scss";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Sidebar from "../DashboardNav/Sidebar";
 import TopNav from "../DashboardNav/TopNav";
@@ -13,7 +13,7 @@ const AdminDashboard = () => {
   const userSurname = localStorage.getItem("userSurname");
   const userRole = localStorage.getItem("userRole");
 
-  const {token} = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -99,11 +99,10 @@ const AdminDashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-xl-3 col-md-6">
+                {/* <div className="col-xl-3 col-md-6">
                   <div className="card bg-danger text-white mb-4">
                     <div className="card-body">Appointments</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
-                      {/* Change href to the report */}
                       <a
                         className="small text-white stretched-link"
                         href="/appointmentslist"
@@ -115,12 +114,11 @@ const AdminDashboard = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="col-xl-3 col-md-6">
-                  <div className="card bg-info text-white mb-4">
+                  <div className="card bg-danger text-white mb-4">
                     <div className="card-body">Reports</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
-                      {/* Change href to the report */}
                       <a
                         className="small text-white stretched-link"
                         href="/reports"
@@ -133,7 +131,6 @@ const AdminDashboard = () => {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </main>
