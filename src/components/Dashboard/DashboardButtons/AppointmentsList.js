@@ -9,22 +9,21 @@ import Footer from "../DashboardNav/Footer";
 
 import { AuthContext } from "../../Content/LoginPage/AuthContext";
 
-// const statuses = ["all", "pending", "expired"];
-
 export default function ListAppointments() {
   const userName = localStorage.getItem("userName");
   const userSurname = localStorage.getItem("userSurname");
   const userRole = localStorage.getItem("userRole");
 
-  const {token } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [visits, setVisits] = useState([]);
   const [appointmentState, setAppointmentState] = useState("pending");
   const [selectedDate, setSelectedDate] = useState("");
+  const [filteredAppointments, setFilteredAppointments] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const appointmentsPerPage = 4;
+  const appointmentsPerPage = 5;
 
   useEffect(() => {
     if (!token && !userRole) {
@@ -41,12 +40,16 @@ export default function ListAppointments() {
   const getAppointments = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/visits/getallappointments"
+        "http://localhost:5000/requests/getallrequests"
       );
-      const sortedAppointments = response.data.sort((a, b) => {
-        return new Date(a.appointmentdate) - new Date(b.appointmentdate);
+      console.log("Response data:", response.data);
+      response.data.sort((a, b) => {
+        const dateA = new Date(a.appointmentDate);
+        const dateB = new Date(b.appointmentDate);
+        return dateA - dateB;
       });
-      setVisits(sortedAppointments);
+
+      setVisits(response.data);
     } catch (error) {
       console.error("Error fetching appointments:", error);
     }
@@ -54,54 +57,68 @@ export default function ListAppointments() {
 
   const handleStateChange = (e) => {
     setAppointmentState(e.target.value);
-  };
+    setCurrentPage(1); // Reset page number when filter changes
+    filterAcceptedRequests(e.target.value);
+};
 
-  const handleDateChange = (e) => {
-    setSelectedDate(e.target.value);
-  };
+const currentDate = new Date(); // Get the current date
 
-  const currentDate = new Date();
+const filterAcceptedRequests = (state) => {
+  let filteredRequests = [];
 
-  const filteredAppointments = visits.filter((visit) => {
-    if (selectedDate !== "") {
-      // If a date is selected, filter by date
-      return visit.appointmentdate === selectedDate;
-    } else {
-      // Otherwise, filter by appointment state
-      if (appointmentState === "pending") {
-        const appointmentDate = new Date(visit.appointmentdate);
-        return appointmentDate >= currentDate;
-      } else if (appointmentState === "expired") {
-        const appointmentDate = new Date(visit.appointmentdate);
-        return appointmentDate < currentDate;
-      } else {
-        return true;
-      }
-    }
-  });
+  if (state === "future") {
+    filteredRequests = visits.filter((visit) => {
+      const appointmentDate = new Date(visit.appointmentDate);
+      return appointmentDate >= currentDate; // Check if appointment date is greater than or equal to the current date
+    });
+  } else if (state === "passed") {
+    filteredRequests = visits.filter((visit) => {
+      const appointmentDate = new Date(visit.appointmentDate);
+      return appointmentDate < currentDate; // Check if appointment date is less than the current date
+    });
+  } else if (state === "all") {
+    // Show all appointments
+    filteredRequests = [...visits];
+  }
 
-  const sortedAppointments = [...visits].sort((a, b) => {
-    // Convert appointment dates to Date objects for comparison
-    const dateA = new Date(a.appointmentdate);
-    const dateB = new Date(b.appointmentdate);
+  setFilteredAppointments(filteredRequests);
+};
 
-    // Compare the dates
-    if (dateA < dateB) return -1;
-    if (dateA > dateB) return 1;
-    return 0;
-  });
+const handleDateChange = (e) => {
+  const date = e.target.value;
+  setSelectedDate(date);
+  setCurrentPage(1); // Reset page number when filter changes
 
-  const deleteAppointment = (id) => {
-    axios
-      .delete(`http://localhost:5000/volunteers/delete/${id}`)
-      .then(function (response) {
-        console.log(response.data);
-        getAppointments();
-      })
-      .catch((error) => {
-        console.error("Error deleting appointment:", error);
-      });
-  };
+  filterAppointmentsByDate(date);
+};
+
+const filterAppointmentsByDate = (date) => {
+  let filteredAppointments = [];
+
+  if (date !== "") {
+    filteredAppointments = visits.filter((visit) => {
+      return visit.appointmentDate === date;
+    });
+  } else {
+    // If no date is selected, show all appointments based on the current appointment state
+    // filteredAppointments(appointmentState);
+    return;
+  }
+
+  setFilteredAppointments(filteredAppointments);
+};
+
+  // const deleteAppointment = (id) => {
+  //   axios
+  //     .delete(`http://localhost:5000/volunteers/delete/${id}`)
+  //     .then(function (response) {
+  //       console.log(response.data);
+  //       getAppointments();
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error deleting appointment:", error);
+  //     });
+  // };
 
   // Paginate filtered appointments
   const indexOfLastAppointment = currentPage * appointmentsPerPage;
@@ -130,10 +147,9 @@ export default function ListAppointments() {
           <main>
             <div className="container-fluid px-4">
               <div className="row">
-                <div className="card bg-danger text-white mb-4">
+                {/* <div className="card bg-danger text-white mb-4">
                   <div className="card-body">Create Appointment</div>
                   <div className="card-footer d-flex align-items-center justify-content-between">
-                    {/* Change href to the report */}
                     <a
                       className="small text-white stretched-link"
                       href="/createappointment"
@@ -144,20 +160,18 @@ export default function ListAppointments() {
                       <i className="fas fa -angle-right"></i>
                     </div>
                   </div>
-                </div>
-                {/* <h3 className="mt-4">Create an Appointment</h3> */}
+                </div> */}
                 <div className="col-xs-12">
                   <h3 className="mt-4">Appointments List</h3>
                   <div className="filters-container">
                     <div className="filters-state">
                       <label>Appointment State:</label>
                       <select
-                        // id="filter"
                         value={appointmentState}
                         onChange={handleStateChange}
                       >
-                        <option value="pending">Pending Appointments</option>
-                        <option value="expired">Expired Appointments</option>
+                        <option value="future">Future Appointments</option>
+                        <option value="passed">Past Appointments</option>
                         <option value="all">All Appointments</option>
                       </select>
                     </div>
@@ -183,25 +197,34 @@ export default function ListAppointments() {
                           <th>Date</th>
                           <th>Time</th>
                           <th>Type of Appointment</th>
-                          <th>Options</th>
+                          {/* <th>Options</th> */}
                         </tr>
                       </thead>
                       <tbody>
-                        {/* Appointments data */}
-                        {currentAppointments.map((visit, key) => (//oldname oldsurname volsurname volname
+                        {currentAppointments.map((visit, key) => (
                           <tr key={key}>
                             <td>
-                              {visit.oldname} {visit.oldsurname} 
+                              {visit.oldUserId
+                                ? `${visit.oldUserId.name} ${visit.oldUserId.surname}`
+                                : "N/A"}
                             </td>
-                            <td>{visit.old_number}</td>
                             <td>
-                              {visit.volname} {visit.volsurname}
+                              {visit.oldUserId ? visit.oldUserId.mobile : "N/A"}
                             </td>
-                            <td>{visit.vol_number}</td>
-                            <td>{visit.appointmentdate}</td>
-                            <td>{visit.appointmenttime}</td>
+                            <td>
+                              {visit.acceptedBy
+                                ? `${visit.acceptedBy.name} ${visit.acceptedBy.surname}`
+                                : "N/A"}
+                            </td>
+                            <td>
+                              {visit.acceptedBy
+                                ? visit.acceptedBy.mobile
+                                : "N/A"}
+                            </td>
+                            <td>{visit.appointmentDate}</td>
+                            <td>{visit.appointmentTime}</td>
                             <td>{visit.description}</td>
-                            <td>
+                            {/* <td>
                               <div className="button-container">
                                 <button
                                   className="delete"
@@ -210,7 +233,7 @@ export default function ListAppointments() {
                                   Delete
                                 </button>
                               </div>
-                            </td>
+                            </td> */}
                           </tr>
                         ))}
                       </tbody>

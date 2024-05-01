@@ -75,7 +75,7 @@ const ManagerDashboard = () =>{
                     </div>
                   </div>
                 </div>
-                {/* <div className="col-xl-3 col-md-6">
+                <div className="col-xl-3 col-md-6">
                   <div className="card bg-danger text-white mb-4">
                     <div className="card-body">Appointments</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
@@ -87,8 +87,8 @@ const ManagerDashboard = () =>{
                       </div>
                     </div>
                   </div>
-                </div> */}
-                {/* Add more cards here */}
+                </div>
+               
               </div>
             </div>
           </main>
