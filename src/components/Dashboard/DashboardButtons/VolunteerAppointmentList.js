@@ -140,7 +140,7 @@ const handlePageChange = (pageNumber) => {
                       <thead>
                         <tr>
                           <th>Old User Name</th>
-                          <th>Old User Phone Number</th>
+                          {/* <th>Old User Phone Number</th> */}
                           <th>Preferred Age</th>
                           <th>Preferred City</th>
                           <th>Preferred Gender</th>
@@ -158,7 +158,7 @@ const handlePageChange = (pageNumber) => {
                               {request.oldUserId.name}{" "}
                               {request.oldUserId.surname}
                             </td>
-                            <td>{request.oldUserId.mobile}</td>
+                            {/* <td>{request.oldUserId.mobile}</td> */}
                             <td>{request.preferredAge}</td>
                             <td>{request.preferredCity}</td>
                             <td>{request.preferredGender}</td>
