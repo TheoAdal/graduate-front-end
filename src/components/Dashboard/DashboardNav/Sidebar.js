@@ -9,14 +9,14 @@ const Sidebar = ({ userRole, userName, userSurname }) => {
           { title: "Volunteer List", path: "/volunteerlist" },
           { title: "Beneficiary List", path: "/olduserlist" },
           { title: "Manager List", path: "/employeelist" },
-          { title: "Appointments", path: "/appointmentslist" },
+          // { title: "Appointments", path: "/appointmentslist" }, 
           { title: "Reports", path: "/reports" },
         ];
       case "manager":
         return [
           { title: "Volunteer List", path: "/volunteerlist" },
           { title: "Beneficiary List", path: "/olduserlist" },
-          { title: "Appointments", path: "/appointmentslist" },
+          // { title: "Appointments", path: "/appointmentslist" },
         ];
       case "volunteer":
         return [{ title: "Profile", path: "/profile" },

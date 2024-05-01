@@ -75,11 +75,10 @@ const ManagerDashboard = () =>{
                     </div>
                   </div>
                 </div>
-                <div className="col-xl-3 col-md-6">
+                {/* <div className="col-xl-3 col-md-6">
                   <div className="card bg-danger text-white mb-4">
-                    <div className="card-body">Calendar</div>
+                    <div className="card-body">Appointments</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
-                      {/* Change href to the report */}
                       <a className="small text-white stretched-link" href="/appointmentslist">
                         View Details
                       </a>
@@ -88,7 +87,7 @@ const ManagerDashboard = () =>{
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 {/* Add more cards here */}
               </div>
             </div>
