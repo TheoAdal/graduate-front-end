@@ -46,6 +46,10 @@ export default function ListAppointments() {
         `http://localhost:5000/volunteers/matching-requests/${userId}`
       );
       console.log("Response data:", response.data);
+      const sortedRequests = response.data.sort((a, b) => {
+        return new Date(a.appointmentDate) - new Date(b.appointmentDate);
+      });
+      setMatchingRequests(sortedRequests);
       setMatchingRequests(response.data);
     } catch (error) {
       console.error("Error fetching matching requests:", error);
@@ -60,7 +64,7 @@ export default function ListAppointments() {
       });
       // Refresh the list of appointments after accepting
       alert("You have accepted an appointment");
-      navigate("/volunteerappointmentlist"); // Navigate to the manager list page after successful registration
+      getMatchingRequests(); // Navigate to the manager list page after successful registration
     } catch (error) {
       console.error("Error accepting request:", error);
     }
@@ -101,17 +105,17 @@ export default function ListAppointments() {
     return 0;
   });
 
-  // Paginate filtered appointments
-  const indexOfLastAppointment = currentPage * appointmentsPerPage;
-  const indexOfFirstAppointment = indexOfLastAppointment - appointmentsPerPage;
-  const currentAppointments = filteredAppointments.slice(
-    indexOfFirstAppointment,
-    indexOfLastAppointment
-  );
+  // Paginate matching requests
+const indexOfLastAppointment = currentPage * appointmentsPerPage;
+const indexOfFirstAppointment = indexOfLastAppointment - appointmentsPerPage;
+const currentAppointments = matchingRequests.slice(
+  indexOfFirstAppointment,
+  indexOfLastAppointment
+);
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+const handlePageChange = (pageNumber) => {
+  setCurrentPage(pageNumber);
+};
 
   return (
     <div className="sb-nav-fixed">
@@ -148,7 +152,7 @@ export default function ListAppointments() {
                       </thead>
                       <tbody>
                         {/* Matching Requests data */}
-                        {matchingRequests.map((request, key) => (
+                        {currentAppointments.map((request, key) => (
                           <tr key={key}>
                             <td>
                               {request.oldUserId.name}{" "}
@@ -190,7 +194,7 @@ export default function ListAppointments() {
                           key={index}
                           className={`pagination-button ${
                             currentPage === index + 1 ? "active" : ""
-                          }`} // Added active class for current page
+                          }`}
                           onClick={() => handlePageChange(index + 1)}
                         >
                           {index + 1}

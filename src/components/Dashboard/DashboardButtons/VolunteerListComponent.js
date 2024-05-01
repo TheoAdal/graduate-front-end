@@ -54,6 +54,7 @@ export default function ListVolunteers() {
   const [selectedCity, setSelectedCity] = useState("all");
   const [selectedState, setSelectedState] = useState("all");
   const [selectedGender, setSelectedGender] = useState("all");
+  
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 2;
 
