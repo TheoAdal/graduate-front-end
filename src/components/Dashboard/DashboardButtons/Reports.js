@@ -60,12 +60,21 @@ const Reports = () => {
     datasets: [],
   });
 
+  const [AcceptedRequestChartData, setAcceptedRequestChartData] = useState({
+    datasets: [],
+  });
+
+  const [PendingRequestChartData, setPendingRequestChartData] = useState({
+    datasets: [],
+  });
+
   useEffect(() => {
     if (!token && !userRole) {
       navigate("/login");
     } else if (userRole === "admin") {
       fetchUserReportData();
       fetchOldUserReportData();
+      fetchAcceptedRequestReportData();
     } else if (userRole === "manager") {
       navigate("/managerdash");
     } else if (userRole === "volunteer") {
@@ -127,6 +136,10 @@ const Reports = () => {
     });
 
     return initialCityData;
+  };
+
+  const transformAcceptedRequestData = (rawData) => {
+    
   };
 
   const createChartData = (transformedData) => {
@@ -201,6 +214,82 @@ const Reports = () => {
     };
   };
 
+  const createAcceptedRequestChartData = (transformedData) => {//VALE KAI TA PREFFERED AGES ALLA KAI TO ALL(volunteers kai geroi)
+    const labels = Object.keys(transformedData);
+    const maleData = labels.map((city) => transformedData[city].male);
+    const femaleData = labels.map((city) => transformedData[city].female);
+    const otherData = labels.map((city) => transformedData[city].other);
+    const totalData = labels.map((city) => transformedData[city].total);
+
+    return {
+      labels,
+      datasets: [
+        {
+            label: "Male",
+            data: Object.values(transformedData).map((data) => data.male),
+            backgroundColor: "rgba(54, 162, 235, 0.5)",
+            borderColor: "rgba(54, 162, 235, 1)",
+          },
+          {
+            label: "Female",
+            data: Object.values(transformedData).map((data) => data.female),
+            backgroundColor: "rgba(255, 99, 132, 0.5)",
+            borderColor: "rgba(255, 99, 132, 1)",
+          },
+          {
+            label: "Other",
+            data: Object.values(transformedData).map((data) => data.other),
+            backgroundColor: "rgba(153, 102, 255, 0.5)",
+            borderColor: "rgba(153, 102, 255, 1)",
+          },
+          {
+            label: "Total",
+            data: Object.values(transformedData).map((data) => data.total),
+            backgroundColor: "#20C988",
+            borderColor: "#",
+          },
+      ],
+    };
+  };
+
+  const createPendingRequestChartData = (transformedData) => {//VALE KAI TA PREFFERED AGES ALLA KAI TO ALL(volunteers kai geroi)
+    const labels = Object.keys(transformedData);
+    const maleData = labels.map((city) => transformedData[city].male);
+    const femaleData = labels.map((city) => transformedData[city].female);
+    const otherData = labels.map((city) => transformedData[city].other);
+    const totalData = labels.map((city) => transformedData[city].total);
+
+    return {
+      labels,
+      datasets: [
+        {
+            label: "Male",
+            data: Object.values(transformedData).map((data) => data.male),
+            backgroundColor: "rgba(54, 162, 235, 0.5)",
+            borderColor: "rgba(54, 162, 235, 1)",
+          },
+          {
+            label: "Female",
+            data: Object.values(transformedData).map((data) => data.female),
+            backgroundColor: "rgba(255, 99, 132, 0.5)",
+            borderColor: "rgba(255, 99, 132, 1)",
+          },
+          {
+            label: "Other",
+            data: Object.values(transformedData).map((data) => data.other),
+            backgroundColor: "rgba(153, 102, 255, 0.5)",
+            borderColor: "rgba(153, 102, 255, 1)",
+          },
+          {
+            label: "Total",
+            data: Object.values(transformedData).map((data) => data.total),
+            backgroundColor: "#20C988",
+            borderColor: "#",
+          },
+      ],
+    };
+  };
+
   const fetchUserReportData = async () => {
     setLoading(true);
     try {
@@ -229,6 +318,40 @@ const Reports = () => {
       setOldUserChartData(chartDataForOldUser);
     } catch (error) {
       console.error("Error fetching old user stats:", error);
+      setError("Failed to fetch data.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchAcceptedRequestReportData = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(
+        "http://localhost:5000/requests/request-accepted-stats"
+      );
+      const transformedData = transformOldUserData(data); //line 137
+      const chartDataForRequest = createAcceptedRequestChartData(transformedData);
+      setAcceptedRequestChartData(chartDataForRequest);
+    } catch (error) {
+      console.error("Error fetching accepted requests stats:", error);
+      setError("Failed to fetch data.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchPendingRequestReportData = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(
+        "http://localhost:5000/requests/request-accepted-stats"
+      );
+      const transformedData = transformOldUserData(data);
+      const chartDataForRequest = createPendingRequestChartData(transformedData);
+      setPendingRequestChartData(chartDataForRequest);
+    } catch (error) {
+      console.error("Error fetching accepted requests stats:", error);
       setError("Failed to fetch data.");
     } finally {
       setLoading(false);
@@ -271,6 +394,42 @@ const Reports = () => {
     },
   };
 
+  const options3 = {
+    // maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Accepted Requests Distribution by City Age and Gender",
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+
+  const options4 = {
+    // maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Pending Requests Distribution by City Age and Gender",
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+
   console.log(chartData);
 
   return (
@@ -296,9 +455,18 @@ const Reports = () => {
                 </div>
                 <div className="col-xs-12">
                   <div className="chart">
-                    {/* <h2>Old Users Distribution by City and Gender</h2> */}
                     <Bar data={oldUserChartData} options={options2} />
                   </div>
+                </div>
+                <div className="col-xs-12">
+                  {/* <div className="chart">
+                    <Bar data={AcceptedRequestChartData} options={options3} />
+                  </div> */}
+                </div>
+                <div className="col-xs-12">
+                  {/* <div className="chart">
+                    <Bar data={PendingRequestChartData} options={options4} />
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -311,87 +479,3 @@ const Reports = () => {
 };
 
 export default Reports;
-
-// setLoading(true);
-//     try {
-//       const { data } = await axios.get("http://localhost:5000/volunteers/volunteer-stats");
-//       const labels = data.map((item) => item._id);
-//       const dataset = data.map((city) => ({
-//         label: city._id,
-//         data: city.genders.map((g) => g.count),
-//         backgroundColor: [
-//           "rgba(54, 162, 235, 0.5)",
-//           "rgba(255, 99, 132, 0.5)",
-//           "rgba(153, 102, 255, 0.5)",
-//           "rgba(201, 203, 207, 0.5)",
-//         ],
-//         borderColor: [
-//           "rgba(54, 162, 235, 1)",
-//           "rgba(255, 99, 132, 1)",
-//           "rgba(153, 102, 255, 1)",
-//           "rgba(201, 203, 207, 1)",
-//         ],
-//         borderWidth: 1,
-//       }));
-//       // Aggregate data by city and gender
-//       const cityData = cities.reduce(
-//         (acc, city) => {
-//           const filteredData = data.filter((user) => user.city === city);
-//           const males = filteredData.filter(
-//             (user) => user.gender === "male"
-//           ).length;
-//           const females = filteredData.filter(
-//             (user) => user.gender === "female"
-//           ).length;
-//           const others = filteredData.filter(
-//             (user) => user.gender === "other"
-//           ).length;
-//           const total = filteredData.length;
-
-//           acc.males.push(males);
-//           acc.females.push(females);
-//           acc.others.push(others);
-//           acc.total.push(total);
-
-//           return acc;
-//         },
-//         { males: [], females: [], others: [], total: [] }
-//       );
-
-//       const maleData = Object.values(cityData).map((data) => data.male);
-//       const femaleData = Object.values(cityData).map((data) => data.female);
-//       const otherData = Object.values(cityData).map((data) => data.other);
-//       const totalData = Object.values(cityData).map((data) => data.total);
-
-//       const formatChartData = {
-//         labels: Object.keys(cityData),
-//         datasets: [
-//           {
-//             label: "Male",
-//             data: maleData,
-//             backgroundColor: "rgba(54, 162, 235, 0.5)",
-//           },
-//           {
-//             label: "Female",
-//             data: femaleData,
-//             backgroundColor: "rgba(255, 99, 132, 0.5)",
-//           },
-//           {
-//             label: "Other",
-//             data: otherData,
-//             backgroundColor: "rgba(153, 102, 255, 0.5)",
-//           },
-//           {
-//             label: "Total",
-//             data: totalData,
-//             backgroundColor: "#20C988",
-//           },
-//         ],
-//       };
-//       setChartData(formatChartData); //
-//     } catch (error) {
-//       console.error("Error fetching report data:", error);
-//       setError("Failed to fetch data.");
-//     } finally {
-//       setLoading(false);
-//     }

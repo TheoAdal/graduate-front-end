@@ -1,9 +1,7 @@
 import { useEffect, useState, Fragment } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-// import success from "../../images/success.png";
-//import styles from "./EmailVerificationStyles.scss";
-// import { Fragment } from "react/cjs/react.production.min";
+import "./EmailVerificationStyles.scss";
 
 const EmailVerify = () => {
 	const [validUrl, setValidUrl] = useState(true);
@@ -24,7 +22,7 @@ const EmailVerify = () => {
                 }
             } catch (error) {
                 console.log('Error fetching API:', error);
-                setValidUrl(true);
+                setValidUrl(true);//kanonika einai false edw
             }
         };
 
@@ -32,12 +30,12 @@ const EmailVerify = () => {
     }, [id, token]);
 
     return (
-        <div>
+        <div className="verification-container">
             {validUrl ? (
-                <div> 
+                <div > 
                     <h1>Email verified successfully</h1>
                     <Link to="/login">
-                        <button>Login</button>
+                        <button className="green_btn">Go to the Login Page</button>
                     </Link>
                 </div>
             ) : (

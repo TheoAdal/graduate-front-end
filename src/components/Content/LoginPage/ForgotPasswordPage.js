@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import "./PasswordPage.scss";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
@@ -12,9 +13,9 @@ const ForgotPassword = () => {
     };
 
     return (
-        <div>
+        <div className='verification-container'>
+            <form className="" onSubmit={handleSubmit}>
             <h1>Forgot Your Password?</h1>
-            <form onSubmit={handleSubmit}>
                 <label>Email:</label>
                 <input
                     type="email"
@@ -22,7 +23,7 @@ const ForgotPassword = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <button type="submit">Send Reset Link</button>
+                <button type="submit" className="green_btn">Send Reset Link</button>
             </form>
             {message && <p>{message}</p>}
         </div>
