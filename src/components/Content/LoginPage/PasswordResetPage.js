@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import "./PasswordPage.scss";
 
 const ResetPassword = () => {
     const [password, setPassword] = useState('');
@@ -29,9 +30,10 @@ const ResetPassword = () => {
     };
 
     return (
-        <div>
-            <h1>Reset Your Password</h1>
+        <div className='verification-container'>
+            
             <form onSubmit={handleSubmit}>
+            <h1>Reset Your Password</h1>
                 <label>New Password:</label>
                 <input
                     type="password"
@@ -46,7 +48,7 @@ const ResetPassword = () => {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
-                <button type="submit">Update Password</button>
+                <button type="submit" className="green_btn">Update Password</button>
             </form>
             {message && <p>{message}</p>}
         </div>

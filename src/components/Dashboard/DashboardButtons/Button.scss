@@ -739,6 +739,7 @@ progress {
   margin-top: calc(-1 * var(--bs-gutter-y));
   margin-right: calc(-0.5 * var(--bs-gutter-x));
   margin-left: calc(-0.5 * var(--bs-gutter-x));
+  // background-color: #782626;
 }
 .row > * {
   flex-shrink: 0;
@@ -747,8 +748,8 @@ progress {
   padding-right: calc(var(--bs-gutter-x) * 0.5);
   padding-left: calc(var(--bs-gutter-x) * 0.5);
   margin-top: var(--bs-gutter-y);
-  //background-color: #434343;
-  //border: 1px solid grey;
+  // background-color: #0caf1f;
+  // border: 1px solid grey;
 }
 //Styles for the filters//
 .filters-container {
@@ -872,12 +873,16 @@ progress {
 }
 
 .chart{
+  margin-left: 78px;
+  // margin-right: 60px;
   background-color: #ffffff; /* Blue background color */ //20C988
   display: block; // removes any extra space below the canvas element
   width: 80% !important; // overrides any inline styles
   height: auto !important;
   margin-top: 10px;
   margin-bottom: 10px;
+  
+  align-items: center;
 }
 
 // Styles for Pagination //

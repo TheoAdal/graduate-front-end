@@ -13,7 +13,7 @@ export default function RegisterVolunteerComponent() {
     mobile: "",
     gender: "male", // Default value
     country: "",
-    city: "",
+    city: "Nicosia",
     password: "",
     confirmPassword: "",
   });
@@ -48,6 +48,14 @@ export default function RegisterVolunteerComponent() {
       return;
     }
 
+    // Check password strength
+  const passwordStrength = checkPasswordStrength(inputs.password);
+  if (passwordStrength !== "strong") {
+    alert("Please choose a stronger password. ");
+    return;
+  }
+
+
     try {
       const response = await axios.post(
         "http://localhost:5000/volunteers/registervolunteer", //localhost:5000/volunteers/register
@@ -63,6 +71,18 @@ export default function RegisterVolunteerComponent() {
       } else {
         alert("An error occurred. Please try again later.");
       }
+    }
+  };
+
+  const checkPasswordStrength = (password) => {
+    // Define criteria for a strong password
+    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+  
+    // Check if the password matches the criteria
+    if (strongPasswordRegex.test(password)) {
+      return "strong";
+    } else {
+      return "weak";
     }
   };
 
@@ -138,7 +158,7 @@ export default function RegisterVolunteerComponent() {
           <div>
             <label>City:</label>
             <select
-              type="text"
+              // type="text"
               name="city"
               value={inputs.city}
               onChange={handleChange}
@@ -155,7 +175,6 @@ export default function RegisterVolunteerComponent() {
             </select>
           </div>
           <div>
-            {/* Create a warning that forces the user to make a stronger password like !?aVgj_hL. or something like that*/}
             <label>Password:</label> 
             <input
               type={inputs.showPassword ? "text" : "password"}

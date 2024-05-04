@@ -24,6 +24,8 @@ function App() {
     "/useredit",
     "/registermanager",
     "/users/:id/verify/:token",
+    // "/forgotpassword",
+    "/reset-password/:token",
     "/reports",
     "/volunteerappointmentlist",
     "/createrequestpage"
