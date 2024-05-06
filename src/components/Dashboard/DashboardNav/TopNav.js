@@ -15,7 +15,7 @@ const TopNav = ({ handleLogout, userRole }) => {
       case "volunteer":
         return { title: "Volunteer Dashboard", link: "/volunteerdash" };
       case "olduser":
-        return { title: "Old User Dashboard", link: "/olduserdash" };
+        return { title: "Beneficiary Dashboard", link: "/olduserdash" };
       default:
         return "Dashboard";
     }
