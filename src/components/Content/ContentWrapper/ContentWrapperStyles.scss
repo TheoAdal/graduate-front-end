@@ -1,14 +1,15 @@
-.content-wrapper-container{
-  background: url('../../../images/imglogin.jpg') center/cover no-repeat;
-
+.content-wrapper-container {
+  background: url("../../../images/imglogin.jpg");
+  background-size: cover;
+  background-position: center;
 }
 .content-wrapper-routes {
-  
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: #ffffffd7;
+  // background-color: #ffffffd7;
   width: 80%;
+
   // height:1065px;
   margin: 0 auto;
   // border: 1px solid grey; /* for dev purposes */

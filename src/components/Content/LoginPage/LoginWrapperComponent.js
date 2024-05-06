@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
 import "./LoginWrapperComponent.scss";
+import ImgLogin from "../../../images/imglogin.jpg";
 
 import axios from "axios";
 import { AuthContext } from "./AuthContext";
@@ -72,52 +73,62 @@ const LoginWrapperComponent = () => {
     }
   };
 
+  // <img
+  //         className="login-image"
+  //         src={ImgLogin}
+  //         alt="img"
+  //       />
+
   return (
-    <div className="Auth-form-container">
-      <form className="Auth-form" onSubmit={handleSubmit}>
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Sign in</h3>
-          <div className="form-group mt-3">
-            <label>Email address</label>
-            <input
-              type="email"
-              value={email}
-              className="form-control mt-1"
-              placeholder="Enter email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Password</label>
-            <input
-              type="password"
-              value={password}
-              className="form-control mt-1"
-              placeholder="Enter password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}{" "}
-          <div className="form-group mt-2">
+    <div>
+      {/* <img className="login-image" src={ImgLogin} alt="img" /> */}
+      <div className="Auth-form-container">
+        <form className="Auth-form" onSubmit={handleSubmit}>
+          <div className="Auth-form-content">
+            <h3 className="Auth-form-title">Sign in</h3>
+            <div className="form-group mt-3">
+              <label>Email address</label>
+              <input
+                type="email"
+                value={email}
+                className="form-control mt-1"
+                placeholder="Enter email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group mt-3">
+              <label>Password</label>
+              <input
+                type="password"
+                value={password}
+                className="form-control mt-1"
+                placeholder="Enter password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}{" "}
+            <div className="form-group mt-2">
+              <div className="options">
+                Participate in our program as a{" "}
+                <a href="/volunteer">Volunteer</a> or a{" "}
+                <a href="/olduser">Beneficiary</a>
+              </div>
+            </div>
+            <div className="d-grid gap-2 mt-3">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={setToken}
+              >
+                Log In
+              </button>
+            </div>
             <div className="options">
-              Participate in our program as a <a href="/volunteer">Volunteer</a>{" "}
-              or a <a href="/olduser">Beneficiary</a>
+              Forgot your <a href="/forgotpassword">password?</a>
             </div>
           </div>
-          <div className="d-grid gap-2 mt-3">
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={setToken}
-            >
-              Log In
-            </button>
-          </div>
-          <div className="options">
-            Forgot your <a href="/forgotpassword">password?</a>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

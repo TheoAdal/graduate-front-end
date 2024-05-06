@@ -67,7 +67,7 @@ const AdminDashboard = () => {
                 </div>
                 <div className="col-xl-3 col-md-6">
                   <div className="card bg-warning text-white mb-4">
-                    <div className="card-body">Old User List</div>
+                    <div className="card-body">Beneficiary List</div>
                     <div className="card-footer d-flex align-items-center justify-content-between">
                       {/* Change href to the report */}
                       <a

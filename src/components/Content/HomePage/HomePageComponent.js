@@ -6,8 +6,7 @@ import "./HomePageStyles.scss";
 
 function HomePageComponent() {
   return (
-    <div>
-      {/* HomePageComponent */}
+    
       <div className="home-page-container">
         <CarouselAnimation />
         <div className="opening-title">
@@ -16,13 +15,13 @@ function HomePageComponent() {
             {/* <p>Βαλε μια μικρη opening περιγραφη του σιτε εδω </p> */}
           </div>
         </div>
-        <CardComponent/>
+        <CardComponent />
         <div className="contributors-title">
-        <h3>Υποστηρικτές</h3>
-        <img src={Img4} alt="Tepak Logo" />
+          <h3>Υποστηρικτές</h3>
+          <img src={Img4} alt="Tepak Logo" />
         </div>
       </div>
-    </div>
+    
   );
 }
 

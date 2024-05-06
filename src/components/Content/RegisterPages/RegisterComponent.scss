@@ -6,6 +6,8 @@
   margin: 100px auto; // Center the form on the page
   border-radius: 8px;
   max-width: 600px; // Limit the maximum width of the form
+  margin-top: 150px;
+  margin-bottom: 200px;
 
   h2 {
     color: #fff;
@@ -17,6 +19,8 @@
     // background-color: #6b8581;
     grid-template-columns: repeat(2, 1fr); // Two columns
     gap: 20px; // Space between fields
+    
+    // margin-bottom: 8px;
 
     div {
       margin-bottom: 0; // Remove bottom margin as gap takes care of space

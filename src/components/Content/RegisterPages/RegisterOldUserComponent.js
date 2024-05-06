@@ -88,7 +88,7 @@ export default function RegisterOldUserComponent() {
   return (
     <div>
       <div className="form-container">
-        <h2>Participate as a Person in Need</h2>
+        <h2>Participate as a Beneficiary</h2>
         <form onSubmit={handleSubmit}>
           <div>
             <label>Name:</label>
