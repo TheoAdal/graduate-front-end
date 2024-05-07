@@ -22,7 +22,7 @@ const EmailVerify = () => {
                 }
             } catch (error) {
                 console.log('Error fetching API:', error);
-                setValidUrl(true);//kanonika einai false edw
+                setValidUrl(false);//kanonika einai false edw
             }
         };
 
