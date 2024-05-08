@@ -6,13 +6,14 @@ import "./HomePageStyles.scss";
 
 function HomePageComponent() {
   return (
-    
-      <div className="home-page-container">
+    <div className="home-page-container">
+      <div className="carousel-container">
         <CarouselAnimation />
+      </div>
+      <div className="more-container">
         <div className="opening-title">
-          <h1>Καλώς ορίσατε </h1> 
-          <div className="opening-text1">
-          </div>
+          <h1>Καλώς ορίσατε </h1>
+          <div className="opening-text1"></div>
         </div>
         <CardComponent />
         <div className="contributors-title">
@@ -20,7 +21,7 @@ function HomePageComponent() {
           <img src={Img4} alt="Tepak Logo" />
         </div>
       </div>
-    
+    </div>
   );
 }
 

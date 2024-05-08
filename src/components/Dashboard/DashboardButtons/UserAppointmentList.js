@@ -36,13 +36,14 @@ export default function ListAppointments() {
     } else if (userRole === "volunteer" || userRole === "olduser") {
       getAcceptedRequests();
     }
-  }, [navigate, token, userRole]);
+  }, [navigate]);
 
   const getAcceptedRequests = async () => {
     try {
       const response = await axios.get(
         `http://localhost:5000/requests/appointmentrequests/accepted/${userId}`
       );
+      console.log("Users Id:", userId);
       console.log("Accepted Requests:", response.data);
       response.data.sort((a, b) => {
         const dateA = new Date(a.appointmentDate);

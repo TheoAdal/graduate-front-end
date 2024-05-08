@@ -75,7 +75,7 @@ export default function RegisterVolunteerComponent() {
   };
 
   const checkPasswordStrength = (password) => {
-    // Define criteria for a strong password
+    // Define criteria for a strong password 
     const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
   
     // Check if the password matches the criteria

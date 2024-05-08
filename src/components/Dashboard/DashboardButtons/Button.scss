@@ -825,12 +825,14 @@ progress {
   color: #000000; /*  header text color */
   font-weight: bold;
   text-align: center; /* Center align header text */
+  
 }
 
 .table-user td {
   text-align: center; /* Center align table data */
   background-color: #ced1d3; /* table background color */ 
   color: #000000; /*  table text color */
+  
 }
 
 /* Styles for the buttons */
@@ -857,7 +859,9 @@ progress {
 .button-container button.change-state {
   background-color: #0056b3; /* #4CAF50 */
   color: white;
-  margin: 2px;
+  // margin: 2px;
+  
+  
 }
 
 .button-container button.delete {
