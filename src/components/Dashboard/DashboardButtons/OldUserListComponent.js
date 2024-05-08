@@ -53,12 +53,12 @@ export default function ListOldUsers() {
   const [selectedState, setSelectedState] = useState("all");
   const [selectedGender, setSelectedGender] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 2;
+  const usersPerPage = 5;
 
   const getUsers = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/oldusers/getalloldusers`
+        `http://localhost:5000/oldusers//getallverifiedold`
       );
       console.log(response.data);
       setUsers(response.data);

@@ -32,8 +32,8 @@ const ResetPassword = () => {
     return (
         <div className='verification-container'>
             
-            <form onSubmit={handleSubmit}>
-            <h1>Reset Your Password</h1>
+            <form className="verification-windown" onSubmit={handleSubmit}>
+            <h2>Reset Your Password</h2>
                 <label>New Password:</label>
                 <input
                     type="password"

@@ -1,39 +1,57 @@
 .verification-container {
-	// width: 100vw;
-	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
+  // width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: rgb(0, 0, 0);
+  
+  .verification-windown {
+	// input{
+	// 	background-color: #d5dad9;
+	// }
+	h1{
+		margin: 10px;
+	}
+    // width: 80%; // Adjust this percentage based on your design preferences
+    
+	max-width: 420px;
+    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.856);
+  }
 }
 
 .green_btn {
-	border: none;
-	outline: none;
-	padding: 12px 0;
-	background-color: #3bb19b;
-	border-radius: 20px;
-	width: 180px;
-	font-weight: bold;
-	font-size: 14px;
-	margin: 20px;
-	cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 12px 0;
+  background-color: #3bb19b;
+  border-radius: 20px;
+  width: 180px;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 20px;
+  cursor: pointer;
 }
 
-.form-control{
-	// display: block;
-//   width: 100%;
-//   padding: 0.375rem 0.75rem;
-//   font-size: 1rem;
-//   font-weight: 400;
-//   line-height: 1.5;
-//   color: #1f548a;
-//   background-color: #8a2e2e;
-//   background-clip: padding-box;
-//   border: 1px solid #ced4da;
-//   -webkit-appearance: none;
-//      -moz-appearance: none;
-//           appearance: none;
-//   border-radius: 0.25rem;
-//   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+.form-control {
+  // display: block;
+  //   width: 100%;
+  //   padding: 0.375rem 0.75rem;
+  //   font-size: 1rem;
+  //   font-weight: 400;
+  //   line-height: 1.5;
+  //   color: #1f548a;
+  //   background-color: #8a2e2e;
+  //   background-clip: padding-box;
+  //   border: 1px solid #ced4da;
+  //   -webkit-appearance: none;
+  //      -moz-appearance: none;
+  //           appearance: none;
+  //   border-radius: 0.25rem;
+  //   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }

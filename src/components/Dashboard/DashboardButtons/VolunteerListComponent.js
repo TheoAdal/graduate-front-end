@@ -56,12 +56,12 @@ export default function ListVolunteers() {
   const [selectedGender, setSelectedGender] = useState("all");
   
   const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 2;
+  const usersPerPage = 5;
 
   const getUsers = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/volunteers/getallvol"
+        "http://localhost:5000/volunteers/getallverifiedvol"
       );
       console.log(response.data);
       setUsers(response.data);
