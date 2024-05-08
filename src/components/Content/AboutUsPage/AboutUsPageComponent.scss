@@ -8,15 +8,16 @@
 
 .section-box {
   margin-top: 20px;
-  background-color: #00a98f;
-  // background-color: #ffffffc4;
+  // background-color: #00a98f;
+  background-color: #ffffffc4;
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 8px;
 
-  // b,p,ul{
-  //   color: black;
-  // }
+  b,p,ul,h4,h2{
+    color: black;
+    font-weight: 600;
+  }
 }
 
 .card-box {
