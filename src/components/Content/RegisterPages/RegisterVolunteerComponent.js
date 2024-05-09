@@ -90,7 +90,7 @@ export default function RegisterVolunteerComponent() {
     <div>
       <div className="form-container">
         <h2>Participate as a Volunteer</h2>
-        <form onSubmit={handleSubmit}>
+        <form className="register-form" onSubmit={handleSubmit}>
           <div>
             <label>Name:</label>
             <input
@@ -192,7 +192,7 @@ export default function RegisterVolunteerComponent() {
               onChange={handleChange}
             />
           </div>
-          <button type="submit">Submit</button>
+          <button type="submit" className="button">Submit</button>
         </form>
       </div>
     </div>

@@ -1,7 +1,7 @@
 // RegisterComponent.scss
 
 .form-container {
-  background-color: #00a98f;
+  background-color: rgb(255 255 255 / 84%);
   padding: 20px;
   margin: 100px auto; // Center the form on the page
   border-radius: 8px;
@@ -10,23 +10,24 @@
   margin-bottom: 200px;
 
   h2 {
-    color: #fff;
+    color: #000000;
     text-align: center; // Center the title
   }
 
-  form {
+  .register-form {
     display: grid;
     // background-color: #6b8581;
+    background-color: rgba(255, 255, 255, 0) !important;
     grid-template-columns: repeat(2, 1fr); // Two columns
     gap: 20px; // Space between fields
-    
+
     // margin-bottom: 8px;
 
     div {
       margin-bottom: 0; // Remove bottom margin as gap takes care of space
 
       label {
-        color: #fff;
+        color: #000000;
         margin-bottom: 8px;
         display: block;
       }
@@ -35,7 +36,7 @@
       select {
         width: 100%; // Adjust the width if necessary
         padding: 8px;
-        border: 1px solid #fff;
+        border: 2px solid #000000;
         border-radius: 4px;
         color: #000;
       }
@@ -49,7 +50,13 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
-      width: 100%
+      width: 30%; // You've set the width to 30%, which is less than full-width
+      margin: 0 auto; // Add auto margins to center the button in its grid cell
+      justify-self: center; // Centers the button horizontally in its grid cell
+      &:hover {
+        color: rgb(0, 0, 0);
+        background-color: #00695c;  // Adjust the color to your preference
+      }
     }
   }
 }

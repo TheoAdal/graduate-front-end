@@ -89,7 +89,7 @@ export default function RegisterOldUserComponent() {
     <div>
       <div className="form-container">
         <h2>Participate as a Beneficiary</h2>
-        <form onSubmit={handleSubmit}>
+        <form className="register-form" onSubmit={handleSubmit}>
           <div>
             <label>Name:</label>
             <input
@@ -192,7 +192,7 @@ export default function RegisterOldUserComponent() {
               onChange={handleChange}
             />
           </div>
-          <button type="submit">Submit</button>
+          <button type="submit" className="button" >Submit</button>
         </form>
       </div>
     </div>
