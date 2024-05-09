@@ -38,7 +38,7 @@ export default function ListAppointments() {
     } else if (userRole === "olduser") {
       navigate("/olduserdash");
     }
-  }, [navigate, token, userRole]);
+  }, [navigate]);
 
   const getMatchingRequests = async () => {
     try {
@@ -139,7 +139,7 @@ const handlePageChange = (pageNumber) => {
                       {/* Table headers */}
                       <thead>
                         <tr>
-                          <th>Old User Name</th>
+                          <th>Beneficiary Name</th>
                           {/* <th>Old User Phone Number</th> */}
                           <th>Preferred Age</th>
                           <th>Preferred City</th>

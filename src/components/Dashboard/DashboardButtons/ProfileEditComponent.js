@@ -60,7 +60,7 @@ const ProfileEditComponent = () => {
         getUserEndpoint = `http://localhost:5000/volunteers/get/${userId}`;
         break;
       case "olduser":
-        getUserEndpoint = `http://localhost:5000/oldsusers/get/${userId}`;
+        getUserEndpoint = `http://localhost:5000/oldusers/get/${userId}`;
         break;
       default:
         console.error("Error updating user:");
@@ -148,7 +148,7 @@ const ProfileEditComponent = () => {
             <h1 className="mt-4">Edit Profile</h1>
             <div className="card-body">
               <div className="form edit">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}> {/*<form className="haha" onSubmit={handleSubmit}> */}
                   <div className="two-column-form">
                     <div className="column">
                       <div className="col-md-3 mb-3">
