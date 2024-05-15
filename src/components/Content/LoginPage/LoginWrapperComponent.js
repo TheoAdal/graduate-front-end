@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
 import "./LoginWrapperComponent.scss";
-import ImgLogin from "../../../images/imglogin.jpg";
+// import ImgLogin from "../../../images/imglogin.jpg";
 
 import axios from "axios";
 import { AuthContext } from "./AuthContext";
