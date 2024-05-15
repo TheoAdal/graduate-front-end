@@ -18,7 +18,7 @@ const ForgotPassword = () => {
   return (
     <div className="verification-container">
       <form className="verification-windown" onSubmit={handleSubmit}>
-          <h1>Forgot Your Password?</h1>
+          <h2>Forgot Your Password?</h2>
           <label>Email:</label>
           <input
             type="email"
