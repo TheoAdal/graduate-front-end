@@ -69,8 +69,8 @@ const ContactUsPageComponent = () => {
             </p>
           </div>
           <Form onSubmit={sendEmail}>
-            <Form.Group className="mb-3" >
-              <Form.Label>Name</Form.Label>
+            <Form.Group className="" >
+              <Form.Label >Name</Form.Label>
               <Form.Control
                 type="text"
                 name="user_name"
@@ -78,7 +78,7 @@ const ContactUsPageComponent = () => {
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" >
+            <Form.Group className="" >
               <Form.Label>Email address</Form.Label>
               <Form.Control 
               type="email" 
@@ -86,7 +86,7 @@ const ContactUsPageComponent = () => {
               placeholder="Enter your email" />
             </Form.Group>
 
-            <Form.Group className="mb-3" >
+            <Form.Group className="" >
               <Form.Label>Message</Form.Label>
               <Form.Control
                 as="textarea"

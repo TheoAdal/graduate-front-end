@@ -73,12 +73,6 @@ const LoginWrapperComponent = () => {
     }
   };
 
-  // <img
-  //         className="login-image"
-  //         src={ImgLogin}
-  //         alt="img"
-  //       />
-
   return (
     <div>
       {/* <img className="login-image" src={ImgLogin} alt="img" /> */}
