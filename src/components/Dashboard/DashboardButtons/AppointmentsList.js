@@ -35,7 +35,7 @@ export default function ListAppointments() {
     } else if (userRole === "olduser") {
       navigate("/olduserdash");
     }
-  }, [navigate, token, userRole]);
+  }, [navigate]);
 
   const getAppointments = async () => {
     try {

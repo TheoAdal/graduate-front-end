@@ -33,7 +33,7 @@ const UserEditComponent = () => {
       } else if (userRole === "olduser") {
         navigate("/olduserdash");
       }
-    }, [navigate, token, userRole]);
+    }, [navigate]);
 
   // State variables
   const [user, setUser] = useState({

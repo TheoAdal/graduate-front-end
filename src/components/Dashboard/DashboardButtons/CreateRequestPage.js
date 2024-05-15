@@ -39,7 +39,7 @@ export default function RequestPage() {
     } else if (userRole === "olduser") {
 
     }
-  }, [navigate, token, userRole]);
+  }, [navigate]);
 
   const handleRequestSubmit = async (e) => {
     e.preventDefault();

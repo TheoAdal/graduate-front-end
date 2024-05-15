@@ -82,7 +82,7 @@ const Reports = () => {
     } else if (userRole === "olduser") {
       navigate("/olduserdash");
     }
-  }, [navigate, token, userRole]);
+  }, [navigate]);
 
   const [reportData, setReportData] = useState(null);
   const [loading, setLoading] = useState(false);

@@ -60,7 +60,7 @@ function TopBarNav() {
                   className="nav-dropdown"
                 >
                   <NavDropdown.Item>
-                    <Link to="/profile"> Profile</Link>
+                    <Link to="/profile">Profile</Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
                     <LogoutButton />
