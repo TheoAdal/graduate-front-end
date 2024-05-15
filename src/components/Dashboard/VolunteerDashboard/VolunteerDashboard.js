@@ -1,9 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext,  useEffect } from "react";
 import "./VolunteerDashboard.scss";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 import Sidebar from "../DashboardNav/Sidebar";
 import TopNav from "../DashboardNav/TopNav";
@@ -17,7 +14,7 @@ const VolunteerDashboard = () => {
   const userSurname = localStorage.getItem("userSurname");
   const userRole = localStorage.getItem("userRole");
 
-  const { setToken, token, loading } = useContext(AuthContext);
+  const {  token } = useContext(AuthContext);
 
   const navigate = useNavigate();
 

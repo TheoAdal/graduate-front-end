@@ -2,9 +2,7 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Content/LoginPage/AuthContext";
 
-  //FOR CREATING THE LOGOUT BUTTON
-  //https://medium.com/@vrinmkansal/quickstart-jwt-based-login-for-react-express-app-eebf4ea9cfe8
-
+  
 const LogoutButton = () => {
   const navigate = useNavigate();
   const { setToken } = useContext(AuthContext);
@@ -24,7 +22,7 @@ const LogoutButton = () => {
 
   return (
     <button className="dropdown-item" onClick={handleLogout}>
-      <a>Logout</a>
+      Logout
     </button>
   );
 };
