@@ -26,7 +26,7 @@ const ProfileEditComponent = () => {
     if (!token && !userRole) {
       navigate("/login");
     }
-  }, [navigate, token, userRole]);
+  }, [navigate]);
 
   // State variables
   const [user, setUser] = useState({

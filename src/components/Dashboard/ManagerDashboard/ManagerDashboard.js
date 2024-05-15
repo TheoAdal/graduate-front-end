@@ -29,7 +29,7 @@ const ManagerDashboard = () =>{
     } else if (userRole === "olduser") {
       navigate("/olduserdash");
     }
-  }, [navigate, token, userRole]);
+  }, [navigate]);
 
   return (
     <div className="sb-nav-fixed">

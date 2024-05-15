@@ -33,7 +33,7 @@ const VolunteerDashboard = () => {
     } else if (userRole === "olduser") {
       navigate("/olduserdash");
     }
-  }, [navigate, token]);
+  }, [navigate]);
 
   return (
     <div className="sb-nav-fixed">

@@ -40,7 +40,7 @@ const EmailVerify = () => {
         </div>
       ) : (
         <div className="verification-windown">
-          <h1>URL NOT WORKING</h1>
+          <h1>This page is not available</h1>
         </div>
       )}
     </div>
