@@ -4,18 +4,16 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../images/sitelogo2.png";
 
 import { AuthContext } from "../Content/LoginPage/AuthContext";
 import LogoutButton from "../Dashboard/LogoutButton";
 
 function TopBarNav() {
-  
   const userRole = localStorage.getItem("userRole");
 
   const { token } = useContext(AuthContext); // Access token from AuthContext
-  
 
   // Function to generate the dashboard link based on user's role
   const getDashboardLink = () => {
@@ -43,7 +41,7 @@ function TopBarNav() {
         <Container>
           <Navbar.Brand>
             <Link to="/">
-              <img src={logo} alt="LOGO" className="nav-logo"/>
+              <img src={logo} alt="LOGO" className="nav-logo" />
             </Link>
             {/* Site */}
           </Navbar.Brand>
@@ -59,10 +57,12 @@ function TopBarNav() {
                   id="basic-nav-dropdown"
                   className="nav-dropdown"
                 >
-                  <NavDropdown.Item>
-                    <Link to="/profile">Profile</Link>
+                  <NavDropdown.Item as="div">
+                    <Link to="/profile">
+                      <button className="dropdown-item">Profile</button>
+                    </Link>
                   </NavDropdown.Item>
-                  <NavDropdown.Item>
+                  <NavDropdown.Item as="div">
                     <LogoutButton />
                   </NavDropdown.Item>
                 </NavDropdown>
