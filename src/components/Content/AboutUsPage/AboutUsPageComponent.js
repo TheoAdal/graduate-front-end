@@ -1,7 +1,7 @@
 // AboutUsPageComponent.js
 import React from "react";
 import "./AboutUsPageComponent.scss";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 function AboutUsPageComponent() {
   return (
