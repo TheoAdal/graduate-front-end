@@ -40,8 +40,8 @@ const ProfileEditComponent = () => {
     dateofbirth: "",
     nid: "", //national id number
     medpapers: "",
-    password: "",
-    confirmpassword: "",
+    // password: "",
+    // confirmpassword: "",
   });
 
   const [countries, setCountries] = useState([]);
@@ -108,9 +108,25 @@ const ProfileEditComponent = () => {
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+  //   // Check if password matches confirm password
+  //   if (user.password !== user.confirmPassword) {
+  //     alert("Passwords do not match");
+  //     return;
+  //   }
+
+  //   // Check password strength
+  // const passwordStrength = checkPasswordStrength(user.password);
+  // if (passwordStrength !== "strong") {
+  //   alert("Please choose a stronger password. ");
+  //   return;
+  // }
+
     try {
       await axios.patch(`http://localhost:5000/users/patch/${userId}`, user);
       // Redirect based on userRole after successful update
+      
+      alert("Profile updated succesfully");
       switch (userRole) {
         case "admin":
           navigate("/admindash");
@@ -131,6 +147,18 @@ const ProfileEditComponent = () => {
       console.error("Error updating user:", error);
     }
   };
+
+  // const checkPasswordStrength = (password) => {
+  //   // Define criteria for a strong password 
+  //   const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+  
+  //   // Check if the password matches the criteria
+  //   if (strongPasswordRegex.test(password)) {
+  //     return "strong";
+  //   } else {
+  //     return "weak";
+  //   }
+  // };
 
   return (
     <div className="sb-nav-fixed">
@@ -291,7 +319,7 @@ const ProfileEditComponent = () => {
                         />
                       </div>
                     </div>
-                    <div className="column">
+                    {/* <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="password" className="form-label">
                           Password
@@ -304,8 +332,8 @@ const ProfileEditComponent = () => {
                           onChange={handleChange}
                         />
                       </div>
-                    </div>
-                    <div className="column">
+                    </div> */}
+                    {/* <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="password" className="form-label">
                           Confirm Password
@@ -318,7 +346,7 @@ const ProfileEditComponent = () => {
                           onChange={handleChange}
                         />
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                   <button type="submit" className="btn btn-primary">
                     Update
