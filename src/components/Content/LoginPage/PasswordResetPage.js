@@ -3,6 +3,10 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import "./PasswordPage.scss";
 
+
+//////////////////MUST ADD TOKEN CHECK/////////////////
+
+
 const ResetPassword = () => {
     const navigate = useNavigate();
     const [password, setPassword] = useState('');
