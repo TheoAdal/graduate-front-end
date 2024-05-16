@@ -8,11 +8,21 @@ const ForgotPassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post(
+    try{const response = await axios.post(
       "http://localhost:5000/users/forgot-password",
       { email }
     );
+    alert("An email has been sent to you, please check your inbox!");
     setMessage(response.data.message);
+  } catch (error) {
+    // alert("Failed to sent email.");
+    if (error.response && error.response.status === 404) {
+      alert("There is no account with this email address");
+    } else {
+      alert("An error occurred. Please try again later.");
+    }
+}
+    
   };
 
   return (

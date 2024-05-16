@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import "./PasswordPage.scss";
 
 const ResetPassword = () => {
+    const navigate = useNavigate();
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');  // State to hold the confirmed password
     const [message, setMessage] = useState('');
@@ -22,7 +23,8 @@ const ResetPassword = () => {
         try {
             const response = await axios.post(`http://localhost:5000/users/reset-password/${token}`, { password });
             setMessage(response.data.message);
-            setMessage("Your password has been changed.");
+            alert("Your password has been changed.");
+            navigate("/login");
         } catch (error) {
             setMessage("Failed to reset password. Please try again later.");
             console.error("Error resetting password:", error);
