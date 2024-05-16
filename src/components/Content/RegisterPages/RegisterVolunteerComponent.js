@@ -11,27 +11,12 @@ export default function RegisterVolunteerComponent() {
     surname: "",
     email: "",
     mobile: "",
-    gender: "male", // Default value
+    gender: "male",   // Default value
     country: "",
-    city: "Nicosia",
+    city: "Nicosia", //default value
     password: "",
     confirmPassword: "",
   });
-
-  // const [countries, setCountries] = useState([]);
-
-  // useEffect(() => {
-  //   // Fetch list of countries from an API or a local file
-  //   axios
-  //     .get("https://restcountries.com/v3.1/all")
-  //     .then((response) => {
-  //       const countries = response.data.map((country) => country.name.common);
-  //       setCountries(countries);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching countries:", error);
-  //     });
-  // }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
