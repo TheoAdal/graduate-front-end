@@ -74,7 +74,7 @@ const Reports = () => {
     } else if (userRole === "admin") {
       fetchUserReportData();
       fetchOldUserReportData();
-      fetchAcceptedRequestReportData();
+      // fetchAcceptedRequestReportData();
     } else if (userRole === "manager") {
       navigate("/managerdash");
     } else if (userRole === "volunteer") {

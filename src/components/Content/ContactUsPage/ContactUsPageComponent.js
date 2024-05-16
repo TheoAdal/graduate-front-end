@@ -3,8 +3,6 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import "./ContactUsPageComponent.scss";
 
 import emailjs from "@emailjs/browser";
-//https://www.telerik.com/blogs/sending-emails-react-app-using-emailjs
-
 
 const ContactUsPageComponent = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);

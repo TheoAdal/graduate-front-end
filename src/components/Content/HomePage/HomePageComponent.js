@@ -12,7 +12,6 @@ function HomePageComponent() {
       </div>
       <div className="more-container">
         <div className="opening-title">
-          {/* <h1>Καλώς ορίσατε </h1> */}
           <div className="opening-text1"></div>
         </div>
         <CardComponent />
