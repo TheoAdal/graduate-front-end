@@ -125,21 +125,6 @@ export default function RegisterVolunteerComponent() {
               <option value="other">Other</option>
             </select>
           </div>
-          {/* <div>
-            <label>Country:</label>
-            <select
-              name="country"
-              value={inputs.country}
-              onChange={handleChange}
-            >
-              <option value="">Select Country</option>
-              {countries.map((country, index) => (
-                <option key={index} value={country}>
-                  {country}
-                </option>
-              ))}
-            </select>
-          </div> */}
           <div>
             <label>City:</label>
             <select

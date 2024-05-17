@@ -72,6 +72,9 @@ const ProfileEditComponent = () => {
       .then(function (response) {
         console.log(response.data);
         const userData = response.data;
+
+        const formattedDateOfBirth = new Date(userData.dateofbirth).toISOString().substring(0, 10);
+        // console.log(userData.dateofbirth);
         setUser((prevUser) => ({
           ...prevUser,
           ...userData,
@@ -105,27 +108,66 @@ const ProfileEditComponent = () => {
     });
   };
 
+  // Validate form fields
+  const validateForm = () => {
+    if (!user.name.trim()) {
+      alert("Name cannot be empty");
+      return false;
+    }
+    if (!user.surname.trim()) {
+      alert("Surname cannot be empty");
+      return false;
+    }
+    if (!user.email.trim() || !/\S+@\S+\.\S+/.test(user.email)) {
+      alert("Invalid email format");
+      return false;
+    }
+    if (!/^\d{8,10}$/.test(user.mobile)) {
+      alert("Mobile number must be 8 to 10 digits");
+      return false;
+    }
+    const birthDate = new Date(user.dateofbirth);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    if (age < 16) {
+      alert("User must be at least 16 years old");
+      return false;
+    }
+    return true;
+  };
+
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-  //   // Check if password matches confirm password
-  //   if (user.password !== user.confirmPassword) {
-  //     alert("Passwords do not match");
-  //     return;
-  //   }
+    if (!validateForm()) return;
 
-  //   // Check password strength
-  // const passwordStrength = checkPasswordStrength(user.password);
-  // if (passwordStrength !== "strong") {
-  //   alert("Please choose a stronger password. ");
-  //   return;
-  // }
+    const formattedUser = {
+      ...user,
+      dateofbirth: new Date(user.dateofbirth).toISOString().substring(0, 10)
+    }
+
+    //   // Check if password matches confirm password
+    //   if (user.password !== user.confirmPassword) {
+    //     alert("Passwords do not match");
+    //     return;
+    //   }
+
+    //   // Check password strength
+    // const passwordStrength = checkPasswordStrength(user.password);
+    // if (passwordStrength !== "strong") {
+    //   alert("Please choose a stronger password. ");
+    //   return;
+    // }
 
     try {
-      await axios.patch(`http://localhost:5000/users/patch/${userId}`, user);
+      await axios.patch(`http://localhost:5000/users/patch/${userId}`, formattedUser);
       // Redirect based on userRole after successful update
-      
+
       alert("Profile updated succesfully");
       switch (userRole) {
         case "admin":
@@ -149,9 +191,9 @@ const ProfileEditComponent = () => {
   };
 
   // const checkPasswordStrength = (password) => {
-  //   // Define criteria for a strong password 
+  //   // Define criteria for a strong password
   //   const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-  
+
   //   // Check if the password matches the criteria
   //   if (strongPasswordRegex.test(password)) {
   //     return "strong";
@@ -176,7 +218,9 @@ const ProfileEditComponent = () => {
             <h1 className="mt-4">Edit Profile</h1>
             <div className="card-body">
               <div className="form edit">
-                <form onSubmit={handleSubmit}> {/*<form className="haha" onSubmit={handleSubmit}> */}
+                <form onSubmit={handleSubmit}>
+                  {" "}
+                  {/*<form className="haha" onSubmit={handleSubmit}> */}
                   <div className="two-column-form">
                     <div className="column">
                       <div className="col-md-3 mb-3">
@@ -248,6 +292,7 @@ const ProfileEditComponent = () => {
                           name="country"
                           value={user.country}
                           onChange={handleChange}
+                          disabled 
                         >
                           <option value="">Select Country</option>
                           {countries.map((country, index) => (
@@ -263,17 +308,27 @@ const ProfileEditComponent = () => {
                         <label htmlFor="city" className="form-label">
                           City
                         </label>
-                        <input
+                        <select
                           type="text"
                           className="form-control"
                           id="city"
                           name="city"
                           value={user.city}
                           onChange={handleChange}
-                        />
+                        >
+                          <option value="Nicosia">Nicosia</option>
+                          <option value="Limassol">Limassol</option>
+                          <option value="Famagusta">Famagusta</option>
+                          <option value="Paphos">Paphos</option>
+                          <option value="Kyrenia">Kyrenia</option>
+                          <option value="Protaras">Protaras</option>
+                          <option value="Polis">Polis</option>
+                          <option value="Ayia Napa">Ayia Napa</option>
+                          <option value="Troodos">Troodos</option>
+                        </select>
                       </div>
                     </div>
-                    {/* <div class="column">
+                    <div class="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="gender" className="form-label">
                           Gender
@@ -289,7 +344,7 @@ const ProfileEditComponent = () => {
                           <option value="other">Other</option>
                         </select>
                       </div>
-                    </div> */}
+                    </div>
                     <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="date" className="form-label">
@@ -304,7 +359,7 @@ const ProfileEditComponent = () => {
                         />
                       </div>
                     </div>
-                    <div className="column">
+                    {/* <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="id" className="form-label">
                           National ID
@@ -318,7 +373,7 @@ const ProfileEditComponent = () => {
                           onChange={handleChange}
                         />
                       </div>
-                    </div>
+                    </div> */}
                     {/* <div className="column">
                       <div className="col-md-3 mb-3">
                         <label htmlFor="password" className="form-label">

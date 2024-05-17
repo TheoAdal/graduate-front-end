@@ -8,14 +8,12 @@ import { AuthContext } from "./AuthContext";
 
 const LoginWrapperComponent = () => {
   const [email, setEmail] = useState("");
-  // const [verified] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null); //For handling error messages
 
   const navigate = useNavigate();
 
   const { setToken, token } = useContext(AuthContext);
-  // const { setToken, token, loading } = useContext(AuthContext);
 
   useEffect(() => {
     if (token) {
@@ -31,9 +29,6 @@ const LoginWrapperComponent = () => {
       }
     }
   }, [navigate, token]);
-
-  //FOR CREATING LOGIN AUTHENTICATION
-  //https://medium.com/@simonsruggi/how-to-implement-jwt-authentication-with-react-and-node-js-5d8bf3e718d0
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
