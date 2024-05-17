@@ -13,33 +13,39 @@ export default function RegisterOldUserComponent() {
     mobile: "",
     gender: "male", // Default value
     country: "",
-    city: "",
+    city: "Nicosia",
     password: "",
     confirmPassword: "",
   });
 
-  // const [countries, setCountries] = useState([]);
-
-  // useEffect(() => {
-  //   // Fetch list of countries from an API or a local file
-  //   axios
-  //     .get("https://restcountries.com/v3.1/all")
-  //     .then((response) => {
-  //       const countries = response.data.map((country) => country.name.common);
-  //       setCountries(countries);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching countries:", error);
-  //     });
-  // }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setInputs((prevInputs) => ({ ...prevInputs, [name]: value }));
   };
 
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Check if name and surname are empty
+    if (!inputs.name || !inputs.surname) {
+      alert("Name and surname are required");
+      return;
+    }
+
+    // Check if name and surname are empty
+    if (!inputs.email ) {
+      alert("Email is required");
+      return;
+    }
+
+    // Check if mobile number is between 8-10 digits
+    if (inputs.mobile.length < 8 || inputs.mobile.length > 10) {
+      alert("Phone number must be between 8 to 10 digits");
+      return;
+    }
 
     // Check if password matches confirm password
     if (inputs.password !== inputs.confirmPassword) {
@@ -47,28 +53,28 @@ export default function RegisterOldUserComponent() {
       return;
     }
 
-      // Check password strength
-  const passwordStrength = checkPasswordStrength(inputs.password);
-  if (passwordStrength !== "strong") {
-    alert("Please choose a stronger password. ");
-    return;
-  }
-
+    // Check password strength
+    const passwordStrength = checkPasswordStrength(inputs.password);
+    if (passwordStrength !== "strong") {
+      alert("Please choose a stronger password. ");
+      return;
+    }
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/oldusers/registerolduser", //localhost:5000/olduser/register
+        "http://localhost:5000/oldusers/registerolduser", 
         inputs
-      ); 
+      );
       console.log(response.data);
       alert("User registered succesfully, check your email for verification");
-      navigate("/login");                    //login redirect
-    } catch (error) {                       //Email validation
+      navigate("/login"); //login redirect
+    } catch (error) {
+      //Email validation
       console.error("Error registering volunteer:", error);
       if (error.response && error.response.status === 400) {
         alert("Email address already exists");
       } else {
-        alert("An error occurred. Please try again later.");
+        alert("An error occurred.Please try again later.");
       }
     }
   };
@@ -76,7 +82,7 @@ export default function RegisterOldUserComponent() {
   const checkPasswordStrength = (password) => {
     // Define criteria for a strong password
     const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-  
+
     // Check if the password matches the criteria
     if (strongPasswordRegex.test(password)) {
       return "strong";
@@ -129,31 +135,12 @@ export default function RegisterOldUserComponent() {
           </div>
           <div>
             <label>Gender:</label>
-            <select
-              name="gender"
-              value={inputs.gender}
-              onChange={handleChange}
-            >
+            <select name="gender" value={inputs.gender} onChange={handleChange}>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
             </select>
           </div>
-          {/* <div>
-            <label>Country:</label>
-            <select
-              name="country"
-              value={inputs.country}
-              onChange={handleChange}
-            >
-              <option value="">Select Country</option>
-              {countries.map((country, index) => (
-                <option key={index} value={country}>
-                  {country}
-                </option>
-              ))}
-            </select>
-          </div> */}
           <div>
             <label>City:</label>
             <select
@@ -161,7 +148,7 @@ export default function RegisterOldUserComponent() {
               name="city"
               value={inputs.city}
               onChange={handleChange}
-              >
+            >
               <option value="Nicosia">Nicosia</option>
               <option value="Limassol">Limassol</option>
               <option value="Famagusta">Famagusta</option>
@@ -174,8 +161,7 @@ export default function RegisterOldUserComponent() {
             </select>
           </div>
           <div>
-            {/* Create a warning that forces the user to make a stronger password like !?aVgj_hL. or something like that*/}
-            <label>Password:</label> 
+            <label>Password:</label>
             <input
               type={inputs.showPassword ? "text" : "password"}
               name="password"
@@ -192,7 +178,9 @@ export default function RegisterOldUserComponent() {
               onChange={handleChange}
             />
           </div>
-          <button type="submit" className="button" >Submit</button>
+          <button type="submit" className="button">
+            Submit
+          </button>
         </form>
       </div>
     </div>

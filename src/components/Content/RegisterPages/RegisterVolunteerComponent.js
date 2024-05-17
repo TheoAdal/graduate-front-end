@@ -11,7 +11,7 @@ export default function RegisterVolunteerComponent() {
     surname: "",
     email: "",
     mobile: "",
-    gender: "male",   // Default value
+    gender: "male", // Default value
     country: "",
     city: "Nicosia", //default value
     password: "",
@@ -23,9 +23,26 @@ export default function RegisterVolunteerComponent() {
     setInputs((prevInputs) => ({ ...prevInputs, [name]: value }));
   };
 
-  
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Check if name and surname are empty
+    if (!inputs.name || !inputs.surname) {
+      alert("Name and surname are required");
+      return;
+    }
+
+    // Check if name and surname are empty
+    if (!inputs.email) {
+      alert("Email is required");
+      return;
+    }
+
+    // Check if mobile number is between 8-10 digits
+    if (inputs.mobile.length < 8 || inputs.mobile.length > 10) {
+      alert("Phone number must be between 8 to 10 digits");
+      return;
+    }
 
     // Check if password matches confirm password
     if (inputs.password !== inputs.confirmPassword) {
@@ -34,22 +51,22 @@ export default function RegisterVolunteerComponent() {
     }
 
     // Check password strength
-  const passwordStrength = checkPasswordStrength(inputs.password);
-  if (passwordStrength !== "strong") {
-    alert("Please choose a stronger password. ");
-    return;
-  }
-
+    const passwordStrength = checkPasswordStrength(inputs.password);
+    if (passwordStrength !== "strong") {
+      alert("Please choose a stronger password. ");
+      return;
+    }
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/volunteers/registervolunteer", //localhost:5000/volunteers/register
+        "http://localhost:5000/volunteers/registervolunteer", 
         inputs
       );
       console.log(response.data);
       alert("User registered succesfully, check your email for verification");
-      navigate("/login");                           //login redirect
-    } catch (error) {                               //Email validation
+      navigate("/login"); //login redirect
+    } catch (error) {
+      //Email validation
       console.error("Error registering volunteer:", error);
       if (error.response && error.response.status === 400) {
         alert("Email address already exists");
@@ -60,9 +77,9 @@ export default function RegisterVolunteerComponent() {
   };
 
   const checkPasswordStrength = (password) => {
-    // Define criteria for a strong password 
+    // Define criteria for a strong password
     const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-  
+
     // Check if the password matches the criteria
     if (strongPasswordRegex.test(password)) {
       return "strong";
@@ -115,11 +132,7 @@ export default function RegisterVolunteerComponent() {
           </div>
           <div>
             <label>Gender:</label>
-            <select
-              name="gender"
-              value={inputs.gender}
-              onChange={handleChange}
-            >
+            <select name="gender" value={inputs.gender} onChange={handleChange}>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
@@ -132,7 +145,7 @@ export default function RegisterVolunteerComponent() {
               name="city"
               value={inputs.city}
               onChange={handleChange}
-              >
+            >
               <option value="Nicosia">Nicosia</option>
               <option value="Limassol">Limassol</option>
               <option value="Famagusta">Famagusta</option>
@@ -145,7 +158,7 @@ export default function RegisterVolunteerComponent() {
             </select>
           </div>
           <div>
-            <label>Password:</label> 
+            <label>Password:</label>
             <input
               type={inputs.showPassword ? "text" : "password"}
               name="password"
@@ -162,7 +175,9 @@ export default function RegisterVolunteerComponent() {
               onChange={handleChange}
             />
           </div>
-          <button type="submit" className="button">Submit</button>
+          <button type="submit" className="button">
+            Submit
+          </button>
         </form>
       </div>
     </div>
