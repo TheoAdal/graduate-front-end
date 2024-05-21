@@ -55,9 +55,9 @@ export default function RequestPage() {
         "http://localhost:5000/requests/create",
         {
           oldUserId: userId,
-          preferredAge,
-          preferredGender,
-          preferredCity,
+          preferredAge, 
+          preferredGender, 
+          preferredCity, 
           appointmentDate,
           appointmentTime,
           description,
@@ -127,6 +127,7 @@ export default function RequestPage() {
                           onChange={(e) => setPreferredAge(e.target.value)}
                         >
                           <option value="">Select Age Range</option>
+                          <option value="all">All</option>
                           <option value="16-20">16-20</option>
                           <option value="21-30">21-30</option>
                           <option value="31-40">31-40</option>
@@ -145,6 +146,7 @@ export default function RequestPage() {
                           onChange={(e) => setPreferredGender(e.target.value)}
                         >
                           <option value="">Select Gender</option>
+                          <option value="all">All</option>
                           <option value="Male">Male</option>
                           <option value="Female">Female</option>
                           <option value="Other">Other</option>
@@ -161,6 +163,7 @@ export default function RequestPage() {
                           onChange={(e) => setPreferredCity(e.target.value)}
                         >
                           <option value="">Select City</option>
+                          {/* <option value="all">All</option> */}
                           <option value="Nicosia">Nicosia</option>
                           <option value="Limassol">Limassol</option>
                           <option value="Famagusta">Famagusta</option>
