@@ -59,7 +59,7 @@ export default function RegisterVolunteerComponent() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/volunteers/registervolunteer", 
+        "http://localhost:5000/volunteers/registervolunteer",
         inputs
       );
       console.log(response.data);

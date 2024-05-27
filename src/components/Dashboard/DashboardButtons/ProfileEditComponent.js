@@ -73,11 +73,18 @@ const ProfileEditComponent = () => {
         console.log(response.data);
         const userData = response.data;
 
-        const formattedDateOfBirth = new Date(userData.dateofbirth).toISOString().substring(0, 10);
+        let formattedDateOfBirth = "";
+        if (userData.dateofbirth) {
+          const date = new Date(userData.dateofbirth);
+          if (!isNaN(date)) {
+            formattedDateOfBirth = date.toISOString().substring(0, 10);
+          }
+        }
         // console.log(userData.dateofbirth);
         setUser((prevUser) => ({
           ...prevUser,
           ...userData,
+          dateofbirth: formattedDateOfBirth,
         }));
       })
       .catch(function (error) {
@@ -294,7 +301,7 @@ const ProfileEditComponent = () => {
                           onChange={handleChange}
                           disabled 
                         >
-                          <option value="">Select Country</option>
+                          <option value="">Cyprus</option>
                           {countries.map((country, index) => (
                             <option key={index} value={country}>
                               {country}
