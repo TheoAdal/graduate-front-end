@@ -14,17 +14,16 @@ export default function RegisterOldUserComponent() {
     gender: "male", // Default value
     country: "",
     city: "Nicosia",
+    dateofbirth: "",
     password: "",
     confirmPassword: "",
+    acceptTerms: false,
   });
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setInputs((prevInputs) => ({ ...prevInputs, [name]: value }));
   };
-
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,7 +35,7 @@ export default function RegisterOldUserComponent() {
     }
 
     // Check if name and surname are empty
-    if (!inputs.email ) {
+    if (!inputs.email) {
       alert("Email is required");
       return;
     }
@@ -60,9 +59,27 @@ export default function RegisterOldUserComponent() {
       return;
     }
 
+    // Check if terms and conditions are accepted
+    if (!inputs.acceptTerms) {
+      alert("You must accept the terms and conditions");
+      return;
+    }
+
+    const birthDate = new Date(inputs.dateofbirth);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    if (age < 16) {
+      alert("User must be at least 16 years old");
+      return false;
+    }
+
     try {
       const response = await axios.post(
-        "http://localhost:5000/oldusers/registerolduser", 
+        "http://localhost:5000/oldusers/registerolduser",
         inputs
       );
       console.log(response.data);
@@ -159,6 +176,29 @@ export default function RegisterOldUserComponent() {
               <option value="Ayia Napa">Ayia Napa</option>
               <option value="Troodos">Troodos</option>
             </select>
+          </div>
+          <div>
+            <div>
+              <label>Date of birth</label>
+              <input
+                className="form-control"
+                type="date"
+                name="dateofbirth"
+                value={inputs.dateofbirth}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div>
+            <label>
+              I consent that I am 16 years of age or older
+              <input
+                type="checkbox"
+                name="acceptTerms"
+                checked={inputs.acceptTerms}
+                onChange={handleChange}
+              />
+            </label>
           </div>
           <div>
             <label>Password:</label>

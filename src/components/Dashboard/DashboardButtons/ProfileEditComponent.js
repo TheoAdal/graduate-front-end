@@ -363,6 +363,7 @@ const ProfileEditComponent = () => {
                           name="dateofbirth"
                           value={user.dateofbirth}
                           onChange={handleChange}
+                          disabled
                         />
                       </div>
                     </div>

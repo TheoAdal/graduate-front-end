@@ -67,6 +67,8 @@ export default function ListAppointments() {
       getMatchingRequests(); // Navigate to the manager list page after successful registration
     } catch (error) {
       console.error("Error accepting request:", error);
+      alert("This request has already been accepted" );
+      navigate("/volunteerappointmentlist");
     }
   };
 
