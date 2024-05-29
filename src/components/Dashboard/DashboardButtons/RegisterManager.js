@@ -41,7 +41,7 @@ const RegisterManager = () => {
     mobile: "",
     gender: "male", // Default value
     country: "Cyprus",
-    city: "",
+    city: "Nicosia",
     dateofbirth: "",
     password: "",
     nid: "",
@@ -71,17 +71,54 @@ const RegisterManager = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Check if name and surname are empty
+    if (!inputs.name || !inputs.surname) {
+      alert("Name and surname are required");
+      return;
+    }
+
+    // Check if name and surname are empty
+    if (!inputs.email) {
+      alert("Email is required");
+      return;
+    }
+
+    // Check if mobile number is between 8-10 digits
+    if (inputs.mobile.length < 8 || inputs.mobile.length > 10) {
+      alert("Phone number must be between 8 to 10 digits");
+      return;
+    }
+
     // Check if password matches confirm password
     if (inputs.password !== inputs.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
 
+    // Check password strength
+    const passwordStrength = checkPasswordStrength(inputs.password);
+    if (passwordStrength !== "strong") {
+      alert("Please choose a stronger password. Try a mix of letters numbers and symbols");
+      return;
+    }
+
+    const birthDate = new Date(inputs.dateofbirth);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    if (age < 16) {
+      alert("User must be at least 16 years old");
+      return false;
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:5000/managers/registermanager",
         inputs
-      ); 
+      );
       console.log(response.data);
       alert("Manager registered succesfully, proceed for verification");
       navigate("/employeelist"); // Navigate to the manager list page after successful registration
@@ -92,6 +129,18 @@ const RegisterManager = () => {
       } else {
         alert("An error occurred. Please try again later.");
       }
+    }
+  };
+
+  const checkPasswordStrength = (password) => {
+    // Define criteria for a strong password
+    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+
+    // Check if the password matches the criteria
+    if (strongPasswordRegex.test(password)) {
+      return "strong";
+    } else {
+      return "weak";
     }
   };
 
@@ -183,14 +232,8 @@ const RegisterManager = () => {
                           name="country"
                           value={inputs.country}
                           onChange={handleChange}
-                        >
-                          <option value="">Select Country</option>
-                          {countries.map((country, index) => (
-                            <option key={index} value={country}>
-                              {country}
-                            </option>
-                          ))}
-                        </select>
+                          disabled
+                        ></select>
                       </div>
                     </div> */}
                     <div className="column">
@@ -198,14 +241,22 @@ const RegisterManager = () => {
                         <label htmlFor="city" className="form-label">
                           City
                         </label>
-                        <input
-                          type="text"
+                        <select
                           className="form-control"
-                          id="city"
                           name="city"
                           value={inputs.city}
                           onChange={handleChange}
-                        />
+                        >
+                          <option value="Nicosia">Nicosia</option>
+                          <option value="Limassol">Limassol</option>
+                          <option value="Famagusta">Famagusta</option>
+                          <option value="Paphos">Paphos</option>
+                          <option value="Kyrenia">Kyrenia</option>
+                          <option value="Protaras">Protaras</option>
+                          <option value="Polis">Polis</option>
+                          <option value="Ayia Napa">Ayia Napa</option>
+                          <option value="Troodos">Troodos</option>
+                        </select>
                       </div>
                     </div>
                     <div className="column">

@@ -207,7 +207,7 @@ export default function ListOldUsers() {
                           <th>Email</th>
                           <th>Phone Number</th>
                           <th>Gender</th>
-                          <th>State</th>
+                          <th>Status</th>
                           <th>City</th>
                           <th>Options</th>
                         </tr>
