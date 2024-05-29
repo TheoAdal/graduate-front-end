@@ -89,16 +89,18 @@ const RegisterManager = () => {
       return;
     }
 
-    // Check if password matches confirm password
-    if (inputs.password !== inputs.confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-
     // Check password strength
     const passwordStrength = checkPasswordStrength(inputs.password);
     if (passwordStrength !== "strong") {
-      alert("Please choose a stronger password. Try a mix of letters numbers and symbols");
+      alert(
+        "Please choose a stronger password. Try a mix of letters numbers and symbols"
+      );
+      return;
+    }
+
+    // Check if password matches confirm password
+    if (inputs.password !== inputs.confirmPassword) {
+      alert("Passwords do not match");
       return;
     }
 
@@ -134,7 +136,7 @@ const RegisterManager = () => {
 
   const checkPasswordStrength = (password) => {
     // Define criteria for a strong password
-    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
 
     // Check if the password matches the criteria
     if (strongPasswordRegex.test(password)) {
