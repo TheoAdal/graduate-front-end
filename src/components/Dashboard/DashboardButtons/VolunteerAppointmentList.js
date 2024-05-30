@@ -64,7 +64,8 @@ export default function ListAppointments() {
       });
       // Refresh the list of appointments after accepting
       alert("You have accepted an appointment");
-      getMatchingRequests(); // Navigate to the manager list page after successful registration
+      getMatchingRequests();
+      //window.location.reload(); // Refresh the page after accepting the appointment 
     } catch (error) {
       console.error("Error accepting request:", error);
       alert("This request has already been accepted" );
