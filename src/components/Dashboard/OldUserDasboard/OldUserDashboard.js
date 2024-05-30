@@ -45,7 +45,7 @@ const OldUserDashboard = () => {
         <div id="layoutSidenav_content">
           <main>
             <div className="container-fluid px-4">
-              <h1 className="mt-4">Dashboard</h1>
+              <h1 className="mt-4">Beneficiary Dashboard</h1>
               <div className="row">
                 <div className="col-xl-3 col-md-6">
                   <div className="card bg-primary text-white mb-4">

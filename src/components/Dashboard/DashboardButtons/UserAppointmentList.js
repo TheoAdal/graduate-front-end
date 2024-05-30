@@ -134,7 +134,7 @@ export default function ListAppointments() {
                       {/* Table headers */}
                       <thead>
                         <tr>
-                          <th>Olduser Name</th>
+                          <th>Beneficiary Name</th>
                           <th>Phone Number</th>
                           <th>Volunteer Name</th>
                           <th>Phone Number</th>
