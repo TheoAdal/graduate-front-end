@@ -118,7 +118,7 @@ const RegisterManager = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/managers/registermanager",
+        "https://graduate-back-end.onrender.com/managers/registermanager",
         inputs
       );
       console.log(response.data);

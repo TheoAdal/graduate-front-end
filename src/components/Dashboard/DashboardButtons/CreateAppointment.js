@@ -67,7 +67,7 @@ export default function CreateAppointment() {
 
   function getActiveVolunteer() {
     axios
-      .get("http://localhost:5000/volunteers/getallactivevol")
+      .get("https://graduate-back-end.onrender.com/volunteers/getallactivevol")
       .then(function (response) {
         console.log(response.data);
         setVolunteer(response.data);
@@ -76,7 +76,7 @@ export default function CreateAppointment() {
 
   function getActiveOldUser() {
     axios
-      .get("http://localhost:5000/oldusers/getallactiveold")
+      .get("https://graduate-back-end.onrender.com/oldusers/getallactiveold")
       .then(function (response) {
         console.log(response.data);
         setOldUser(response.data);
@@ -179,7 +179,7 @@ export default function CreateAppointment() {
   const handleCreateAppointment = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/visits/createappointment`,
+        `https://graduate-back-end.onrender.com/visits/createappointment`,
         {
           vol_id: selectedVolunteerId,
           old_id: selectedOldUserId,

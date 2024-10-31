@@ -58,7 +58,7 @@ export default function ListOldUsers() {
   const getUsers = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/oldusers//getallverifiedold`
+        `https://graduate-back-end.onrender.com/oldusers//getallverifiedold`
       );
       console.log(response.data);
       setUsers(response.data);
@@ -78,7 +78,7 @@ export default function ListOldUsers() {
 
   const changeUserState = (id) => {
     axios
-      .patch(`http://localhost:5000/oldusers/changeState/${id}`)
+      .patch(`https://graduate-back-end.onrender.com/oldusers/changeState/${id}`)
       .then(function (response) {
         console.log(response.data);
         getUsers();

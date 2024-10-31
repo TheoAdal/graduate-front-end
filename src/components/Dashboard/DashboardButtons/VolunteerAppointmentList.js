@@ -43,7 +43,7 @@ export default function ListAppointments() {
   const getMatchingRequests = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/volunteers/matching-requests/${userId}`
+        `https://graduate-back-end.onrender.com/volunteers/matching-requests/${userId}`
       );
       console.log("Response data:", response.data);
       const sortedRequests = response.data.sort((a, b) => {
@@ -59,7 +59,7 @@ export default function ListAppointments() {
   // Function to accept an appointment request
   const handleAccept = async (id) => {
     try {
-      await axios.patch(`http://localhost:5000/requests/accept/${id}`, {
+      await axios.patch(`https://graduate-back-end.onrender.com/requests/accept/${id}`, {
         volunteerId: userId, // Assuming the volunteer ID is stored in localStorage
       });
       // Refresh the list of appointments after accepting

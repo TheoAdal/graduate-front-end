@@ -41,7 +41,7 @@ export default function ListAppointments() {
   const getAcceptedRequests = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/requests/appointmentrequests/accepted/${userId}`
+        `https://graduate-back-end.onrender.com/requests/appointmentrequests/accepted/${userId}`
       );
       // console.log("Users Id:", userId);
       console.log("Accepted Requests:", response.data);

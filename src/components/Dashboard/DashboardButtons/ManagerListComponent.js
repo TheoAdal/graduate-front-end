@@ -57,7 +57,7 @@ export default function ListManagers() {
 
   function getUsers() {
     axios
-      .get("http://localhost:5000/managers/getallmanagers")
+      .get("https://graduate-back-end.onrender.com/managers/getallmanagers")
       .then(function (response) {
         console.log(response.data);
         setUsers(response.data);
@@ -75,7 +75,7 @@ export default function ListManagers() {
 
   const changeUserState = (id) => {
     axios
-      .patch(`http://localhost:5000/managers/changeState/${id}`)
+      .patch(`https://graduate-back-end.onrender.com/managers/changeState/${id}`)
       .then(function (response) {
         console.log(response.data);
         getUsers();

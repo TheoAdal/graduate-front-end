@@ -294,7 +294,7 @@ const Reports = () => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/volunteers/volunteer-stats"
+        "https://graduate-back-end.onrender.com/volunteers/volunteer-stats"
       );
       const transformedData = transformData(data); // Transform the raw data
       const formatChartData = createChartData(transformedData); // Create chart from transformed data
@@ -311,7 +311,7 @@ const Reports = () => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/oldusers/olduser-stats"
+        "https://graduate-back-end.onrender.com/oldusers/olduser-stats"
       );
       const transformedData = transformOldUserData(data);
       const chartDataForOldUser = createOldUserChartData(transformedData);
@@ -328,7 +328,7 @@ const Reports = () => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/requests/request-accepted-stats"
+        "https://graduate-back-end.onrender.com/requests/request-accepted-stats"
       );
       const transformedData = transformOldUserData(data); //line 137
       const chartDataForRequest = createAcceptedRequestChartData(transformedData);
@@ -345,7 +345,7 @@ const Reports = () => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/requests/request-accepted-stats"
+        "https://graduate-back-end.onrender.com/requests/request-accepted-stats"
       );
       const transformedData = transformOldUserData(data);
       const chartDataForRequest = createPendingRequestChartData(transformedData);

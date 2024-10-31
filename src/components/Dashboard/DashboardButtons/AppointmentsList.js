@@ -40,7 +40,7 @@ export default function ListAppointments() {
   const getAppointments = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/requests/getallrequests"
+        "https://graduate-back-end.onrender.com/requests/getallrequests"
       );
       console.log("Response data:", response.data);
       response.data.sort((a, b) => {

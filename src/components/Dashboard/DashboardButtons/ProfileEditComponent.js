@@ -172,7 +172,7 @@ const ProfileEditComponent = () => {
     // }
 
     try {
-      await axios.patch(`http://localhost:5000/users/patch/${userId}`, formattedUser);
+      await axios.patch(`https://graduate-back-end.onrender.com/users/patch/${userId}`, formattedUser);
       // Redirect based on userRole after successful update
 
       alert("Profile updated succesfully");
