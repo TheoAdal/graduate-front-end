@@ -11,7 +11,7 @@ const EmailVerify = () => {
     const verifyEmailUrl = async () => {
       try {
         console.log("ID:", id, "Token:", token); // Add this line
-        const url = `http://localhost:5000/users/${id}/verify/${token}`;
+        const url = `https://graduate-back-end.onrender.com/users/${id}/verify/${token}`;
         const response = await axios.get(url);
         console.log("API Response:", response);
         if (response.status === 200) {

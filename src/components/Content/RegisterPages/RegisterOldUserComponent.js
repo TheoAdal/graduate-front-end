@@ -81,7 +81,7 @@ export default function RegisterOldUserComponent() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/oldusers/registerolduser",
+        "https://graduate-back-end.onrender.com/oldusers/registerolduser",
         inputs
       );
       console.log(response.data);

@@ -81,7 +81,7 @@ export default function RegisterVolunteerComponent() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/volunteers/registervolunteer",
+        "https://graduate-back-end.onrender.com/volunteers/registervolunteer",
         inputs
       );
       console.log(response.data);

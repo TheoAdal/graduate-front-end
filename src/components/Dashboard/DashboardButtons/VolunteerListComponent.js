@@ -61,7 +61,7 @@ export default function ListVolunteers() {
   const getUsers = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/volunteers/getallverifiedvol"
+        "https://graduate-back-end.onrender.com/volunteers/getallverifiedvol"
       );
       console.log(response.data);
       setUsers(response.data);
@@ -81,7 +81,7 @@ export default function ListVolunteers() {
 
   const changeUserState = (id) => {
     axios
-      .patch(`http://localhost:5000/volunteers/changeState/${id}`)
+      .patch(`https://graduate-back-end.onrender.com/volunteers/changeState/${id}`)
       .then(function (response) {
         console.log(response.data);
         getUsers();

@@ -33,7 +33,7 @@ const ResetPassword = () => {
     // Attempt to reset password if they do match
     try {
       const response = await axios.post(
-        `http://localhost:5000/users/reset-password/${token}`,
+        `https://graduate-back-end.onrender.com/users/reset-password/${token}`,
         { password }
       );
       setMessage(response.data.message);

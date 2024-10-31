@@ -9,7 +9,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try{const response = await axios.post(
-      "http://localhost:5000/users/forgot-password",
+      "https://graduate-back-end.onrender.com/users/forgot-password",
       { email }
     );
     alert("An email has been sent to you, please check your inbox!");
