@@ -1,5 +1,10 @@
 .content-wrapper-container {
-  background: url("../../../images/imglogin.jpg");
+  // background: url("../../../images/imglogin.jpg");
+  // background-color: rgba(197, 204, 211, 0.226);
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(45deg, #92c9b1, #92c9b1 20px, #b3e0d2 20px, #b3e0d2 40px);
+
   background-size: cover;
   background-position: center;
 }
@@ -9,7 +14,7 @@
   justify-content: center;
   flex-direction: column;
   // background-color: #ffffffd7;
-  width: 80%;
+  width: 100%;
 
   // height:1065px;
   margin: 0 auto;

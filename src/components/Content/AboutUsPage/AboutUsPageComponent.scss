@@ -16,6 +16,7 @@
   border-radius: 8px;
 
   b,p,ul,h4,h2{
+    text-align: left;
     color: black;
     font-weight: 600;
   }
@@ -42,11 +43,13 @@ h2,
 h4,
 p,
 ul {
+  
   margin-bottom: 20px;
   
 }
 
 h3 {
+  // text-align: left;
   margin-bottom: 0px; /* Adjust the margin as needed */
   color: black;
 }

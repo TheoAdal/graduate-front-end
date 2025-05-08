@@ -59,7 +59,7 @@ const ContactUsPageComponent = () => {
     <Container>
       <Row>
         <Col lg={8}>
-          <div className="section-box">
+          <div className="contact-title">
             <h2>Contact Us</h2>
             <p>
             Θα θέλαμε να ακούσουμε νέα σας! Συμπληρώστε την παρακάτω φόρμα και 

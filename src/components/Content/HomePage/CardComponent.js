@@ -10,7 +10,7 @@ function CardComponent()
           <Card className="card">
             {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
             <Card.Body>
-              <Card.Title>Εγγραφή ως εθελοντής</Card.Title>
+              <Card.Title>Εγγραφή ως εθελοντής στην ομάδα</Card.Title>
               <Card.Text>
                 Μπες και εσύ στην ομάδα και πάρε μέρος στο έργο μας
               </Card.Text>

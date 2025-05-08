@@ -16,12 +16,12 @@
 }
 
 .nav-dropdown .dropdown-menu {
-  background-color: #1b8877; // Set the dropdown menu background color
+  background-color: #f7f7f7; // Set the dropdown menu background color
   .dropdown-item {
     color: rgb(255, 255, 255);
     &:hover {
       color: rgb(255, 255, 255);
-      background-color: #00A98F;  // Adjust the color to your preference
+      background-color: #f7f7f7;  // Adjust the color to your preference
     }
   }
 }
@@ -30,12 +30,13 @@
 
 
 .dropdown .dropdown-toggle {
-  color: white !important;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.719) !important;
 }
 
 .navbar-brand {
   display: flex;
-  font-family: Helvetica-Nue;
+  // font-family: Helvetica-Nue;
   color: #ffffff !important;
   // margin-bottom: 5px;
 
@@ -50,11 +51,13 @@
 .navbar-expand .navbar-nav {
   display: flex;
   display: contents;
-  font-family: Sans-Serif;
+  font-family: Helvetica;
   margin-left: -15px;
 
   a {
-    color: white;
+    font-family: Helvetica;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.719);
     text-decoration: none;
   }
 }

@@ -31,13 +31,13 @@ function TopBarNav() {
     }
   };
 
-  const navbarStyle = {
-    backgroundColor: "#00A98F",
-  };
+  // const navbarStyle = {
+  //   backgroundColor: "#00A98F",
+  // };
 
   return (
     <div className="nav-bar-container">
-      <Navbar style={navbarStyle} data-bs-theme="dark">
+      <Navbar  data-bs-theme="dark">
         <Container>
           <Navbar.Brand>
             <Link to="/">

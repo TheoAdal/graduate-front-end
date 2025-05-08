@@ -5,24 +5,15 @@ import { Container, Row, Col } from "react-bootstrap";
 
 function AboutUsPageComponent() {
   return (
-    <Container >
+    <Container>
       <Row>
         <Col lg={10}>
           <div className="section-box">
-            <h3>
-              <b>Καλώς ήρθατε στο Friendship at All Ages!</b>
-            </h3>
-            <p>
-              Στο Friendship at All Ages, πιστεύουμε στη δύναμη των συνδέσεων
-              και στον θετικό αντίκτυπο των φιλιών μεταξύ των γενεών. Η
-              πλατφόρμα μας είναι αφιερωμένη στην καλλιέργεια ουσιαστικών
-              σχέσεων μεταξύ εθελοντών και ατόμων της Τρίτης Ηλικίας.
-            </p>
-          </div>
-          <div className="section-box">
-            <h3>
-              <b>Σκοπός:</b>
-            </h3>
+            <div className="section-title">
+              <h3>
+                <b>Σκοπός</b>
+              </h3>
+            </div>
             <p>
               Ο σκοπός της εταιρείας είναι να δημιουργήσουμε μια κοινότητα όπου
               άτομα από διαφορετικές γενιές μπορούν να συναντηθούν, να
@@ -33,9 +24,24 @@ function AboutUsPageComponent() {
             </p>
           </div>
           <div className="section-box">
-            <h3>
-              <b>Πώς λειτουργεί:</b>
-            </h3>
+            <div className="section-title">
+              <h3>
+                <b>Το όραμα μας</b>
+              </h3>
+            </div>
+            <p>
+              Οραματιζόμαστε έναν κόσμο όπου κανένας ηλικιωμένος δεν θα
+              αισθάνεται απομονωμένος ή μόνος, όπου οι διαγενεακές συνδέσεις θα
+              ανθίζουν και όπου η τεχνολογία θα χρησιμεύει ως γέφυρα προς
+              ουσιαστικές ανθρώπινες σχέσεις και όχι ως εμπόδιο.
+            </p>
+          </div>
+          <div className="section-box">
+            <div className="section-title-bullet">
+              <h3>
+                <b>Πώς λειτουργεί</b>
+              </h3>
+            </div>
             <h4>Για Εθελοντές:</h4>
             <ul>
               <li>

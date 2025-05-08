@@ -44,7 +44,8 @@
 
     button {
       grid-column: 1 / -1; // Span the button across all columns
-      background-color: #00695c;
+      background-color: #68b694;
+      border-color: #68b694;
       color: #fff;
       padding: 10px;
       border: none;
@@ -53,9 +54,11 @@
       width: 30%; // You've set the width to 30%, which is less than full-width
       margin: 0 auto; // Add auto margins to center the button in its grid cell
       justify-self: center; // Centers the button horizontally in its grid cell
+      
       &:hover {
         color: rgb(0, 0, 0);
-        background-color: #00695c;  // Adjust the color to your preference
+        background-color: #b3e0d2;
+        border-color: #b3e0d2;
       }
     }
   }
