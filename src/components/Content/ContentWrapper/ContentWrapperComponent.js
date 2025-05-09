@@ -34,7 +34,7 @@ import CreateRequestPage from "../../Dashboard/DashboardButtons/CreateRequestPag
 
 function ContentWrapperComponent() {
   return (
-    <div className="content-wrapper-container">
+    <div>
       {/* ContentWrapperComponent */}
       <div className="content-wrapper-routes">
         <Routes>

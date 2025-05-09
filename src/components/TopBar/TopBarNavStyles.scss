@@ -1,5 +1,16 @@
 .nav-bar-container {
-  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  background-color: #f7f7f7;
+  box-shadow: rgb(0, 0, 0) 1px 1px 10px;
+  position:fixed;
+  width: 100%;
+  transition: background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+  z-index: 1000;
+
+  &.scrolled {
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
 }
 
 .container {
@@ -21,7 +32,7 @@
     color: rgb(255, 255, 255);
     &:hover {
       color: rgb(255, 255, 255);
-      background-color: #f7f7f7;  // Adjust the color to your preference
+      background-color: #b3b0b0;  // Adjust the color to your preference
     }
   }
 }
@@ -37,7 +48,7 @@
 .navbar-brand {
   display: flex;
   // font-family: Helvetica-Nue;
-  color: #ffffff !important;
+  color: #ffffff;
   // margin-bottom: 5px;
 
   .nav-logo {

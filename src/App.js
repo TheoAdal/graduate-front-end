@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.scss";
+import "./components/Content/ContentWrapper/ContentWrapperStyles.scss";
 import { BrowserRouter } from "react-router-dom";
 import TopBarNav from "./components/TopBar/TopBarNav";
 import FooterWrapper from "./components/Footer/FooterWrapper";
@@ -46,7 +47,7 @@ function App() {
             </div>
           )}
 
-          <div className="content-wrapper">
+          <div className="content-wrapper-container">
             <ContentWrapperComponent />
           </div>
 

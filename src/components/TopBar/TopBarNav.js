@@ -1,5 +1,5 @@
 import "./TopBarNavStyles.scss";
-import React, { useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -11,6 +11,7 @@ import { AuthContext } from "../Content/LoginPage/AuthContext";
 import LogoutButton from "../Dashboard/LogoutButton";
 
 function TopBarNav() {
+  const [scrolled, setScrolled] = useState(false);
   const userRole = localStorage.getItem("userRole");
 
   const { token } = useContext(AuthContext); // Access token from AuthContext
@@ -31,12 +32,17 @@ function TopBarNav() {
     }
   };
 
-  // const navbarStyle = {
-  //   backgroundColor: "#00A98F",
-  // };
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <div className="nav-bar-container">
+    <div className={`nav-bar-container ${scrolled ? 'scrolled' : ''}`}> 
       <Navbar  data-bs-theme="dark">
         <Container>
           <Navbar.Brand>
